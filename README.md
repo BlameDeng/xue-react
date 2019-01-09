@@ -8,18 +8,14 @@
 
 ## 安装
 
-```
-$ npm install xue-re
-$ yarn add xue-re
-```
+暂未发布，可克隆仓库后本地引入使用。
 
 ## 使用
 
 ```javascript
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Button } from 'xue-re'
-import 'xue-re/lib/xue-re.css'
+import Button from 'components/Button'
 
 ReactDOM.render(
   <div>
@@ -28,8 +24,6 @@ ReactDOM.render(
   mountNode
 )
 ```
-
-以上便是 Xue-re 的用法。需要注意的是，样式文件需要在入口文件处单独引入。
 
 ## 特别提醒
 

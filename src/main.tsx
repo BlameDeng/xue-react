@@ -9,7 +9,7 @@ import Tabs from './packages/tabs/Tabs'
 import Menu from './packages/menu/Menu'
 import Transition from './packages/transition/Transition'
 
-export {
+export default {
   Button,
   Input,
   Switch,

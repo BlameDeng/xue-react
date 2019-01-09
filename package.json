@@ -1,6 +1,6 @@
 {
     "name": "xue-re",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "> 一套小巧的 UI 组件库。",
     "main": "lib/xue-re.js",
     "author": "blame",
