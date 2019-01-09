@@ -3,6 +3,8 @@
     "version": "0.0.1",
     "description": "> 一套小巧的 UI 组件库。",
     "main": "lib/xue-re.js",
+    "author": "blame",
+    "license": "MIT",
     "dependencies": {
         "prop-types": "^15.6.2",
         "react": "^16.7.0",
@@ -23,5 +25,13 @@
         "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
         "typescript": "^3.2.2"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BlameDeng/xue-re.git"
+    },
+    "bugs": {
+        "url": "https://github.com/BlameDeng/xue-re/issues"
+    },
+    "homepage": "https://github.com/BlameDeng/xue-re#readme"
 }
