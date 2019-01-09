@@ -1,0 +1,89 @@
+@import './Color.scss';
+.x-pager {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    height: 30px;
+    color: rgba(0, 0, 0, 0.65);
+    >.x-pager-num {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 22px;
+        min-width: 35px;
+        height: 100%;
+        cursor: pointer;
+        padding: 2px 0;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid;
+        border-color: rgba(0, 0, 0, 0.15);
+        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        &:not(:first-child) {
+            margin-left: 4px;
+        }
+        &:hover:not(.seprator) {
+            color: $hover;
+            border-color: $hover;
+        }
+        &.active {
+            color: $brand;
+            border-color: $brand;
+            cursor: default;
+            &:hover {
+                color: $brand;
+                border-color: $brand;
+            }
+        }
+        &.seprator {
+            cursor: default;
+        }
+        &.disabled {
+            color: rgba(0, 0, 0, 0.25);
+            border-color: #d9d9d9;
+            cursor: not-allowed;
+            &:hover {
+                color: rgba(0, 0, 0, 0.25);
+                border-color: #d9d9d9;
+            }
+        }
+        >.pager-icon {
+            width: 12px;
+            height: 12px;
+            &.prev {
+                transform: rotateZ(180deg);
+            }
+        }
+    }
+    &.simple {
+        >.x-pager-num {
+            border-color: transparent;
+            &:hover:not(.seprator) {
+                color: $hover;
+                border-color: $hover;
+            }
+            &.active {
+                color: $brand;
+                border-color: $brand;
+            }
+            &.disabled {
+                color: rgba(0, 0, 0, 0.25);
+                border-color: transparent;
+                &:hover {
+                    color: rgba(0, 0, 0, 0.25);
+                    border-color: transparent;
+                }
+            }
+        }
+    }
+    &.small {
+        >.x-pager-num {
+            min-width: 25px;
+            font-size: 12px;
+            line-height: 20px;
+            height: 24px;
+        }
+    }
+}

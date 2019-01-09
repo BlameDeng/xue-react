@@ -1,0 +1,27 @@
+{
+    "name": "xue-re",
+    "version": "0.0.1",
+    "description": "> 一套小巧的 UI 组件库。",
+    "main": "lib/xue-re.js",
+    "dependencies": {
+        "prop-types": "^15.6.2",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "react-scripts-ts": "3.1.0"
+    },
+    "scripts": {
+        "start": "react-scripts-ts start",
+        "build": "react-scripts-ts build",
+        "test": "react-scripts-ts test --env=jsdom",
+        "eject": "react-scripts-ts eject"
+    },
+    "devDependencies": {
+        "@types/jest": "^23.3.10",
+        "@types/node": "^10.12.18",
+        "@types/react": "^16.7.18",
+        "@types/react-dom": "^16.0.11",
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0",
+        "typescript": "^3.2.2"
+    }
+}

@@ -1,0 +1,191 @@
+@import './Color.scss';
+.x-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 4px 15px;
+    border: 1px solid;
+    color: $main;
+    border-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    >.loading {
+        animation: button-loading-spin 1s linear infinite;
+    }
+    >.button-inner {
+        font-size: 14px;
+        line-height: 22px;
+    }
+    &.large {
+        font-size: 16px;
+        line-height: 24px;
+        padding: 6px 15px;
+    }
+    &.small {
+        font-size: 12px;
+        line-height: 20px;
+        padding: 2px 10px;
+    }
+    >.button-inner {
+        font-size: inherit;
+        line-height: inherit;
+    }
+    >.button-icon {
+        &.small {
+            width: 12px;
+            height: 12px;
+        }
+        &.medium {
+            width: 14px;
+            height: 14px;
+        }
+        &.large {
+            width: 16px;
+            height: 16px;
+        }
+    }
+    &.left {
+        >.button-icon {
+            margin-right: 2px;
+            order: 1;
+        }
+        >.button-inner {
+            order: 2;
+        }
+    }
+    &.right {
+        >.button-icon {
+            margin-left: 2px;
+            order: 2;
+        }
+        >.button-inner {
+            order: 1;
+        }
+    }
+    &.ghost {
+        color: #fff;
+        border-color: #fff;
+        background-color: transparent;
+    }
+    &:hover {
+        color: $brand;
+        border-color: $brand;
+        z-index: 1;
+    }
+    &:focus {
+        outline: none;
+        color: $brand;
+        border-color: $brand;
+        z-index: 1;
+    }
+    &.dashed {
+        border-style: dashed;
+    }
+    &.primary {
+        color: #fff;
+        background-color: $brand;
+        &:hover {
+            background-color: $hover;
+            border-color: $hover;
+        }
+        &.ghost {
+            color: $brand;
+            border-color: $brand;
+            background-color: transparent;
+            &:hover {
+                color: $hover;
+                border-color: $hover;
+            }
+        }
+        &.disabled {
+            color: rgba(0, 0, 0, 0.25);
+            border-color: #d9d9d9;
+            background-color: #e6e6e6;
+            cursor: not-allowed;
+            &:hover {
+                color: rgba(0, 0, 0, 0.25);
+                border-color: #d9d9d9;
+            }
+        }
+    }
+    &.danger {
+        color: $error;
+        background-color: #f5f5f5;
+        &:hover {
+            color: #fff;
+            background-color: $error;
+            border-color: $error;
+        }
+        &:focus {
+            color: $error;
+            background-color: #fff;
+            border-color: $error;
+            &.disabled {
+                border-color: #d9d9d9;
+                color: rgba(0, 0, 0, 0.25);
+                background-color: #e6e6e6;
+            }
+        }
+        &.ghost {
+            color: $error;
+            border-color: $error;
+            background-color: transparent;
+            &:hover {
+                color: lighten($error, 10%);
+                border-color: lighten($error, 10%);
+            }
+        }
+        &.disabled {
+            background-color: #e6e6e6;
+        }
+        &.ghost.disabled {
+            border-color: #fff;
+            color: rgba(0, 0, 0, 0.25);
+            background-color: transparent;
+        }
+    }
+    &.disabled {
+        color: rgba(0, 0, 0, 0.25);
+        border-color: #d9d9d9;
+        background-color: #e6e6e6;
+        cursor: not-allowed;
+        &:hover {
+            color: rgba(0, 0, 0, 0.25);
+            border-color: #d9d9d9;
+        }
+    }
+    &.ghost.disabled {
+        background-color: transparent;
+    }
+}
+@keyframes button-loading-spin {
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+.x-button-group {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    >.x-button {
+        border-radius: 0;
+        &:not(:first-child) {
+            margin-left: -1px;
+        }
+        &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+    }
+}

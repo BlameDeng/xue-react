@@ -1,0 +1,7 @@
+node_modules
+/docs
+/dist
+babel.config.js
+index.js
+yarn.lock
+yarn-error.log
