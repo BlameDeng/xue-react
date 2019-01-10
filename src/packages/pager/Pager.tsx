@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { calculatePagerPages, classes, simpleArrayIsEqual } from '../utils'
+import { calculatePagerPages, classes } from '../utils'
 import Icon from '../icon/Icon'
 import '../style/Pager.scss'
 
