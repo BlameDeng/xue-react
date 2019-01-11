@@ -17,10 +17,10 @@ interface IInputProps {
   onPressEnter?: React.KeyboardEventHandler
   onFocus?: React.FocusEventHandler
   onBlur?: React.FocusEventHandler
-  addonBefore?: React.ReactNode
-  addonAfter?: React.ReactNode
-  prefix?: React.ReactNode
-  suffix?: React.ReactNode
+  addonBefore?: string | React.ReactNode
+  addonAfter?: string | React.ReactNode
+  prefix?: string | React.ReactNode
+  suffix?: string | React.ReactNode
   disabled?: boolean
   error?: boolean
 }

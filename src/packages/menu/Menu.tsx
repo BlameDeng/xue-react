@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { classes, simpleArrayIsEqual } from '../utils'
+import { classes, isSimpleArrayEqual } from '../utils'
 import SubMenu from './SubMenu'
 import MenuItem from './MenuItem'
 import '../style/Menu.scss'
@@ -27,6 +27,7 @@ interface IChildProps {
   uniqueKey?: string
   selectedKey?: string
   expandKeys?: string[]
+  title: string | React.ReactNode
   handleSelectedKey?: (key: string) => any
   handleExpandKeys?: (key: string) => any
   className?: string
@@ -69,7 +70,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
       'selectedKey' in nextProps && selectedKey !== derivedSelectedKey
     const shouldChangeExpandKeys =
       'expandKeys' in nextProps &&
-      !simpleArrayIsEqual(expandKeys as string[], derivedExpandKeys)
+      !isSimpleArrayEqual(expandKeys as string[], derivedExpandKeys)
     if (shouldChangeSelectedKey && shouldChangeExpandKeys) {
       return { derivedSelectedKey: selectedKey, derivedExpandKeys: expandKeys }
     } else if (shouldChangeSelectedKey && !shouldChangeExpandKeys) {

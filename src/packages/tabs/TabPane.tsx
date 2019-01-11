@@ -14,7 +14,8 @@ class TabPane extends React.Component<ITabPaneProps, {}> {
   public static displayName = 'TabPane'
 
   public static propTypes = {
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+      .isRequired,
     active: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object,

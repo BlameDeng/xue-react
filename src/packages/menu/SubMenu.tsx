@@ -9,7 +9,7 @@ interface ISubMenuProps {
   uniqueKey?: string
   selectedKey?: string
   expandKeys?: string[]
-  title?: React.ReactNode
+  title: string | React.ReactNode
   handleSelectedKey?: (key: string) => any
   handleExpandKeys?: (key: string) => any
   className?: string
@@ -37,6 +37,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
     uniqueKey: PropTypes.string,
     selectedKey: PropTypes.string,
     expandKeys: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     mode: PropTypes.oneOf(['vertical', 'horizontal']),
     theme: PropTypes.oneOf(['light', 'dark']),
     onSelectedChange: PropTypes.func,

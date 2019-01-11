@@ -8,7 +8,7 @@ interface ISearchProps {
   value?: string
   defaultValue?: string
   placeholder?: string
-  enterButton?: boolean | string
+  enterButton?: boolean | string | React.ReactNode
   onSearch?: (value: string) => any
   onChange?: React.ChangeEventHandler
   className?: string
@@ -26,7 +26,11 @@ class Search extends React.Component<ISearchProps, ISearchState> {
     value: PropTypes.string,
     defaultValue: PropTypes.string,
     placeholder: PropTypes.string,
-    enterButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    enterButton: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.element
+    ]),
     onSearch: PropTypes.func,
     style: PropTypes.object,
     className: PropTypes.string
@@ -87,28 +91,25 @@ class Search extends React.Component<ISearchProps, ISearchState> {
         onChange={this.handleChange}
         onPressEnter={this.handleSearch}
         suffix={
-          enterButton ? (
-            undefined
-          ) : (
+          (enterButton === false && (
             <Icon
               name="search"
               style={{ width: '18px', height: '18px', cursor: 'pointer' }}
               onClick={this.handleSearch}
             />
-          )
+          )) ||
+          null
         }
         addonAfter={
           enterButton ? (
             <div className="search-enter-button" onClick={this.handleSearch}>
-              {typeof enterButton === 'string' ? (
-                enterButton
-              ) : (
+              {enterButton === true ? (
                 <Icon name="search" style={{ width: '20px', height: '20px' }} />
+              ) : (
+                enterButton
               )}
             </div>
-          ) : (
-            undefined
-          )
+          ) : null
         }
         placeholder={placeholder}
       />

@@ -28,7 +28,7 @@ class Transition extends React.Component<ITransitionProps> {
 
   public static defaultProps = {
     transitionActive: {
-      transition: '0.3s all cubic-bezier(.645, .045, .355, 1)'
+      transition: '300ms all cubic-bezier(.645, .045, .355, 1)'
     }
   }
 
