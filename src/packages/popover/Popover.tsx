@@ -11,7 +11,7 @@ interface IPopoveProps {
   position?: 'top' | 'left' | 'right' | 'bottom'
   defaultVisible?: boolean
   visible?: boolean
-  clickPopClose?: boolean
+  popClosable?: boolean
   onVisibleChange?: (visible: boolean) => any
   className?: string
   style?: React.CSSProperties
@@ -34,14 +34,14 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
     onVisibleChange: PropTypes.func,
     className: PropTypes.string,
     style: PropTypes.object,
-    clickPopClose: PropTypes.bool
+    popClosable: PropTypes.bool
   }
 
   public static defaultProps = {
     trigger: 'hover',
     position: 'top',
     defaultVisible: false,
-    clickPopClose: false
+    popClosable: false
   }
 
   public static getDerivedStateFromProps(
@@ -58,6 +58,8 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
   private wrapperRef: HTMLDivElement
   private contentRef: HTMLDivElement
   private arrowRef: HTMLDivElement
+  private delay: number = 200
+  private timeout: any
 
   constructor(props: IPopoveProps) {
     super(props)
@@ -77,16 +79,16 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
     const { derivedVisible: prevDerivedVisible } = prevState
     const { derivedVisible } = this.state
     const { trigger } = this.props
-    // when the pop is open, locate it
+    // false => true，打开，定位
     if (!prevDerivedVisible && derivedVisible) {
       this.locateContent()
       this.setArrowBorderColor()
-      // if the trigger were 'click', add a listener
+      // 触发方式是 'click', 监听
       if (trigger === 'click') {
         document.addEventListener('click', this.handleClickDocument)
       }
     }
-    // when then pop is closed and the trigger is 'click', remove the listener
+    // true => false，关闭，触发方式是 'click' 时移除监听
     if (prevDerivedVisible && !derivedVisible && trigger === 'click') {
       document.removeEventListener('click', this.handleClickDocument)
     }
@@ -94,6 +96,9 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
 
   public componentWillUnmount() {
     document.removeEventListener('click', this.handleClickDocument)
+    if (this.timeout) {
+      window.clearTimeout(this.timeout)
+    }
   }
 
   public saveWrapperRef = (node: HTMLDivElement) => {
@@ -107,7 +112,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
   public saveArrowRef = (node: HTMLDivElement) => {
     this.arrowRef = node
   }
-
+  // 设置箭头图标颜色
   public setArrowBorderColor = () => {
     const { contentRef, arrowRef } = this
     const { position } = this.props
@@ -140,7 +145,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
         break
     }
   }
-
+  // 定位 pop
   public locateContent = () => {
     const { wrapperRef, triggerNode } = this
     const {
@@ -183,10 +188,10 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
       this.open()
     }
   }
-
+  // 监听点击 document
   public handleClickDocument = (e: MouseEvent) => {
-    const { clickPopClose } = this.props
-    if (clickPopClose) {
+    const { popClosable } = this.props
+    if (popClosable) {
       this.close()
       return
     }
@@ -201,13 +206,36 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
     const { trigger } = this.props
     if (trigger === 'hover') {
       this.open()
+      if (this.timeout) {
+        window.clearTimeout(this.timeout)
+        this.timeout = null
+      }
     }
   }
 
   public handleMouseLeave: React.MouseEventHandler = e => {
     const { trigger } = this.props
     if (trigger === 'hover') {
-      this.close()
+      this.timeout = setTimeout(() => {
+        this.close()
+      }, this.delay)
+    }
+  }
+
+  public handleMouseEnterPop: React.MouseEventHandler = e => {
+    const { trigger } = this.props
+    if (trigger === 'hover' && this.timeout) {
+      window.clearTimeout(this.timeout)
+      this.timeout = null
+    }
+  }
+
+  public handleMouseLeavePop: React.MouseEventHandler = e => {
+    const { trigger } = this.props
+    if (trigger === 'hover' && !this.timeout) {
+      this.timeout = setTimeout(() => {
+        this.close()
+      }, this.delay)
     }
   }
 
@@ -245,7 +273,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
       onVisibleChange(false)
     }
   }
-
+  // 获取监听 props
   public getChildrenEventHandlers = (): object => {
     const {
       handleClick: onClick,
@@ -262,7 +290,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
     }
     return { onFocus, onBlur }
   }
-
+  // 渲染 children 时传递监听 props
   public renderChildren() {
     const { children } = this.props
     if (!children) {
@@ -295,7 +323,12 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
         >
           <>
             {ReactDOM.createPortal(
-              <div className={wrapperClassName} ref={this.saveWrapperRef}>
+              <div
+                className={wrapperClassName}
+                ref={this.saveWrapperRef}
+                onMouseEnter={this.handleMouseEnterPop}
+                onMouseLeave={this.handleMouseLeavePop}
+              >
                 <div
                   className={contentClassName}
                   style={style}

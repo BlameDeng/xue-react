@@ -43,7 +43,7 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
   private isTransitioning: boolean = false
   private length: number = 0
   private prevIndex: number = 1
-  private timerId: any
+  private timeout: any
 
   public componentDidMount() {
     this.cloneNode()
@@ -58,9 +58,9 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
   }
 
   public componentWillUnmount() {
-    const { containerRef, timerId } = this
-    if (timerId) {
-      window.clearTimeout(timerId)
+    const { containerRef, timeout } = this
+    if (timeout) {
+      window.clearTimeout(timeout)
     }
     containerRef.removeEventListener('transitionend', this.handleTransitionEnd)
   }
@@ -88,11 +88,11 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
     const duration = this.props.duration as number
     const play = () => {
       this.next()
-      this.timerId = setTimeout(() => {
+      this.timeout = setTimeout(() => {
         play()
       }, duration * 1000)
     }
-    this.timerId = setTimeout(() => {
+    this.timeout = setTimeout(() => {
       play()
     }, duration * 1000)
   }
@@ -186,9 +186,9 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
 
   public handleMouseEnter: React.MouseEventHandler = e => {
     const { duration } = this.props
-    const { timerId } = this
-    if (duration && timerId) {
-      window.clearTimeout(timerId)
+    const { timeout } = this
+    if (duration && timeout) {
+      window.clearTimeout(timeout)
     }
   }
 

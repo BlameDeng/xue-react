@@ -30,7 +30,7 @@
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
-                transform: translateY(-50%) rotateZ(-90deg);
+                transform: translateY(-50%) rotateZ(90deg);
                 transition: all .3s cubic-bezier(.645, .045, .355, 1);
             }
             &:hover {
@@ -38,7 +38,7 @@
             }
             &.active {
                 >.x-sub-menu-title-icon-wrapper {
-                    transform: translateY(-50%) rotateZ(90deg);
+                    transform: translateY(-50%) rotateZ(-90deg);
                 }
             }
         }
@@ -82,6 +82,11 @@
     .x-sub-menu .x-sub-menu {
         >.x-sub-menu-title {
             padding-left: 40px;
+        }
+        >.x-sub-menu-children-wrapper {
+            >.x-menu-item {
+                padding-left: 60px;
+            }
         }
     }
     &.horizontal {

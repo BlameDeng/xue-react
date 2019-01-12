@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import { openModal, removeModal } from './openModal'
@@ -19,7 +20,7 @@ interface IModalProps {
   mode?: 'declarative' | 'imperative'
   className?: string
   style?: React.CSSProperties
-  didLeave?: () => any
+  afterClose?: () => any
   // the declarative mode only
   onConfirm?: (e: React.MouseEvent) => any
   onCancel?: (e: React.MouseEvent) => any
@@ -56,7 +57,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
     maskClosable: PropTypes.bool,
     promiseHandler: PropTypes.object,
     modalId: PropTypes.string,
-    didLeave: PropTypes.func,
+    afterClose: PropTypes.func,
     okText: PropTypes.string,
     okType: PropTypes.oneOf(['default', 'dashed', 'primary', 'danger']),
     cancelText: PropTypes.string,
@@ -75,7 +76,9 @@ class Modal extends React.Component<IModalProps, IModalState> {
     cancelType: 'default'
   }
 
-  private timerId: any = null
+  private timeout: any
+  private bodyOverflow: string | null
+  private bodyPaddingRight: string | null
 
   constructor(props: IModalProps) {
     super(props)
@@ -85,26 +88,61 @@ class Modal extends React.Component<IModalProps, IModalState> {
   }
 
   public componentDidMount() {
-    if (!this.state.modalVisible) {
+    const { visible } = this.props
+    const { modalVisible } = this.state
+    if (visible && modalVisible) {
+      this.bodyPaddingRight = document.body.style.paddingRight
+    }
+    if (!modalVisible) {
       this.setState({
         modalVisible: true
       })
     }
   }
 
-  public componentWillUnmount() {
-    if (this.timerId) {
-      window.clearTimeout(this.timerId)
+  public componentDidUpdate(prevProps: IModalProps, prevState: IModalState) {
+    const { mode, visible } = this.props
+    const { modalVisible } = this.state
+    // 声明式调用
+    if (mode === 'declarative') {
+      // false => true 打开
+      if (!prevProps.visible && visible) {
+        this.bodyOverflow = document.body.style.overflow
+        this.bodyPaddingRight = document.body.style.paddingRight
+        document.body.style.paddingRight = this.getScrollBarWidth() + 'px'
+        document.body.style.overflow = 'hidden'
+        // true => false 关闭
+      }
+      // 命令式调用
+    } else if (mode === 'imperative') {
+      if (!prevState.modalVisible && modalVisible) {
+        this.bodyOverflow = document.body.style.overflow
+        this.bodyPaddingRight = document.body.style.paddingRight
+        document.body.style.paddingRight = this.getScrollBarWidth() + 'px'
+        document.body.style.overflow = 'hidden'
+      }
     }
   }
 
+  public componentWillUnmount() {
+    if (this.timeout) {
+      window.clearTimeout(this.timeout)
+    }
+  }
+
+  // 获取滚动条宽度
+  public getScrollBarWidth = (): number => {
+    return window.innerWidth - document.body.clientWidth
+  }
+
+  // 'imperative' 模式下关闭 modal
   public closeModal = () => {
     this.setState(
       {
         modalVisible: false
       },
       () => {
-        this.timerId = setTimeout(() => {
+        this.timeout = setTimeout(() => {
           this.afterLeave()
         }, 300)
       }
@@ -114,7 +152,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
   public handleOnConfirm = (e: React.MouseEvent) => {
     const { onConfirm, mode, promiseHandler } = this.props
     if (mode === 'declarative') {
-      this.timerId = setTimeout(() => {
+      this.timeout = setTimeout(() => {
         this.afterLeave()
       }, 300)
       if (onConfirm) {
@@ -129,9 +167,8 @@ class Modal extends React.Component<IModalProps, IModalState> {
 
   public handleOnCancel = (e: React.MouseEvent) => {
     const { onCancel, mode, promiseHandler } = this.props
-
     if (mode === 'declarative') {
-      this.timerId = setTimeout(() => {
+      this.timeout = setTimeout(() => {
         this.afterLeave()
       }, 300)
       if (onCancel) {
@@ -156,9 +193,12 @@ class Modal extends React.Component<IModalProps, IModalState> {
   }
 
   public afterLeave = () => {
-    const { modalId, didLeave } = this.props
-    if (didLeave) {
-      didLeave()
+    // 关闭后还原
+    document.body.style.overflow = this.bodyOverflow
+    document.body.style.paddingRight = this.bodyPaddingRight
+    const { modalId, afterClose } = this.props
+    if (afterClose) {
+      afterClose()
     }
     if (modalId) {
       Modal.removeModal(modalId)
@@ -181,7 +221,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
       children
     } = this.props
     const { modalVisible } = this.state
-    return (
+    return ReactDOM.createPortal(
       <>
         <Transition
           visible={visible && modalVisible}
@@ -226,7 +266,8 @@ class Modal extends React.Component<IModalProps, IModalState> {
             </div>
           </div>
         </Transition>
-      </>
+      </>,
+      document.body
     )
   }
 }

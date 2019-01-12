@@ -11,7 +11,7 @@ interface IModalOptions {
   cancelText?: string
   cancelType?: 'default' | 'dashed' | 'primary' | 'danger'
   maskClosable?: boolean
-  didLeave?: () => any
+  afterClose?: () => any
   className?: string
   style?: React.CSSProperties
 }
@@ -40,7 +40,7 @@ export function openModal(options: IModalOptions) {
       cancelText,
       cancelType = 'default',
       maskClosable,
-      didLeave,
+      afterClose,
       className,
       style
     } = options
@@ -60,7 +60,7 @@ export function openModal(options: IModalOptions) {
         maskClosable,
         promiseHandler: { resolve, reject },
         modalId,
-        didLeave,
+        afterClose,
         className,
         style
       } as React.ClassAttributes<any>

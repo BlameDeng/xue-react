@@ -10,6 +10,7 @@ interface ISubMenuProps {
   selectedKey?: string
   expandKeys?: string[]
   title: string | React.ReactNode
+  showArrow?: boolean
   handleSelectedKey?: (key: string) => any
   handleExpandKeys?: (key: string) => any
   className?: string
@@ -43,7 +44,12 @@ class SubMenu extends React.Component<ISubMenuProps> {
     onSelectedChange: PropTypes.func,
     onExpandChange: PropTypes.func,
     className: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    showArrow: PropTypes.bool
+  }
+
+  public static defaultProps = {
+    showArrow: true
   }
 
   public state = {
@@ -101,7 +107,8 @@ class SubMenu extends React.Component<ISubMenuProps> {
       className,
       style,
       theme,
-      mode
+      mode,
+      showArrow
     } = this.props
     const { childrenKeys } = this
     return (
@@ -120,9 +127,11 @@ class SubMenu extends React.Component<ISubMenuProps> {
           onClick={this.handleClick}
         >
           {title}
-          <span className="x-sub-menu-title-icon-wrapper">
-            <Icon name="arrow" style={{ width: '8px', height: '8px' }} />
-          </span>
+          {showArrow && (
+            <span className="x-sub-menu-title-icon-wrapper">
+              <Icon name="arrow" style={{ width: '8px', height: '8px' }} />
+            </span>
+          )}
         </div>
         <Unfold vertical={true} visible={expandKeys!.indexOf(uniqueKey!) > -1}>
           <ul className="x-sub-menu-children-wrapper">

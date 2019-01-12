@@ -200,6 +200,8 @@ class Unfold extends React.Component<IUnfoldProps> {
   }
 
   public hideNode() {
+    // 关闭时先获取最新的 node 数据
+    this.getNodeSize(this.node)
     const { node, leaveTo, transitionEffect, prevCssProp } = this
     const { vertical } = this.props
     const {

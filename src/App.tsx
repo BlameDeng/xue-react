@@ -15,6 +15,8 @@ import TabsExample from './examples/Tabs.example'
 import CollapseExample from './examples/Collapse.example'
 import MenuExample from './examples/Menu.example'
 import ModalExample from './examples/Modal.example'
+import DatePickerExample from './examples/DatePicker.example'
+import CascaderExample from './examples/Cascader.example'
 
 class App extends React.Component {
   public render() {
@@ -34,7 +36,7 @@ class App extends React.Component {
             <div
               className="github"
               onClick={() =>
-                window.open('https://github.com/BlameDeng/Xue-react', '_self')
+                window.open('https://github.com/BlameDeng/Xue-react', '_blank')
               }
             >
               <Icon
@@ -61,6 +63,11 @@ class App extends React.Component {
               <Route path="/components/collapse" component={CollapseExample} />
               <Route path="/components/modal" component={ModalExample} />
               <Route path="/components/menu" component={MenuExample} />
+              <Route path="/components/cascader" component={CascaderExample} />
+              <Route
+                path="/components/datepicker"
+                component={DatePickerExample}
+              />
               <Route
                 path="/components/transition"
                 component={TransitionExample}
@@ -71,7 +78,10 @@ class App extends React.Component {
             <ul className="footer-link">
               <li
                 onClick={() =>
-                  window.open('https://github.com/BlameDeng/Xue-react', '_self')
+                  window.open(
+                    'https://github.com/BlameDeng/Xue-react',
+                    '_blank'
+                  )
                 }
               >
                 <span className="icon-wrapper">

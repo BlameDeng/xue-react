@@ -7,8 +7,8 @@ function isSimpleArrayEqual(
   }
   const newArr1 = JSON.parse(JSON.stringify(arr1)).sort()
   const newArr2 = JSON.parse(JSON.stringify(arr2)).sort()
-  for (const index of newArr1.keys()) {
-    if (newArr1[index] !== newArr2[index]) {
+  for (let i = 0; i < newArr1.length; i++) {
+    if (newArr1[i] !== newArr2[i]) {
       return false
     }
   }

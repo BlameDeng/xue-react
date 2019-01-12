@@ -10,8 +10,8 @@ interface ICollapseProps {
   accordion?: boolean
   showArrow?: boolean
   onChange?: (activeKey: string[], e: React.MouseEvent) => any
-  style?: React.CSSProperties
   className?: string
+  style?: React.CSSProperties
 }
 
 interface ICollapseState {
@@ -26,8 +26,8 @@ interface IPanelProps {
   activeKey?: string[]
   derivedActiveKey?: string[]
   onClick?: (key: string, e: React.MouseEvent) => any
-  style?: React.CSSProperties
   className?: string
+  style?: React.CSSProperties
 }
 
 class Collapse extends React.Component<ICollapseProps, ICollapseState> {
