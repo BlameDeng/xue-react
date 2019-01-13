@@ -1,20 +1,21 @@
 @import './Color.scss';
 .x-menu {
     color: rgba(0, 0, 0, 0.65);
-    font-size: 14px;
-    line-height: 22px;
     display: inline-block;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
     background-color: #fff;
     position: relative;
-    z-index: 20;
+    z-index: 80;
     .x-sub-menu {
         >.x-sub-menu-title {
             height: 40px;
-            padding-left: 20px;
+            padding-left: 30px;
             padding-right: 34px;
             padding-top: 4px;
             padding-bottom: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 22px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -26,7 +27,7 @@
             >.x-sub-menu-title-icon-wrapper {
                 position: absolute;
                 top: 50%;
-                right: 10px;
+                right: 13px;
                 display: inline-flex;
                 justify-content: center;
                 align-items: center;
@@ -42,10 +43,19 @@
                 }
             }
         }
+        &.item-group {
+            >.x-sub-menu-title {
+                color: rgba(0, 0, 0, 0.35);
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 500;
+                cursor: default;
+            }
+        }
     }
     .x-menu-item {
         height: 40px;
-        padding-left: 20px;
+        padding-left: 30px;
         padding-right: 16px;
         padding-top: 4px;
         padding-bottom: 4px;
@@ -57,6 +67,9 @@
         cursor: pointer;
         transition: all .3s cubic-bezier(.645, .045, .355, 1);
         position: relative;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
         >.x-menu-item-filler {
             position: absolute;
             top: 0;
@@ -76,16 +89,16 @@
     }
     // menu sub item
     .x-sub-menu .x-menu-item {
-        padding-left: 40px;
+        padding-left: 50px;
     }
     // menu sub sub
     .x-sub-menu .x-sub-menu {
         >.x-sub-menu-title {
-            padding-left: 40px;
+            padding-left: 50px;
         }
         >.x-sub-menu-children-wrapper {
             >.x-menu-item {
-                padding-left: 60px;
+                padding-left: 70px;
             }
         }
     }
@@ -193,6 +206,15 @@
                 }
                 &.child-selected.horizontal {
                     color: rgba(255, 255, 255, 1);
+                }
+            }
+            &.item-group {
+                >.x-sub-menu-title {
+                    color: rgba(255, 255, 255, 0.35);
+                    font-size: 12px;
+                    line-height: 20px;
+                    font-weight: 500;
+                    cursor: default;
                 }
             }
         }

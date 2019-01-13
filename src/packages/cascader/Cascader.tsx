@@ -42,7 +42,10 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     itemStyle: PropTypes.object,
     itemClassName: PropTypes.string,
     style: PropTypes.object,
-    className: PropTypes.string
+    className: PropTypes.string,
+    onChange: PropTypes.func,
+    onSelect: PropTypes.func,
+    changeOnSelect: PropTypes.bool
   }
 
   public static defaultProps = {

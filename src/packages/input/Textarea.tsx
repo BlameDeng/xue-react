@@ -100,6 +100,14 @@ class Textarea extends React.Component<ITextareaProps, ITextareaState> {
     this.textareaRef = textarea
   }
 
+  public focus = () => {
+    this.textareaRef.focus()
+  }
+
+  public blur = () => {
+    this.textareaRef.blur()
+  }
+
   public render() {
     const { style, autosize, placeholder, size, className } = this.props
     const { derivedValue } = this.state

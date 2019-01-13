@@ -3,6 +3,10 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import './style/App.scss'
 import NavBar from './components/NavBar'
 import Icon from './packages/icon/Icon'
+import Introduction from './components/Introduction'
+import Color from './components/Color'
+import ZIndex from './components/ZIndex'
+import Start from './components/Start'
 import ButtonExample from './examples/Button.example'
 import InputExample from './examples/Input.example'
 import SwitchExample from './examples/Switch.example'
@@ -36,7 +40,7 @@ class App extends React.Component {
             <div
               className="github"
               onClick={() =>
-                window.open('https://github.com/BlameDeng/Xue-react', '_blank')
+                window.open('https://github.com/BlameDeng/xue-react', '_blank')
               }
             >
               <Icon
@@ -52,6 +56,10 @@ class App extends React.Component {
           <main className="main">
             <Route path="/" component={NavBar} />
             <div className="container">
+              <Route path="/introduction" component={Introduction} />
+              <Route path="/color" component={Color} />
+              <Route path="/zindex" component={ZIndex} />
+              <Route path="/start" component={Start} />
               <Route path="/components/button" component={ButtonExample} />
               <Route path="/components/input" component={InputExample} />
               <Route path="/components/switch" component={SwitchExample} />
@@ -79,7 +87,7 @@ class App extends React.Component {
               <li
                 onClick={() =>
                   window.open(
-                    'https://github.com/BlameDeng/Xue-react',
+                    'https://github.com/BlameDeng/xue-react',
                     '_blank'
                   )
                 }
@@ -91,7 +99,7 @@ class App extends React.Component {
               </li>
               <li
                 onClick={() =>
-                  window.open('https://github.com/BlameDeng/Xue-ui', '_blank')
+                  window.open('https://github.com/BlameDeng/xue-ui', '_blank')
                 }
               >
                 <span className="icon-wrapper">

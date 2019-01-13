@@ -23,6 +23,7 @@ interface IInputProps {
   suffix?: string | React.ReactNode
   disabled?: boolean
   error?: boolean
+  readonly?: boolean
 }
 
 interface IInputState {
@@ -51,12 +52,14 @@ class Input extends React.Component<IInputProps, IInputState> {
     prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     disabled: PropTypes.bool,
-    error: PropTypes.bool
+    error: PropTypes.bool,
+    readonly: PropTypes.bool
   }
 
   public static defaultProps = {
     disabled: false,
-    error: false
+    error: false,
+    readonly: false
   }
 
   public static getDerivedStateFromProps(
@@ -70,6 +73,8 @@ class Input extends React.Component<IInputProps, IInputState> {
     }
     return null
   }
+
+  private inputRef: HTMLInputElement
 
   constructor(props: IInputProps) {
     super(props)
@@ -99,6 +104,18 @@ class Input extends React.Component<IInputProps, IInputState> {
     }
   }
 
+  public saveInputRef = (node: HTMLInputElement) => {
+    this.inputRef = node
+  }
+
+  public focus = () => {
+    this.inputRef.focus()
+  }
+
+  public blur = () => {
+    this.inputRef.blur()
+  }
+
   public render() {
     const {
       placeholder,
@@ -111,7 +128,8 @@ class Input extends React.Component<IInputProps, IInputState> {
       disabled,
       error,
       onFocus,
-      onBlur
+      onBlur,
+      readonly
     } = this.props
     const { derivedValue } = this.state
     const labelClassName = classes('x-input-wrapper', className, {
@@ -157,6 +175,8 @@ class Input extends React.Component<IInputProps, IInputState> {
           onBlur={onBlur}
           style={style}
           disabled={disabled}
+          readOnly={readonly}
+          ref={this.saveInputRef}
         />
         {suffix && (
           <span className="suffix-wrapper">

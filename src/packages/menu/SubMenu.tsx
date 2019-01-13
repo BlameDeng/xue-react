@@ -17,6 +17,7 @@ interface ISubMenuProps {
   style?: React.CSSProperties
   mode?: 'vertical' | 'horizontal'
   theme?: 'light' | 'dark'
+  itemGroup?: boolean
 }
 
 interface IChildProps {
@@ -45,11 +46,13 @@ class SubMenu extends React.Component<ISubMenuProps> {
     onExpandChange: PropTypes.func,
     className: PropTypes.string,
     style: PropTypes.object,
-    showArrow: PropTypes.bool
+    showArrow: PropTypes.bool,
+    itemGroup: PropTypes.bool
   }
 
   public static defaultProps = {
-    showArrow: true
+    showArrow: true,
+    itemGroup: false
   }
 
   public state = {
@@ -94,8 +97,10 @@ class SubMenu extends React.Component<ISubMenuProps> {
   }
 
   public handleClick: React.ReactEventHandler = e => {
-    const { uniqueKey, handleExpandKeys } = this.props
-    handleExpandKeys!(uniqueKey as string)
+    const { uniqueKey, handleExpandKeys, itemGroup } = this.props
+    if (!itemGroup) {
+      handleExpandKeys!(uniqueKey as string)
+    }
   }
 
   public render() {
@@ -108,13 +113,15 @@ class SubMenu extends React.Component<ISubMenuProps> {
       style,
       theme,
       mode,
-      showArrow
+      showArrow,
+      itemGroup
     } = this.props
     const { childrenKeys } = this
     return (
       <li
         className={classes('x-sub-menu', theme, {
-          active: expandKeys!.indexOf(uniqueKey!) > -1
+          active: expandKeys!.indexOf(uniqueKey!) > -1,
+          ['item-group']: itemGroup
         })}
       >
         <div
@@ -133,7 +140,10 @@ class SubMenu extends React.Component<ISubMenuProps> {
             </span>
           )}
         </div>
-        <Unfold vertical={true} visible={expandKeys!.indexOf(uniqueKey!) > -1}>
+        <Unfold
+          vertical={true}
+          visible={expandKeys!.indexOf(uniqueKey!) > -1 || itemGroup!}
+        >
           <ul className="x-sub-menu-children-wrapper">
             {this.renderChildren()}
           </ul>

@@ -53,6 +53,8 @@ class Search extends React.Component<ISearchProps, ISearchState> {
     return null
   }
 
+  private inputInstance: any
+
   constructor(props: ISearchProps) {
     super(props)
     this.state = {
@@ -78,11 +80,24 @@ class Search extends React.Component<ISearchProps, ISearchState> {
     }
   }
 
+  public saveInputInstance = (instance: any) => {
+    this.inputInstance = instance
+  }
+
+  public focus = () => {
+    this.inputInstance.focus()
+  }
+
+  public blur = () => {
+    this.inputInstance.blur()
+  }
+
   public render() {
     const { enterButton, placeholder, className, style } = this.props
     const { derivedValue } = this.state
     return (
       <Input
+        ref={this.saveInputInstance}
         value={derivedValue}
         className={classes('search', className, {
           'enter-button': !!enterButton

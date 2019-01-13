@@ -14,7 +14,7 @@ interface ICascaderMenuProps {
   options: IOption[]
   level: number
   handleChangeValue: (option: IOption, level: number) => any
-  valueArr: string[] | null
+  valueArr: string[]
   itemClassName?: string
   itemStyle?: React.CSSProperties
 }
@@ -28,6 +28,15 @@ class CascaderMenu extends React.Component<
   ICascaderMenuState
 > {
   public static displayName = 'CascaderMenu'
+
+  public static propTypes = {
+    options: PropTypes.arrayOf(PropTypes.object),
+    level: PropTypes.number,
+    handleChangeValue: PropTypes.func,
+    valueArr: PropTypes.arrayOf(PropTypes.string),
+    itemClassName: PropTypes.string,
+    itemStyle: PropTypes.object
+  }
 
   public static getDerivedStateFromProps(
     nextProps: ICascaderMenuProps,
