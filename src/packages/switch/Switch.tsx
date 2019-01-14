@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { Wave, classes } from '../utils'
-import '../style/Switch.scss'
+import './style'
 
 interface ISwitchProps {
   checked?: boolean
@@ -17,8 +17,10 @@ interface ISwitchState {
   derivedChecked: boolean
 }
 
+const componentName = 'Switch'
+
 class Switch extends React.Component<ISwitchProps, ISwitchState> {
-  public static displayName = 'Switch'
+  public static displayName = componentName
 
   public static propTypes = {
     defaultChecked: PropTypes.bool,
@@ -68,9 +70,10 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
   }
 
   public render() {
+    const cn = componentName
     const { size, disabled, style, className } = this.props
     const { derivedChecked } = this.state
-    const switchClassName = classes('x-switch', className, size, {
+    const switchClassName = classes(cn, '', [className, size], {
       checked: derivedChecked,
       disabled
     })
@@ -81,7 +84,7 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
           onClick={this.handleClick}
           style={style}
         >
-          <span className="x-switch-core" />
+          <span className={classes(cn, 'core')} />
         </span>
       </Wave>
     )

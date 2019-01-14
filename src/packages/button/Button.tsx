@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { classes, Wave } from '../utils'
+import { Wave, classes } from '../utils'
 import Icon from '../icon/Icon'
 import ButtonGroup from './ButtonGroup'
-import '../style/Button.scss'
+import './style'
 
 interface IButtonProps {
   icon?: string
@@ -23,8 +23,10 @@ interface IButtonProps {
   onBlur?: React.FocusEventHandler
 }
 
+const componentName = 'Button'
+
 class Button extends React.Component<IButtonProps> {
-  public static displayName = 'Button'
+  public static displayName = componentName
 
   public static Group: typeof ButtonGroup = ButtonGroup
 
@@ -52,55 +54,48 @@ class Button extends React.Component<IButtonProps> {
     disabled: false
   }
 
+  public renderIcon = () => {
+    const { icon, size, loading } = this.props
+    const className = classes(componentName, 'icon', [size], { loading })
+    return loading ? (
+      <Icon name="loading" className={className} />
+    ) : (
+      icon && <Icon name={icon} className={className} />
+    )
+  }
+
   public render() {
+    const cn = componentName
     const {
-      icon,
       position,
+      icon,
+      loading,
       size,
       type,
       htmlType,
       ghost,
-      loading,
       style,
       className,
       disabled,
-      onClick,
-      onBlur,
-      onFocus,
-      onMouseEnter,
-      onMouseLeave
+      children,
+      ...rest
     } = this.props
-    const buttonClassName = classes(
-      'x-button',
-      position,
-      size,
-      type,
-      className,
-      {
-        ghost,
-        disabled
-      }
-    )
+    const buttonClassName = classes(cn, '', [position, size, type, className], {
+      ghost,
+      disabled
+    })
 
     return (
       <Wave>
         <button
           className={buttonClassName}
-          onClick={onClick}
           style={style}
           type={htmlType}
           disabled={disabled}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          onBlur={onBlur}
-          onFocus={onFocus}
+          {...rest}
         >
-          {loading ? (
-            <Icon name="loading" className={`button-icon loading ${size}`} />
-          ) : (
-            icon && <Icon name={icon} className={`button-icon ${size}`} />
-          )}
-          <span className="button-inner">{this.props.children}</span>
+          {this.renderIcon()}
+          <span className={classes(cn, 'inner')}>{children}</span>
         </button>
       </Wave>
     )

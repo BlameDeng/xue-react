@@ -1,4 +1,4 @@
-.x-modal-mask {
+.xue-modal-mask {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,7 +7,7 @@
     background-color: #314659;
     z-index: 99;
 }
-.x-modal-content {
+.xue-modal-content {
     position: fixed;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -15,7 +15,7 @@
     z-index: 100;
     min-width: 200px;
     border-radius: 4px;
-    >.x-modal-header {
+    >.xue-modal-header {
         padding: 20px 16px;
         color: rgba(0, 0, 0, 0.85);
         font-size: 16px;
@@ -23,14 +23,14 @@
         font-weight: 500;
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     }
-    >.x-modal-body {
+    >.xue-modal-body {
         padding: 0 24px;
         color: rgba(0, 0, 0, 0.65);
         font-size: 14px;
         line-height: 22px;
         font-weight: 400;
     }
-    >.x-modal-footer {
+    >.xue-modal-footer {
         padding: 10px 16px;
         text-align: end;
         color: rgba(0, 0, 0, 0.65);

@@ -2,24 +2,28 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import '../utils/svg.js'
-import '../style/Icon.scss'
+import './style'
 
 interface IIconProps {
   name: string
-  fill?: string
   onClick?: React.MouseEventHandler
   className?: string
   style?: React.CSSProperties
+  size?: number
 }
 
+const componentName = 'Icon'
+
 const Icon: React.FunctionComponent<IIconProps> = props => {
-  const { className, fill, style, onClick, name } = props
-  const styleObj = style ? { fill, ...style } : { fill }
+  const { className, size, style, onClick, name } = props
   return (
     <svg
-      className={classes('x-icon', className)}
+      className={classes(componentName, '', [className])}
       aria-hidden="true"
-      style={styleObj}
+      style={Object.assign({}, style, {
+        width: size + 'px',
+        height: size + 'px'
+      })}
       onClick={onClick}
     >
       <use xlinkHref={`#icon-${name}`} />
@@ -27,17 +31,16 @@ const Icon: React.FunctionComponent<IIconProps> = props => {
   )
 }
 
-Icon.displayName = 'Icon'
+Icon.displayName = componentName
 
 Icon.propTypes = {
   name: PropTypes.string.isRequired,
-  fill: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string
 }
 
 Icon.defaultProps = {
-  fill: 'currentColor'
+  size: 16
 }
 
 export default Icon

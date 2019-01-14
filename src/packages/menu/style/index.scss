@@ -1,13 +1,13 @@
-@import './Color.scss';
-.x-menu {
+@import '../../style/mixins.scss';
+.xue-menu {
     color: rgba(0, 0, 0, 0.65);
     display: inline-block;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
     background-color: #fff;
     position: relative;
     z-index: 80;
-    .x-sub-menu {
-        >.x-sub-menu-title {
+    .xue-submenu {
+        >.xue-submenu-title {
             height: 40px;
             padding-left: 30px;
             padding-right: 34px;
@@ -24,7 +24,7 @@
             cursor: pointer;
             transition: all .3s cubic-bezier(.645, .045, .355, 1);
             position: relative;
-            >.x-sub-menu-title-icon-wrapper {
+            >.xue-submenu-title-icon-wrapper {
                 position: absolute;
                 top: 50%;
                 right: 13px;
@@ -38,13 +38,13 @@
                 color: $hover;
             }
             &.active {
-                >.x-sub-menu-title-icon-wrapper {
+                >.xue-submenu-title-icon-wrapper {
                     transform: translateY(-50%) rotateZ(-90deg);
                 }
             }
         }
         &.item-group {
-            >.x-sub-menu-title {
+            >.xue-submenu-title {
                 color: rgba(0, 0, 0, 0.35);
                 font-size: 12px;
                 line-height: 20px;
@@ -53,7 +53,7 @@
             }
         }
     }
-    .x-menu-item {
+    .xue-menuitem {
         height: 40px;
         padding-left: 30px;
         padding-right: 16px;
@@ -70,7 +70,7 @@
         font-size: 14px;
         font-weight: 400;
         line-height: 22px;
-        >.x-menu-item-filler {
+        >.xue-menuitem-filler {
             position: absolute;
             top: 0;
             right: 0;
@@ -88,16 +88,16 @@
         }
     }
     // menu sub item
-    .x-sub-menu .x-menu-item {
+    .xue-submenu .xue-menuitem {
         padding-left: 50px;
     }
     // menu sub sub
-    .x-sub-menu .x-sub-menu {
-        >.x-sub-menu-title {
+    .xue-submenu .xue-sub-menu {
+        >.xue-submenu-title {
             padding-left: 50px;
         }
-        >.x-sub-menu-children-wrapper {
-            >.x-menu-item {
+        >.xue-submenu-children-wrapper {
+            >.xue-menuitem {
                 padding-left: 70px;
             }
         }
@@ -107,10 +107,10 @@
         flex-direction: row;
         border-right: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-        .x-sub-menu {
+        .xue-submenu {
             flex-shrink: 0;
             position: relative;
-            >.x-sub-menu-title {
+            >.xue-submenu-title {
                 &::after {
                     content: '';
                     display: block;
@@ -134,7 +134,7 @@
                     }
                 }
             }
-            >.x-sub-menu-children-wrapper {
+            >.xue-submenu-children-wrapper {
                 width: 100%;
                 position: absolute;
                 top: 40px;
@@ -144,7 +144,7 @@
                 border-bottom-right-radius: 4px;
             }
         }
-        .x-menu-item {
+        .xue-menuitem {
             flex-shrink: 0;
             &::after {
                 content: '';
@@ -175,20 +175,20 @@
             }
         }
         // menu sub item
-        .x-sub-menu .x-menu-item {
+        .xue-submenu .xue-menuitem {
             padding-left: 20px;
         }
         // menu sub sub
-        .x-sub-menu .x-sub-menu {
-            >.x-sub-menu-title {
+        .xue-submenu .xue-submenu {
+            >.xue-submenu-title {
                 padding-left: 20px;
             }
         }
     }
     &.dark {
         color: rgba(255, 255, 255, 0.65);
-        .x-sub-menu {
-            >.x-sub-menu-title {
+        .xue-submenu {
+            >.xue-submenu-title {
                 background-color: rgb(0, 21, 41);
                 color: rgba(255, 255, 255, 0.65);
                 &:hover {
@@ -209,7 +209,7 @@
                 }
             }
             &.item-group {
-                >.x-sub-menu-title {
+                >.xue-submenu-title {
                     color: rgba(255, 255, 255, 0.35);
                     font-size: 12px;
                     line-height: 20px;
@@ -218,7 +218,7 @@
                 }
             }
         }
-        .x-menu-item {
+        .xue-menuitem {
             background-color: rgb(0, 21, 41);
             color: rgba(255, 255, 255, 0.65);
             &:hover {
@@ -231,7 +231,7 @@
         }
     }
     &.dark.horizontal {
-        .x-menu-item {
+        .xue-menuitem {
             &::after {
                 display: none;
             }

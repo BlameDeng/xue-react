@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import TabPane from './TabPane'
 import { classes } from '../utils'
-import '../style/Tabs.scss'
+import TabPane from './TabPane'
+import './style'
 
 interface ITabsProps {
   activeKey?: string
@@ -25,8 +25,10 @@ interface ITabPane {
   style?: React.CSSProperties
 }
 
+const componentName = 'Tabs'
+
 class Tabs extends React.Component<ITabsProps, ITabsState> {
-  public static displayName = 'Tabs'
+  public static displayName = componentName
 
   public static TabPane: typeof TabPane = TabPane
 
@@ -99,7 +101,7 @@ class Tabs extends React.Component<ITabsProps, ITabsState> {
             onClick={(e: React.MouseEvent) =>
               this.handleClickTitle(key, child.props.disabled as boolean, e)
             }
-            className={classes('x-tabs-title', {
+            className={classes(componentName, 'title', {
               active: key === derivedActiveKey,
               disabled: child.props.disabled
             })}
@@ -179,16 +181,17 @@ class Tabs extends React.Component<ITabsProps, ITabsState> {
   }
 
   public render() {
+    const cn = componentName
     const { vertical, className, style } = this.props
     return (
-      <div className={classes('x-tabs', className, { vertical })} style={style}>
+      <div className={classes(cn, '', [className], { vertical })} style={style}>
         <ul
-          className={classes('x-tabs-head', { vertical })}
+          className={classes(cn, 'head', { vertical })}
           ref={this.saveHeadRef}
         >
           {this.getTitles()}
           <li
-            className={classes('x-tabs-role', {
+            className={classes(cn, 'role', {
               vertical,
               horizontal: !vertical
             })}
@@ -196,7 +199,7 @@ class Tabs extends React.Component<ITabsProps, ITabsState> {
           />
         </ul>
         <ul
-          className={classes('x-tabs-body', { vertical })}
+          className={classes(cn, 'body', { vertical })}
           ref={this.saveBodyRef}
         >
           {this.getPanes()}

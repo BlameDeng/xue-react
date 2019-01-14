@@ -1,7 +1,7 @@
-@import './Color.scss';
-.x-input-wrapper {
+@import '../../style/mixins.scss';
+.xue-input-wrapper {
     display: inline-flex;
-    >.x-input {
+    >.xue-input {
         font-size: 14px;
         padding-top: 4px;
         padding-bottom: 4px;
@@ -33,7 +33,7 @@
             justify-content: center;
             align-items: center;
         }
-        >.x-input {
+        >.xue-input {
             padding-left: 30px;
         }
     }
@@ -50,7 +50,7 @@
             justify-content: center;
             align-items: center;
         }
-        >.x-input {
+        >.xue-input {
             padding-right: 30px;
         }
     }
@@ -72,7 +72,7 @@
                 color: rgba(0, 0, 0, 0.65);
             }
         }
-        >.x-input {
+        >.xue-input {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
@@ -96,13 +96,13 @@
                 transition: all .3s cubic-bezier(.645, .045, .355, 1);
             }
         }
-        >.x-input {
+        >.xue-input {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
     }
     &.disabled {
-        >.x-input {
+        >.xue-input {
             color: rgba(0, 0, 0, 0.25);
             border-color: #d9d9d9;
             background-color: #e6e6e6;
@@ -116,7 +116,7 @@
         }
     }
     &.error {
-        >.x-input {
+        >.xue-input {
             border-color: $error;
         }
     }
@@ -131,12 +131,12 @@
             }
         }
         &.enter-button {
-            >.x-input {
+            >.xue-input {
                 border-right: none;
             }
         }
         >.addon-after-wrapper {
-            >.search-enter-button {
+            >.xue-search-enter-button {
                 height: 30px;
                 padding: 0 15px;
                 border-top-right-radius: 4px;
@@ -156,7 +156,7 @@
         }
     }
 }
-.xue-ui-hidden-textarea {
+.xueue-ui-hidden-textarea {
     min-height: 0 !important;
     max-height: none !important;
     height: 0 !important;
@@ -167,7 +167,7 @@
     top: 0 !important;
     right: 0 !important;
 }
-.x-textarea {
+.xue-textarea {
     padding: 4px 11px;
     font-size: 14px;
     line-height: 22px;

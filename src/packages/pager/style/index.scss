@@ -1,12 +1,12 @@
-@import './Color.scss';
-.x-pager {
+@import '../../style/mixins.scss';
+.xue-pager {
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
     user-select: none;
     height: 30px;
     color: rgba(0, 0, 0, 0.65);
-    >.x-pager-num {
+    >.xue-pager-num {
         font-size: 14px;
         font-weight: 500;
         line-height: 22px;
@@ -38,7 +38,9 @@
             }
         }
         &.seprator {
-            cursor: default;
+            &:hover {
+                color: $hover;
+            }
         }
         &.disabled {
             color: rgba(0, 0, 0, 0.25);
@@ -49,7 +51,7 @@
                 border-color: #d9d9d9;
             }
         }
-        >.pager-icon {
+        >.xue-pager-icon {
             width: 12px;
             height: 12px;
             &.prev {
@@ -58,7 +60,7 @@
         }
     }
     &.simple {
-        >.x-pager-num {
+        >.xue-pager-num {
             border-color: transparent;
             &:hover:not(.seprator) {
                 color: $hover;
@@ -79,7 +81,7 @@
         }
     }
     &.small {
-        >.x-pager-num {
+        >.xue-pager-num {
             min-width: 25px;
             font-size: 12px;
             line-height: 20px;

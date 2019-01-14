@@ -19,8 +19,10 @@ interface ISearchState {
   derivedValue: string
 }
 
+const componentName = 'Search'
+
 class Search extends React.Component<ISearchProps, ISearchState> {
-  public static displayName = 'Search'
+  public static displayName = componentName
 
   public static propTypes = {
     value: PropTypes.string,
@@ -93,13 +95,14 @@ class Search extends React.Component<ISearchProps, ISearchState> {
   }
 
   public render() {
+    const cn = componentName
     const { enterButton, placeholder, className, style } = this.props
     const { derivedValue } = this.state
     return (
       <Input
         ref={this.saveInputInstance}
         value={derivedValue}
-        className={classes('search', className, {
+        className={classes(cn, ['search', className], {
           'enter-button': !!enterButton
         })}
         style={style}
@@ -109,7 +112,8 @@ class Search extends React.Component<ISearchProps, ISearchState> {
           (enterButton === false && (
             <Icon
               name="search"
-              style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+              style={{ cursor: 'pointer' }}
+              size={18}
               onClick={this.handleSearch}
             />
           )) ||
@@ -117,9 +121,12 @@ class Search extends React.Component<ISearchProps, ISearchState> {
         }
         addonAfter={
           enterButton ? (
-            <div className="search-enter-button" onClick={this.handleSearch}>
+            <div
+              className={classes(cn, 'enter-button')}
+              onClick={this.handleSearch}
+            >
               {enterButton === true ? (
-                <Icon name="search" style={{ width: '20px', height: '20px' }} />
+                <Icon name="search" size={20} />
               ) : (
                 enterButton
               )}

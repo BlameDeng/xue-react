@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
-import '../style/Slides.scss'
+import './style'
 
 interface ISlidesProps {
   duration?: number
@@ -17,8 +17,10 @@ interface ISlidesState {
   current: number
 }
 
+const componentName = 'Slides'
+
 class Slides extends React.Component<ISlidesProps, ISlidesState> {
-  public static displayName = 'Slides'
+  public static displayName = componentName
 
   public static propTypes = {
     duration: PropTypes.number,
@@ -200,14 +202,15 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
   }
 
   public render() {
+    const cn = componentName
     const { children, dots, className, style } = this.props
     const { hasTransitionClassName, current } = this.state
-    const containerClassName = classes('x-slides-container', {
-      ['has-transition-class-name']: hasTransitionClassName
+    const containerClassName = classes(cn, 'container', {
+      'has-transition-class-name': hasTransitionClassName
     })
     return (
       <div
-        className={classes('x-slides', className)}
+        className={classes(cn, '', [className])}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         style={style}
@@ -216,10 +219,10 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
           {children}
         </div>
         {dots && (
-          <div className="x-slides-dots-wrapper">
+          <div className={classes(cn, 'dots-wrapper')}>
             {React.Children.map(children, (child, index) => (
               <span
-                className={classes('x-slides-dot', {
+                className={classes(cn, 'dot', {
                   active: current === index + 1
                 })}
                 onClick={() => this.goTo(index + 1)}

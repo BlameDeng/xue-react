@@ -1,4 +1,4 @@
-.x-popover-content-wrapper {
+.xue-popover-content-wrapper {
     position: absolute;
     z-index: 90;
     background-color: transparent;
@@ -18,12 +18,12 @@
         transform: translateY(-50%);
         padding-left: 10px;
     }
-    >.x-popover-content {
+    >.xue-popover-content {
         border-radius: 4px;
         box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.07);
         position: relative;
         background-color: #fff;
-        >.x-popover-content-arrow {
+        >.xue-popover-content-arrow {
             position: absolute;
             border: 5px solid;
             width: 0;

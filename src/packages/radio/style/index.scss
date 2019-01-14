@@ -1,5 +1,5 @@
-@import './Color.scss';
-.x-radio {
+@import '../../style/mixins.scss';
+.xue-radio {
     display: inline-flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -9,7 +9,7 @@
     &.vertical {
         flex-direction: column;
     }
-    >.x-radio-option {
+    >.xue-option {
         display: inline-flex;
         justify-content: flex-start;
         align-items: center;

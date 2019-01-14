@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import Transition from '../transition/Transition'
 import { classes } from '../utils'
+import Transition from '../transition/Transition'
 import Icon from '../icon/Icon'
 const Unfold = Transition.Unfold
 
@@ -16,8 +16,10 @@ interface IPanelProps {
   className?: string
 }
 
+const componentName = 'Panel'
+
 class Panel extends React.Component<IPanelProps> {
-  public static displayName = 'Panel'
+  public static displayName = componentName
 
   public static propTypes = {
     header: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -40,6 +42,7 @@ class Panel extends React.Component<IPanelProps> {
   }
 
   public render() {
+    const cn = componentName
     const {
       header,
       disabled,
@@ -55,23 +58,23 @@ class Panel extends React.Component<IPanelProps> {
     return (
       <>
         <div
-          className={classes('x-collapse-header', {
+          className={classes(cn, 'header', {
             disabled,
             active,
-            ['with-arrow']: showArrow
+            'with-arrow': showArrow
           })}
           onClick={this.handleClickHeader}
         >
           {showArrow && (
             <span className="arrow-wrapper">
-              <Icon name="arrow" style={{ width: '10px', height: '10px' }} />
+              <Icon name="arrow" size={10} />
             </span>
           )}
 
           {header}
         </div>
         <Unfold visible={active} vertical={true}>
-          <div className={classes('x-collapse-body', className)} style={style}>
+          <div className={classes(cn, 'body', [className])} style={style}>
             {children}
           </div>
         </Unfold>

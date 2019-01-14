@@ -4,7 +4,7 @@ import { classes } from '../utils'
 import CascaderMenu from './CascaderMenu'
 import Icon from '../icon/Icon'
 import Unfold from '../transition/Unfold'
-import '../style/Cascader.scss'
+import './style'
 
 interface IOption {
   value: string
@@ -33,8 +33,10 @@ interface ICascaderState {
   menuStyle: React.CSSProperties
 }
 
+const componentName = 'Cascader'
+
 class Cascader extends React.Component<ICascaderProps, ICascaderState> {
-  public static displayName = 'Cascader'
+  public static displayName = componentName
 
   public static propTypes = {
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -71,6 +73,22 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
         top: `${bottom - top + 4}px`
       }
     })
+    document.addEventListener('click', this.handleClickDocument, true)
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickDocument, true)
+  }
+
+  // 监听 document，点击别处关闭
+  public handleClickDocument = (e: MouseEvent) => {
+    const target = e.target as HTMLElement
+    const { menuVisible } = this.state
+    if (!this.cascaderRef.contains(target) && menuVisible) {
+      this.setState({
+        menuVisible: false
+      })
+    }
   }
 
   public saveCascaderRef = (node: HTMLDivElement) => {
@@ -206,6 +224,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   }
 
   public render() {
+    const cn = componentName
     const {
       options,
       placeholder,
@@ -217,38 +236,38 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     const { valueArr, menuVisible, menuStyle, inputValueFromLabel } = this.state
     return (
       <div
-        className={classes('x-cascader', {
+        className={classes(cn, '', {
           active: menuVisible
         })}
         ref={this.saveCascaderRef}
       >
-        <span className="x-cascader-input-wrapper">
+        <span className={classes(cn, 'input-wrapper')}>
           {placeholder && !inputValueFromLabel && (
-            <span className="x-cascader-placeholder">{placeholder}</span>
+            <span className={classes(cn, 'placeholder')}>{placeholder}</span>
           )}
           <input
             type="text"
-            className={classes('x-cascader-input', className)}
+            className={classes(cn, 'input', [className])}
             style={style}
             readOnly={true}
             onClick={this.handleClickInput}
             value={inputValueFromLabel}
           />
-          <span className="x-cascader-icon-wrapper arrow">
-            <Icon name="arrow" style={{ width: '8px', height: '8px' }} />
+          <span className={classes(cn, 'icon-wrapper', ['arrow'])}>
+            <Icon name="arrow" size={8} />
           </span>
           {inputValueFromLabel && (
             <span
-              className="x-cascader-icon-wrapper close"
+              className={classes(cn, 'icon-wrapper', ['close'])}
               onClick={this.handleOnClear}
             >
-              <Icon name="close" style={{ width: '10px', height: '10px' }} />
+              <Icon name="close" size={10} />
             </span>
           )}
         </span>
         {options && options.length && (
           <Unfold visible={menuVisible} vertical={true}>
-            <div className="x-cascader-menu-container" style={menuStyle}>
+            <div className={classes(cn, 'menu-container')} style={menuStyle}>
               <CascaderMenu
                 options={options}
                 level={0}

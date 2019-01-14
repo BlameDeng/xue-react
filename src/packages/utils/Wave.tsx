@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 import { classes } from '.'
-import '../style/Wave.scss'
+import '../style/wave.scss'
 
 interface IWaveProps {
   closeWave?: boolean
@@ -22,7 +22,7 @@ class Wave extends React.Component<IWaveProps> {
   private node: HTMLElement
   private animating: boolean = false
   private originClassName: string
-  private animatingClassName = 'xue-ui-wave-animation-animating'
+  private animatingClassName = 'xue-react-wave-animation-animating'
 
   public componentDidMount() {
     const node = ReactDOM.findDOMNode(this) as HTMLElement
@@ -50,13 +50,16 @@ class Wave extends React.Component<IWaveProps> {
     }
     this.animating = true
     this.originClassName = this.node.className
-    this.node.className = classes(this.originClassName, this.animatingClassName)
+    this.node.className = classes('', [
+      this.originClassName,
+      this.animatingClassName
+    ])
     this.node.addEventListener('animationend', this.animationEnd)
   }
 
   public animationEnd = () => {
     this.animating = false
-    this.node.className = classes(this.originClassName)
+    this.node.className = classes('', [this.originClassName])
   }
 
   public render() {

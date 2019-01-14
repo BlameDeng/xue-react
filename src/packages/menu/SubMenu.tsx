@@ -32,8 +32,10 @@ interface IChildProps {
   theme?: 'light' | 'dark'
 }
 
+const componentName = 'SubMenu'
+
 class SubMenu extends React.Component<ISubMenuProps> {
-  public static displayName = 'SubMenu'
+  public static displayName = componentName
 
   public static propTypes = {
     uniqueKey: PropTypes.string,
@@ -104,6 +106,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
   }
 
   public render() {
+    const cn = componentName
     const {
       uniqueKey,
       selectedKey,
@@ -119,15 +122,15 @@ class SubMenu extends React.Component<ISubMenuProps> {
     const { childrenKeys } = this
     return (
       <li
-        className={classes('x-sub-menu', theme, {
+        className={classes(cn, '', [theme], {
           active: expandKeys!.indexOf(uniqueKey!) > -1,
-          ['item-group']: itemGroup
+          'item-group': itemGroup
         })}
       >
         <div
-          className={classes('x-sub-menu-title', className, mode, {
+          className={classes(cn, 'title', [className, mode], {
             active: expandKeys!.indexOf(uniqueKey!) > -1,
-            ['child-selected']:
+            'child-selected':
               childrenKeys && childrenKeys.indexOf(selectedKey as string) > -1
           })}
           style={style}
@@ -135,8 +138,8 @@ class SubMenu extends React.Component<ISubMenuProps> {
         >
           {title}
           {showArrow && (
-            <span className="x-sub-menu-title-icon-wrapper">
-              <Icon name="arrow" style={{ width: '8px', height: '8px' }} />
+            <span className={classes(cn, 'title-icon-wrapper')}>
+              <Icon name="arrow" size={8} />
             </span>
           )}
         </div>
@@ -144,7 +147,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
           vertical={true}
           visible={expandKeys!.indexOf(uniqueKey!) > -1 || itemGroup!}
         >
-          <ul className="x-sub-menu-children-wrapper">
+          <ul className={classes(cn, 'children-wrapper')}>
             {this.renderChildren()}
           </ul>
         </Unfold>

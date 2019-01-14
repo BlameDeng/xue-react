@@ -1,4 +1,4 @@
-.xue-ui-wave-animation-animating {
+.xue-react-wave-animation-animating {
     position: relative;
     &::before {
         content: '';
@@ -15,12 +15,12 @@
         border: 0 solid;
         border-color: inherit;
         opacity: 0.3;
-        animation: xue-ui-wave-animation 0.3s ease-in-out forwards;
+        animation: xue-react-wave-animation 0.3s ease-in-out forwards;
         flex-shrink: 0;
     }
 }
 
-@keyframes xue-ui-wave-animation {
+@keyframes xue-react-wave-animation {
     to {
         top: -6px;
         left: -6px;

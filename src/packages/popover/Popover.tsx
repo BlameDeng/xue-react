@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import Transition from '../transition/Transition'
-import '../style/Popover.scss'
+import './style'
 
 interface IPopoveProps {
   content: string | React.ReactNode
@@ -21,8 +21,10 @@ interface IPopoveState {
   derivedVisible: boolean
 }
 
+const componentName = 'Popover'
+
 class Popover extends React.Component<IPopoveProps, IPopoveState> {
-  public static displayName = 'Popover'
+  public static displayName = componentName
 
   public static propTypes = {
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -307,13 +309,13 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
   }
 
   public render() {
+    const cn = componentName
     const { content, position, className, style } = this.props
     const { derivedVisible } = this.state
-    const wrapperClassName = classes(
-      'x-popover-content-wrapper',
+    const wrapperClassName = classes(cn, 'content-wrapper', [
       'position-' + position
-    )
-    const contentClassName = classes('x-popover-content', className)
+    ])
+    const contentClassName = classes(cn, 'content', [className])
     return (
       <>
         <Transition
@@ -336,7 +338,9 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
                 >
                   {content}
                   <div
-                    className={`x-popover-content-arrow position-${position}`}
+                    className={classes(cn, 'content-arrow', [
+                      `position-${position}`
+                    ])}
                     ref={this.saveArrowRef}
                   />
                 </div>

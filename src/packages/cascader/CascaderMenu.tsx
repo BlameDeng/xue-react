@@ -23,11 +23,13 @@ interface ICascaderMenuState {
   currentOption: IOption | null
 }
 
+const componentName = 'CascaderMenu'
+
 class CascaderMenu extends React.Component<
   ICascaderMenuProps,
   ICascaderMenuState
 > {
-  public static displayName = 'CascaderMenu'
+  public static displayName = componentName
 
   public static propTypes = {
     options: PropTypes.arrayOf(PropTypes.object),
@@ -81,6 +83,7 @@ class CascaderMenu extends React.Component<
   }
 
   public render() {
+    const cn = componentName
     const {
       options,
       level,
@@ -92,12 +95,12 @@ class CascaderMenu extends React.Component<
     const { currentOption } = this.state
     return (
       <>
-        <ul className="x-cascader-menu">
+        <ul className={classes(cn, '')}>
           {options.map(option => (
             <li
-              className={classes('x-cascader-item', itemClassName, {
+              className={classes(cn, 'item', [itemClassName], {
                 selected: valueArr && valueArr.indexOf(option.value) > -1,
-                ['has-children']: option.children && option.children.length,
+                'has-children': option.children && option.children.length,
                 disabled: option.disabled
               })}
               style={itemStyle}
@@ -106,8 +109,8 @@ class CascaderMenu extends React.Component<
             >
               {option.label}
               {option.children && option.children.length && (
-                <span className="x-cascader-item-icon-wrapper">
-                  <Icon name="arrow" style={{ width: '8px', height: '8px' }} />
+                <span className={classes(cn, 'item-icon-wrapper')}>
+                  <Icon name="arrow" size={8} />
                 </span>
               )}
             </li>

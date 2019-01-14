@@ -15,8 +15,10 @@ interface IMenuItemProps {
   theme?: 'light' | 'dark'
 }
 
+const componentName = 'MenuItem'
+
 class MenuItem extends React.Component<IMenuItemProps> {
-  public static displayName = 'MenuItem'
+  public static displayName = componentName
 
   public static propTypes = {
     uniqueKey: PropTypes.string,
@@ -31,6 +33,7 @@ class MenuItem extends React.Component<IMenuItemProps> {
   }
 
   public render() {
+    const cn = componentName
     const {
       uniqueKey,
       selectedKey,
@@ -43,7 +46,7 @@ class MenuItem extends React.Component<IMenuItemProps> {
     } = this.props
     return (
       <li
-        className={classes('x-menu-item', className, theme, mode, {
+        className={classes(cn, '', [className, theme, mode], {
           active: uniqueKey === selectedKey
         })}
         style={style}
@@ -56,7 +59,7 @@ class MenuItem extends React.Component<IMenuItemProps> {
             beforeEnter={{ height: '0', top: '50%', opacity: 0 }}
             afterEnter={{ height: '100%', top: '0', opacity: 1 }}
           >
-            <div className="x-menu-item-filler" />
+            <div className={classes(cn, 'filler')} />
           </Transition>
         )}
       </li>

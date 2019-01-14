@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { isSimpleArrayEqual, classes } from '../utils'
 import Panel from './Panel'
-import '../style/Collapse.scss'
+import './style'
 
 interface ICollapseProps {
   activeKey?: string[]
@@ -30,8 +30,10 @@ interface IPanelProps {
   style?: React.CSSProperties
 }
 
+const componentName = 'Collapse'
+
 class Collapse extends React.Component<ICollapseProps, ICollapseState> {
-  public static displayName = 'Collapse'
+  public static displayName = componentName
 
   public static Panel: typeof Panel = Panel
 
@@ -139,7 +141,7 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
   public render() {
     const { className, style } = this.props
     return (
-      <div className={classes('x-collapse', className)} style={style}>
+      <div className={classes(componentName, '', [className])} style={style}>
         {this.renderChildren()}
       </div>
     )

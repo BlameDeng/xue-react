@@ -1,5 +1,5 @@
-@import './Color.scss';
-.x-switch {
+@import '../../style/mixins.scss';
+.xue-switch {
     width: 40px;
     height: 22px;
     display: inline-flex;
@@ -10,7 +10,7 @@
     transition: all .2s linear;
     padding: 2px;
     position: relative;
-    >.x-switch-core {
+    >.xue-switch-core {
         width: 18px;
         height: 18px;
         border-radius: 50%;
@@ -20,7 +20,7 @@
     }
     &.checked {
         background-color: $brand;
-        >.x-switch-core {
+        >.xue-switch-core {
             transform: translateX(100%);
         }
     }
@@ -43,7 +43,7 @@
         width: 32px;
         height: 18px;
         padding: 2px;
-        >.x-switch-core {
+        >.xue-switch-core {
             width: 14px;
             height: 14px;
         }

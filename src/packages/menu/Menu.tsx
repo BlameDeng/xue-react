@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { classes, isSimpleArrayEqual } from '../utils'
+import { isSimpleArrayEqual, classes } from '../utils'
 import SubMenu from './SubMenu'
 import MenuItem from './MenuItem'
-import '../style/Menu.scss'
+import './style'
 
 interface IMenuProps {
   selectedKey?: string
@@ -36,8 +36,10 @@ interface IChildProps {
   theme?: 'light' | 'dark'
 }
 
+const componentName = 'Menu'
+
 class Menu extends React.Component<IMenuProps, IMenuState> {
-  public static displayName = 'Menu'
+  public static displayName = componentName
 
   public static SubMenu: typeof SubMenu = SubMenu
   public static MenuItem: typeof MenuItem = MenuItem
@@ -158,9 +160,10 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
   }
 
   public render() {
+    const cn = componentName
     const { className, style, mode, theme } = this.props
     return (
-      <ul className={classes('x-menu', className, mode, theme)} style={style}>
+      <ul className={classes(cn, '', [className, mode, theme])} style={style}>
         {this.renderChildren()}
       </ul>
     )

@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { calculatePagerPages, classes } from '../utils'
 import Icon from '../icon/Icon'
-import '../style/Pager.scss'
+import './style'
 
 interface IPagerProps {
   current?: number
@@ -21,8 +21,10 @@ interface IPagerState {
   derivedTotal: number
 }
 
+const componentName = 'Pager'
+
 class Pager extends React.Component<IPagerProps, IPagerState> {
-  public static displayName = 'Pager'
+  public static displayName = componentName
 
   public static propTypes = {
     current: PropTypes.number,
@@ -75,50 +77,81 @@ class Pager extends React.Component<IPagerProps, IPagerState> {
       this.setState({
         derivedCurrent: n
       })
-      const { onChange } = this.props
-      if (onChange) {
-        onChange(n)
-      }
+      this.handleOnChange(n)
     }
   }
 
-  public handleSkip(payload: -1 | 1) {
+  public handleSkip(payload: number) {
     const { derivedCurrent } = this.state
-    const { total, onChange } = this.props
+    const { total } = this.props
     if (derivedCurrent + payload > total || derivedCurrent + payload < 1) {
       return
+    } else {
+      this.setState({
+        derivedCurrent: derivedCurrent + payload
+      })
+      this.handleOnChange(derivedCurrent + payload)
     }
-    this.setState({
-      derivedCurrent: derivedCurrent + payload
-    })
+  }
+
+  // 处理点击省略号
+  public handleClickDot = (index: number) => {
+    const { derivedCurrent } = this.state
+    const { total } = this.props
+    // prev
+    if (index === 1) {
+      const n = derivedCurrent - 5 < 1 ? 1 : derivedCurrent - 5
+      this.setState({
+        derivedCurrent: n
+      })
+      this.handleOnChange(n)
+    } else {
+      const n = derivedCurrent + 5 > total ? total : derivedCurrent + 5
+      this.setState({
+        derivedCurrent: n
+      })
+      this.handleOnChange(n)
+    }
+  }
+
+  public handleOnChange = (n: number) => {
+    const { onChange } = this.props
     if (onChange) {
-      onChange(derivedCurrent + payload)
+      onChange(n)
     }
   }
 
   public render() {
+    const cn = componentName
     const { simple, size, className, style, hideOnSinglePage } = this.props
     const { derivedCurrent, derivedTotal } = this.state
     const pages = calculatePagerPages(derivedCurrent, derivedTotal)
     return derivedTotal === 1 && hideOnSinglePage ? null : (
       <ul
-        className={classes('x-pager', size, className, { simple })}
+        className={classes(cn, '', [size, className], { simple })}
         style={style}
       >
         <li
-          className={classes('x-pager-num', { disabled: derivedCurrent < 2 })}
+          className={classes(cn, 'num', { disabled: derivedCurrent < 2 })}
           onClick={() => this.handleSkip(-1)}
         >
-          <Icon name="arrow" className="pager-icon prev" />
+          <Icon
+            name="arrow"
+            className={classes(cn, 'icon', ['prev'])}
+            size={10}
+          />
         </li>
         {pages.map((item, index) =>
           item === '...' ? (
-            <li className="x-pager-num seprator" key={`${item}-${index}`}>
-              <Icon name="dot" />
+            <li
+              className={classes(cn, 'num', ['seprator'])}
+              key={`${item}-${index}`}
+            >
+              <Icon name="dot" onClick={() => this.handleClickDot(index)} />
             </li>
           ) : (
             <li
-              className={classes('x-pager-num', {
+              className={classes(cn, 'num', {
                 active: derivedCurrent === item
               })}
               key={`${item}-${index}`}
@@ -129,12 +162,12 @@ class Pager extends React.Component<IPagerProps, IPagerState> {
           )
         )}
         <li
-          className={classes('x-pager-num', {
+          className={classes(cn, 'num', {
             disabled: derivedCurrent >= derivedTotal
           })}
           onClick={() => this.handleSkip(1)}
         >
-          <Icon name="arrow" className="pager-icon" />
+          <Icon name="arrow" className={classes(cn, 'icon')} size={10} />
         </li>
       </ul>
     )

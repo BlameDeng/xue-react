@@ -1,8 +1,8 @@
-.x-slides {
+.xue-slides {
     width: 100%;
     overflow: hidden;
     position: relative;
-    >.x-slides-container {
+    >.xue-slides-container {
         display: flex;
         width: 100%;
         transform: translateX(-100%);
@@ -10,7 +10,7 @@
             transition: transform .5s cubic-bezier(.645, .045, .355, 1);
         }
     }
-    >.x-slides-dots-wrapper {
+    >.xue-slides-dots-wrapper {
         position: absolute;
         bottom: 15px;
         left: 50%;
@@ -18,7 +18,7 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        >.x-slides-dot {
+        >.xue-slides-dot {
             display: block;
             background-color: #fff;
             opacity: 0.3;
@@ -28,7 +28,7 @@
             margin: 0 2px;
             transition: all .3s cubic-bezier(.645, .045, .355, 1);
             cursor: pointer;
-            &:hover{
+            &:hover {
                 opacity: 0.6;
             }
             &.active {

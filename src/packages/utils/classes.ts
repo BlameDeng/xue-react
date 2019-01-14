@@ -1,16 +1,20 @@
-function classes(...args: any): string {
+const prefix = 'xue'
+
+function classes(componentName: string, ...args: any): string {
   const className: string[] = []
   args.forEach((arg: any) => {
     if (typeof arg === 'string') {
-      className.push(arg)
-    } else if (typeof arg === 'object') {
+      className.push(
+        `${prefix}-${componentName.toLowerCase()}${arg && '-' + arg}`
+      )
+    } else if (arg instanceof Array) {
+      arg.forEach(str => typeof str === 'string' && className.push(str))
+    } else if (typeof arg === 'object' && !(arg instanceof Array)) {
       for (const key in arg) {
         if (arg.hasOwnProperty(key) && arg[key]) {
           className.push(key)
         }
       }
-    } else if (arg instanceof Array) {
-      arg.forEach(str => typeof str === 'string' && className.push(str))
     }
   })
   return className.filter(v => v).join(' ')

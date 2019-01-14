@@ -24,8 +24,10 @@ interface ITextareaState {
   derivedValue: string
 }
 
+const componentName = 'Textarea'
+
 class Textarea extends React.Component<ITextareaProps, ITextareaState> {
-  public static displayName = 'Textarea'
+  public static displayName = componentName
 
   public static propTypes = {
     size: PropTypes.object,
@@ -109,9 +111,10 @@ class Textarea extends React.Component<ITextareaProps, ITextareaState> {
   }
 
   public render() {
+    const cn = componentName
     const { style, autosize, placeholder, size, className } = this.props
     const { derivedValue } = this.state
-    const textareaClassName = classes('x-textarea', className, {
+    const textareaClassName = classes(cn, '', [className], {
       autosize
     })
     return (

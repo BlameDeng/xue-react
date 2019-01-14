@@ -1,0 +1,311 @@
+@import '../../style/mixins.scss';
+.xue-datepanel {
+    width: 260px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    >.xue-datepanel-day,
+    >.xue-datepanel-date {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 6px;
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 2px;
+        color: rgba(0, 0, 0, 0.65);
+        user-select: none;
+        &.today {
+            border: 1px solid $brand;
+            color: $brand;
+        }
+        &:hover {
+            background-color: #e6f7ff;
+        }
+        &.prefix,
+        &.suffix {
+            color: rgba(0, 0, 0, 0.25);
+        }
+        &.selected {
+            background-color: $brand;
+            color: rgba(255, 255, 255, 0.85);
+        }
+    }
+    >.xue-datepanel-day {
+        cursor: default;
+        &:hover {
+            background-color: #fff;
+        }
+    }
+}
+.xue-monthpanel,
+.xue-yearpanel,
+.xue-decadepanel {
+    width: 260px;
+    height: 240px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    >.xue-monthpanel-month,
+    >.xue-yearpanel-year,
+    >.xue-decadepanel-decade {
+        width: 30%;
+        flex-shrink: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 10px 0;
+        >.xue-monthpanel-month-item,
+        >.xue-yearpanel-year-item,
+        >.xue-decadepanel-decade-item {
+            transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background-color: #fff;
+            padding: 4px 12px;
+            cursor: pointer;
+            border-radius: 2px;
+            color: rgba(0, 0, 0, 0.65);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            user-select: none;
+            &:hover {
+                background-color: #e6f7ff;
+                color: $brand;
+            }
+            &.selected {
+                background-color: $brand;
+                color: rgba(255, 255, 255, 0.85);
+            }
+        }
+        >.xue-monthpanel-month-item {
+            &.selected {
+                background-color: $brand;
+                color: rgba(255, 255, 255, 0.85);
+            }
+        }
+        >.xue-decadepanel-decade-item {
+            padding: 4px 6px;
+        }
+        &:first-child,
+        &:last-child {
+            >.xue-yearpanel-year-item,
+            >.xue-decadepanel-decade-item {
+                transition: none;
+                color: rgba(0, 0, 0, 0.25);
+                &:hover {
+                    background-color: #fff;
+                    color: rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+    }
+}
+
+.xue-datepicker {
+    display: inline-flex;
+    border-radius: 4px;
+    position: relative;
+    >.xue-datepicker-input-wrapper {
+        display: inline-flex;
+        border-radius: 4px;
+        position: relative;
+        >.xue-datepicker-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 11px;
+            transform: translateY(-50%);
+            color: rgba(0, 0, 0, 0.45);
+            pointer-events: none;
+            font-size: 13px;
+        }
+        >.xue-datepicker-icon-wrapper {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            color: rgba(0, 0, 0, 0.45);
+            transform: translateY(-50%);
+            transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            &.arrow {
+                pointer-events: none;
+            }
+            &.close {
+                right: 12px;
+                border-radius: 50%;
+                transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                cursor: pointer;
+                padding: 2px;
+                opacity: 0;
+                background-color: rgb(150, 150, 150);
+                color: rgb(200, 200, 200);
+            }
+        }
+        >.xue-datepicker-input {
+            width: 100%;
+            font-size: 14px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 11px;
+            padding-right: 20px;
+            line-height: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+            color: rgba(0, 0, 0, 0.65);
+            cursor: pointer;
+            &:focus {
+                outline: none;
+                border-color: $hover;
+            }
+        }
+        &:hover {
+            >.xue-datepicker-icon-wrapper {
+                &.close {
+                    opacity: 1;
+                }
+            }
+            >.xue-datepicker-input {
+                border-color: $hover;
+            }
+        }
+    }
+    &.active {
+        >.xue-datepicker-input-wrapper {
+            >.xue-datepicker-input {
+                border-color: $hover;
+            }
+        }
+    }
+    >.xue-datepicker-calendar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 280px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow: hidden;
+        >.calendar-placeholder {
+            position: absolute;
+            top: 6.5px;
+            left: 11px;
+            color: rgba(0, 0, 0, 0.45);
+            pointer-events: none;
+            font-size: 13px;
+        }
+        >.calendar-input {
+            width: 100%;
+            font-size: 14px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 11px;
+            padding-right: 20px;
+            line-height: 20px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border: 1px solid transparent;
+            border-bottom-color: rgba(0, 0, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+            color: rgba(0, 0, 0, 0.65);
+            cursor: pointer;
+            &:focus {
+                outline: none;
+            }
+        }
+        >.calendar-handlebar {
+            width: 100%;
+            height: 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            >li {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                >.icon-wrapper {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: rgba(0, 0, 0, 0.45);
+                    transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+                    cursor: pointer;
+                    &:first-child {
+                        margin: 0 10px;
+                    }
+                    &:hover {
+                        color: $brand;
+                    }
+                }
+                >.value {
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 22px;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: rgba(0, 0, 0, 0.65);
+                    transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+                    cursor: pointer;
+                    user-select: none;
+                    &:hover {
+                        color: $brand;
+                    }
+                    &.decade {
+                        cursor: default;
+                        &:hover {
+                            color: rgba(0, 0, 0, 0.65);
+                        }
+                    }
+                }
+                &.left {
+                    >.icon-wrapper {
+                        transform: rotateZ(180deg);
+                    }
+                }
+            }
+        }
+        >.calendar-body {
+            padding: 10px;
+        }
+        >.calendar-footer {
+            width: 100%;
+            height: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            >.footer-text {
+                width: 100%;
+                height: 100%;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                color: $brand;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 22px;
+                user-select: none;
+            }
+        }
+    }
+}

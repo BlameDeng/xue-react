@@ -4,6 +4,8 @@ import calculateNodeHeight from './calculateNodeHeight'
 import calculatePagerPages from './calculatePagerPages'
 import isSimpleArrayEqual from './isSimpleArrayEqual'
 import uniqueId from './uniqueId'
+import getDateLists from './getDateLists'
+import parseDateString from './parseDateString'
 
 export {
   Wave,
@@ -11,5 +13,7 @@ export {
   calculateNodeHeight,
   calculatePagerPages,
   isSimpleArrayEqual,
-  uniqueId
+  uniqueId,
+  getDateLists,
+  parseDateString
 }

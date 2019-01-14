@@ -10,8 +10,10 @@ interface ITabPaneProps {
   style?: React.CSSProperties
 }
 
+const componentName = 'TabPane'
+
 class TabPane extends React.Component<ITabPaneProps, {}> {
-  public static displayName = 'TabPane'
+  public static displayName = componentName
 
   public static propTypes = {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -30,7 +32,7 @@ class TabPane extends React.Component<ITabPaneProps, {}> {
     const { active, className, style, children } = this.props
     return (
       <li
-        className={classes('x-tabs-pane', className, { active })}
+        className={classes(componentName, '', [className], { active })}
         style={style}
       >
         {children}

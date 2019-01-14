@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
+import { classes } from '../utils'
 import Icon from '../icon/Icon'
 import Textarea from './Textarea'
 import Search from './Search'
-import { classes } from '../utils'
-import '../style/Input.scss'
+import './style'
 
 interface IInputProps {
   value?: string
@@ -30,8 +30,10 @@ interface IInputState {
   derivedValue: string
 }
 
+const componentName = 'Input'
+
 class Input extends React.Component<IInputProps, IInputState> {
-  public static displayName = 'Input'
+  public static displayName = componentName
 
   public static Textarea: typeof Textarea = Textarea
   public static Search: typeof Search = Search
@@ -117,6 +119,7 @@ class Input extends React.Component<IInputProps, IInputState> {
   }
 
   public render() {
+    const cn = componentName
     const {
       placeholder,
       style,
@@ -132,13 +135,13 @@ class Input extends React.Component<IInputProps, IInputState> {
       readonly
     } = this.props
     const { derivedValue } = this.state
-    const labelClassName = classes('x-input-wrapper', className, {
+    const labelClassName = classes(cn, 'wrapper', [className], {
       disabled,
       error,
       prefix: !!prefix,
       suffix: !!suffix,
-      ['addon-before']: !!addonBefore,
-      ['addon-after']: !!addonAfter
+      'addon-before': !!addonBefore,
+      'addon-after': !!addonAfter
     })
     return (
       <label className={labelClassName}>
@@ -156,8 +159,8 @@ class Input extends React.Component<IInputProps, IInputState> {
             {typeof prefix === 'string' ? (
               <Icon
                 name={prefix}
-                fill="rgba(0,0,0,0.25)"
-                style={{ width: '16px', height: '16px' }}
+                style={{ fill: 'rgba(0,0,0,0.25)' }}
+                size={16}
               />
             ) : (
               prefix
@@ -165,7 +168,7 @@ class Input extends React.Component<IInputProps, IInputState> {
           </span>
         )}
         <input
-          className="x-input"
+          className="xue-input"
           type="text"
           placeholder={placeholder || ''}
           onChange={this.handleChange}
@@ -183,8 +186,8 @@ class Input extends React.Component<IInputProps, IInputState> {
             {typeof suffix === 'string' ? (
               <Icon
                 name={suffix}
-                fill="rgba(0,0,0,0.25)"
-                style={{ width: '16px', height: '16px' }}
+                style={{ fill: 'rgba(0,0,0,0.25)' }}
+                size={16}
               />
             ) : (
               suffix

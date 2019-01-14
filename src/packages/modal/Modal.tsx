@@ -5,7 +5,7 @@ import { classes } from '../utils'
 import { openModal, removeModal } from './openModal'
 import Transition from '../transition/Transition'
 import Button from '../button/Button'
-import '../style/Modal.scss'
+import './style'
 
 interface IPromiseHandler {
   resolve: () => any
@@ -40,8 +40,10 @@ interface IModalState {
   modalVisible: boolean
 }
 
+const componentName = 'Modal'
+
 class Modal extends React.Component<IModalProps, IModalState> {
-  public static displayName = 'Modal'
+  public static displayName = componentName
 
   public static openModal = openModal
   public static removeModal = removeModal
@@ -206,6 +208,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
   }
 
   public render() {
+    const cn = componentName
     const {
       title,
       footer,
@@ -228,7 +231,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
           beforeEnter={{ opacity: 0 }}
           afterEnter={{ opacity: 0.7 }}
         >
-          <div className="x-modal-mask" onClick={this.handleOnMask} />
+          <div className={classes(cn, 'mask')} onClick={this.handleOnMask} />
         </Transition>
         <Transition
           visible={visible && modalVisible}
@@ -243,12 +246,12 @@ class Modal extends React.Component<IModalProps, IModalState> {
             top: '30%'
           }}
         >
-          <div className={classes('x-modal-content', className)} style={style}>
-            <div className="x-modal-header">{title || 'Modal'}</div>
-            <div className="x-modal-body">
+          <div className={classes(cn, 'content', [className])} style={style}>
+            <div className={classes(cn, 'header')}>{title || 'Modal'}</div>
+            <div className={classes(cn, 'body')}>
               {mode === 'declarative' ? children : content}
             </div>
-            <div className="x-modal-footer">
+            <div className={classes(cn, 'footer')}>
               {footer || (
                 <>
                   <Button

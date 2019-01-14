@@ -1,5 +1,5 @@
-@import './Color.scss';
-.x-button {
+@import '../../style/mixins.scss';
+.xue-button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,7 @@
     >.loading {
         animation: button-loading-spin 1s linear infinite;
     }
-    >.button-inner {
+    >.xue-button-inner {
         font-size: 14px;
         line-height: 22px;
     }
@@ -30,11 +30,11 @@
         line-height: 20px;
         padding: 2px 10px;
     }
-    >.button-inner {
+    >.xue-button-inner {
         font-size: inherit;
         line-height: inherit;
     }
-    >.button-icon {
+    >.xue-button-icon {
         &.small {
             width: 12px;
             height: 12px;
@@ -49,20 +49,20 @@
         }
     }
     &.left {
-        >.button-icon {
+        >.xue-button-icon {
             margin-right: 2px;
             order: 1;
         }
-        >.button-inner {
+        >.xue-button-inner {
             order: 2;
         }
     }
     &.right {
-        >.button-icon {
+        >.xue-button-icon {
             margin-left: 2px;
             order: 2;
         }
-        >.button-inner {
+        >.xue-button-inner {
             order: 1;
         }
     }
@@ -88,6 +88,7 @@
     &.primary {
         color: #fff;
         background-color: $brand;
+        border-color: $brand;
         &:hover {
             background-color: $hover;
             border-color: $hover;
@@ -170,11 +171,11 @@
         transform: rotateZ(360deg);
     }
 }
-.x-button-group {
+.xue-buttongroup {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    >.x-button {
+    >.xue-button {
         border-radius: 0;
         &:not(:first-child) {
             margin-left: -1px;

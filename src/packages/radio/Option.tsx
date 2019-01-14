@@ -13,8 +13,10 @@ interface IOptionProps {
   style?: React.CSSProperties
 }
 
+const componentName = 'Option'
+
 class Option extends React.Component<IOptionProps> {
-  public static displayName = 'Option'
+  public static displayName = componentName
 
   public static propTypes = {
     value: PropTypes.any.isRequired,
@@ -39,6 +41,7 @@ class Option extends React.Component<IOptionProps> {
   }
 
   public render() {
+    const cn = componentName
     const {
       radioStyle,
       disabled,
@@ -47,7 +50,7 @@ class Option extends React.Component<IOptionProps> {
       checkedValue,
       children
     } = this.props
-    const optionClassName = classes('x-radio-option', radioStyle + '-style', {
+    const optionClassName = classes(cn, '', [radioStyle + '-style'], {
       checked: value === checkedValue,
       disabled,
       vertical

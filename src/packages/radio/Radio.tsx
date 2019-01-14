@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import Option from './Option'
 import { classes } from '../utils'
-import '../style/Radio.scss'
+import Option from './Option'
+import './style'
 
 interface IRadioProps {
   value?: any
@@ -29,8 +29,10 @@ interface IOptionProps {
   style?: React.CSSProperties
 }
 
+const componentName = 'Radio'
+
 class Radio extends React.Component<IRadioProps, IRadionState> {
-  public static displayName = 'Radio'
+  public static displayName = componentName
 
   public static Option: typeof Option = Option
 
@@ -103,12 +105,10 @@ class Radio extends React.Component<IRadioProps, IRadionState> {
   }
 
   public render() {
+    const cn = componentName
     const { vertical, className, style } = this.props
     return (
-      <div
-        className={classes('x-radio', className, { vertical })}
-        style={style}
-      >
+      <div className={classes(cn, '', [className], { vertical })} style={style}>
         {this.renderChildren()}
       </div>
     )
