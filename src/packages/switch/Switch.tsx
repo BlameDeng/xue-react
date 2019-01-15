@@ -27,8 +27,8 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
     onChange: PropTypes.func,
     size: PropTypes.oneOf(['small', 'default']),
     disabled: PropTypes.bool,
-    style: PropTypes.object,
-    className: PropTypes.string
+    className: PropTypes.string,
+    style: PropTypes.object
   }
 
   public static defaultProps = {

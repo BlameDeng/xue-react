@@ -11,6 +11,7 @@ import ButtonExample from './examples/Button.example'
 import InputExample from './examples/Input.example'
 import SwitchExample from './examples/Switch.example'
 import RadioExample from './examples/Radio.example'
+import RateExample from './examples/Rate.example'
 import PopoverExample from './examples/Popover.example'
 import SlidesExample from './examples/Slides.example'
 import PagerExample from './examples/Pager.example'
@@ -64,6 +65,7 @@ class App extends React.Component {
               <Route path="/components/input" component={InputExample} />
               <Route path="/components/switch" component={SwitchExample} />
               <Route path="/components/radio" component={RadioExample} />
+              <Route path="/components/rate" component={RateExample} />
               <Route path="/components/popover" component={PopoverExample} />
               <Route path="/components/slides" component={SlidesExample} />
               <Route path="/components/pager" component={PagerExample} />
