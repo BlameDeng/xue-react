@@ -1,0 +1,32 @@
+.xue-react-wave-animation-animating {
+    position: relative;
+    &::before {
+        content: '';
+        display: block;
+        background-color: inherit;
+        pointer-events: none;
+        position: absolute;
+        z-index: 1;
+        top: -1px;
+        left: -1px;
+        bottom: -1px;
+        right: -1px;
+        border-radius: inherit;
+        border: 0 solid;
+        border-color: inherit;
+        opacity: 0.3;
+        animation: xue-react-wave-animation 0.3s ease-in-out forwards;
+        flex-shrink: 0;
+    }
+}
+
+@keyframes xue-react-wave-animation {
+    to {
+        top: -6px;
+        left: -6px;
+        bottom: -6px;
+        right: -6px;
+        border-width: 6px;
+        opacity: 0;
+    }
+}

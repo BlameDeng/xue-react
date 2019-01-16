@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as PropTypes from 'prop-types'
 import Icon from '../icon/Icon'
 import { parseDateString, classes } from '../utils'
 import Transition from '../transition/Transition'
@@ -40,6 +41,19 @@ const componentName = 'DatePicker'
 
 class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
   public static displayName = componentName
+
+  public static propTypes = {
+    value: PropTypes.string,
+    defaultValue: PropTypes.string,
+    defaultPickerValue: PropTypes.string,
+    placeholder: PropTypes.string,
+    footer: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    onChange: PropTypes.func,
+    onOpenChange: PropTypes.func,
+    zIndex: PropTypes.number,
+    className: PropTypes.string,
+    style: PropTypes.object
+  }
 
   public static defaultProps = {
     zIndex: 80

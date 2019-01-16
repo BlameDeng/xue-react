@@ -14,6 +14,7 @@ class DecadePanel extends React.Component<IDecadePanelProps> {
   public static displayName = componentName
 
   public static propTypes = {
+    startDecade: PropTypes.number,
     decade: PropTypes.number,
     onClickDecade: PropTypes.func
   }

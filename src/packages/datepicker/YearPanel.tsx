@@ -14,6 +14,7 @@ class YearPanel extends React.Component<IYearPanelProps> {
   public static displayName = componentName
 
   public static propTypes = {
+    startYear: PropTypes.number,
     year: PropTypes.number,
     onClickYear: PropTypes.func
   }
