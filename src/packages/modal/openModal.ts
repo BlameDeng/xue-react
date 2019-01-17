@@ -16,21 +16,21 @@ interface IModalOptions {
   style?: React.CSSProperties
 }
 
-const containerMap = {}
+const modalContainerMap = {}
 
 function addModalContainer(modalId: string, container: HTMLDivElement) {
-  containerMap[modalId] = container
+  modalContainerMap[modalId] = container
 }
 
-function ensureUniqueModalInstance(modalId: string) {
-  if (containerMap[modalId]) {
+function ensureUniqueModal(modalId: string) {
+  if (modalContainerMap[modalId]) {
     throw new Error(`Duplicate modalId found: ${modalId}`)
   }
 }
 
 export function openModal(options: IModalOptions) {
-  const modalId = uniqueId('$x-modal$-')
-  ensureUniqueModalInstance(modalId)
+  const modalId = uniqueId('$xue-modal$-')
+  ensureUniqueModal(modalId)
   return new Promise((resolve, reject) => {
     const {
       title,
@@ -71,11 +71,11 @@ export function openModal(options: IModalOptions) {
 }
 
 export function removeModal(modalId: string) {
-  if (!containerMap[modalId]) {
+  if (!modalContainerMap[modalId]) {
     return
   }
-  const container = containerMap[modalId]
+  const container = modalContainerMap[modalId]
   ReactDOM.unmountComponentAtNode(container)
   container.remove()
-  delete containerMap[modalId]
+  delete modalContainerMap[modalId]
 }

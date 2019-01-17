@@ -1,0 +1,51 @@
+@import '../../style/mixins.scss';
+.xue-message {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    padding: 8px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    >.xue-message-icon-wrapper {
+        display: none;
+    }
+    >.xue-message-close {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-left: 24px;
+        transform: translateX(8px);
+        color: rgba(0, 0, 0, 0.45);
+    }
+    &.with-icon {
+        >.xue-message-icon-wrapper {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 16px;
+            height: 16px;
+            margin-right: 4px;
+            &.info {
+                color: $brand;
+            }
+            &.success {
+                color: $success;
+            }
+            &.warning {
+                color: $warning;
+            }
+            &.error {
+                color: $error;
+            }
+        }
+    }
+}
