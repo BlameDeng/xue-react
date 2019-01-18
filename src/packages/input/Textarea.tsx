@@ -73,14 +73,13 @@ class Textarea extends React.Component<ITextareaProps, ITextareaState> {
     this.originHeight = bottom - top
   }
 
-  public handleChange: React.ChangeEventHandler = e => {
+  public handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = e => {
     const { onChange, autosize } = this.props
     if (onChange) {
       onChange(e)
     }
-    const target = e.target as HTMLTextAreaElement
     this.setState({
-      derivedValue: target.value
+      derivedValue: e.target.value
     })
     if (!autosize) {
       return

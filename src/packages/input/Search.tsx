@@ -64,10 +64,9 @@ class Search extends React.Component<ISearchProps, ISearchState> {
     }
   }
 
-  public handleChange: React.ChangeEventHandler = e => {
-    const target = e.target as HTMLInputElement
+  public handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     this.setState({
-      derivedValue: target.value
+      derivedValue: e.target.value
     })
     const { onChange } = this.props
     if (onChange) {

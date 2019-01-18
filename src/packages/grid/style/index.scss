@@ -1,0 +1,99 @@
+@import '../../style/mixins.scss';
+.xue-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.xue-col {
+    $prefix: col-span-;
+    @for $n from 1 through 24 {
+        &.#{$prefix}#{$n} {
+            width: ($n/24)*100%;
+        }
+    }
+    $prefix: col-offset-;
+    @for $n from 1 through 24 {
+        &.#{$prefix}#{$n} {
+            margin-left: ($n/24)*100%;
+        }
+    }
+    &.col-span-0 {
+        display: none;
+    }
+
+    // sm
+    @media (min-width:577px) {
+        $prefix: sm-col-span-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                width: ($n/24)*100%;
+            }
+        }
+        $prefix: sm-col-offset-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                margin-left: ($n/24)*100%;
+            }
+        }
+        &.sm-col-span-0 {
+            display: none;
+        }
+    }
+
+    // md
+    @media (min-width: 769px) {
+        $prefix: md-col-span-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                width: ($n/24)*100%;
+            }
+        }
+        $prefix: md-col-offset-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                margin-left: ($n/24)*100%;
+            }
+        }
+        &.md-col-span-0 {
+            display: none;
+        }
+    }
+
+    // lg
+    @media (min-width: 993px) {
+        $prefix: lg-col-span-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                width: ($n/24)*100%;
+            }
+        }
+        $prefix: lg-col-offset-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                margin-left: ($n/24)*100%;
+            }
+        }
+        &.lg-col-span-0 {
+            display: none;
+        }
+    }
+
+    // xl
+    @media (min-width: 1201px) {
+        $prefix: xl-col-span-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                width: ($n/24)*100%;
+            }
+        }
+        $prefix: xl-col-offset-;
+        @for $n from 1 through 24 {
+            &.#{$prefix}#{$n} {
+                margin-left: ($n/24)*100%;
+            }
+        }
+        &.xl-col-span-0 {
+            display: none;
+        }
+    }
+}

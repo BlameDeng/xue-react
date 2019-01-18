@@ -89,7 +89,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
     this.state = {
       derivedSelectedKey: ('defaultSelectedKey' in props
         ? defaultSelectedKey
-        : '') as string,
+        : '') as string ,
       derivedExpandKeys: ('defaultExpandKeys' in props
         ? defaultExpandKeys
         : []) as string[]

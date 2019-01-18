@@ -101,7 +101,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
   public handleClick: React.ReactEventHandler = e => {
     const { uniqueKey, handleExpandKeys, itemGroup } = this.props
     if (!itemGroup) {
-      handleExpandKeys!(uniqueKey as string)
+      handleExpandKeys!(uniqueKey!)
     }
   }
 
@@ -131,7 +131,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
           className={classes(cn, 'title', [className, mode], {
             active: expandKeys!.indexOf(uniqueKey!) > -1,
             'child-selected':
-              childrenKeys && childrenKeys.indexOf(selectedKey as string) > -1
+              childrenKeys && childrenKeys.indexOf(selectedKey!) > -1
           })}
           style={style}
           onClick={this.handleClick}

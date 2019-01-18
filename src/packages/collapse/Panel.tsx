@@ -11,7 +11,7 @@ interface IPanelProps {
   disabled?: boolean
   showArrow?: boolean
   derivedActiveKey?: string[]
-  onClick?: (key: string, e: React.MouseEvent) => any
+  onClick?: (key: string, e: React.MouseEvent<HTMLElement>) => any
   style?: React.CSSProperties
   className?: string
 }
@@ -33,7 +33,7 @@ class Panel extends React.Component<IPanelProps> {
     className: PropTypes.string
   }
 
-  public handleClickHeader = (e: React.MouseEvent) => {
+  public handleClickHeader: React.MouseEventHandler<HTMLElement> = e => {
     const { uniqueKey, onClick, disabled } = this.props
     if (disabled) {
       return
@@ -53,8 +53,7 @@ class Panel extends React.Component<IPanelProps> {
       style,
       children
     } = this.props
-    const active = (derivedActiveKey &&
-      derivedActiveKey.indexOf(uniqueKey!) > -1) as boolean
+    const active = derivedActiveKey!.indexOf(uniqueKey!) > -1
     return (
       <>
         <div
@@ -70,7 +69,6 @@ class Panel extends React.Component<IPanelProps> {
               <Icon name="arrow" size={10} />
             </span>
           )}
-
           {header}
         </div>
         <Unfold visible={active} vertical={true}>

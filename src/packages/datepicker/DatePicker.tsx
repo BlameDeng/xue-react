@@ -112,10 +112,10 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     document.removeEventListener('click', this.handleClickDocument, true)
   }
 
-  public handleClickDocument = (e: MouseEvent) => {
+  public handleClickDocument: EventListener = e => {
     const { calendarVisible } = this.state
-    const target = e.target as HTMLElement
-    if (!this.datePickerRef.contains(target) && calendarVisible) {
+    const target = e.target
+    if (!this.datePickerRef.contains(target as Node) && calendarVisible) {
       this.setState({
         calendarVisible: false
       })
@@ -179,7 +179,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     )
   }
 
-  // 处理点击清楚图标
+  // 处理点击清除图标
   public handleOnClear = () => {
     this.setState(
       {

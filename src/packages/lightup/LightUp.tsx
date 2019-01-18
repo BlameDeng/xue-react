@@ -66,7 +66,7 @@ class LightUp extends React.Component<ILightUpProps> {
     }
   }
 
-  public handleClickImg = (e: React.MouseEvent) => {
+  public handleClickImg: React.MouseEventHandler<HTMLImageElement> = e => {
     this.setState(
       {
         visible: true,

@@ -186,7 +186,7 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
     this.containerRef.style.transform = `translateX(${-100 * n}%)`
   }
 
-  public handleMouseEnter: React.MouseEventHandler = e => {
+  public handleMouseEnter: React.MouseEventHandler = () => {
     const { duration } = this.props
     const { timeout } = this
     if (duration && timeout) {
@@ -194,7 +194,7 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
     }
   }
 
-  public handleMouseLeave: React.MouseEventHandler = e => {
+  public handleMouseLeave: React.MouseEventHandler = () => {
     const { duration } = this.props
     if (duration) {
       this.autoPlay()

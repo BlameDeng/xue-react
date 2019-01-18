@@ -9,7 +9,7 @@ interface ICollapseProps {
   defaultActiveKey?: string[]
   accordion?: boolean
   showArrow?: boolean
-  onChange?: (activeKey: string[], e: React.MouseEvent) => any
+  onChange?: (activeKey: string[], e: React.MouseEvent<HTMLElement>) => any
   className?: string
   style?: React.CSSProperties
 }
@@ -25,7 +25,7 @@ interface IPanelProps {
   showArrow?: boolean
   activeKey?: string[]
   derivedActiveKey?: string[]
-  onClick?: (key: string, e: React.MouseEvent) => any
+  onClick?: (key: string, e: React.MouseEvent<HTMLElement>) => any
   className?: string
   style?: React.CSSProperties
 }
@@ -85,7 +85,10 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
     }
   }
 
-  public handleClickHeader = (key: string, e: React.MouseEvent) => {
+  public handleClickHeader = (
+    key: string,
+    e: React.MouseEvent<HTMLElement>
+  ) => {
     const { onChange, accordion } = this.props
     const { derivedActiveKey } = this.state
     // only one open
@@ -129,7 +132,7 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
         }
         const key = child.key as string
         return React.cloneElement(child, {
-          derivedActiveKey: derivedActiveKey as string[],
+          derivedActiveKey,
           showArrow,
           uniqueKey: key,
           onClick: handleClickHeader

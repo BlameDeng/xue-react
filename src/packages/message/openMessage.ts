@@ -26,17 +26,20 @@ function ensureUniqueMessage(messageId: string) {
 }
 
 function openMessage(
-  content: string | React.ReactNode,
-  mode: 'info' | 'success' | 'warning' | 'error',
-  duration: number = 3,
-  top: number = 24,
-  showIcon: boolean = true,
-  onClose?: () => any,
-  className?: string,
-  style?: React.CSSProperties
+  options: IOptions,
+  mode: 'info' | 'success' | 'warning' | 'error'
 ) {
   const messageId = uniqueId('$xue-message$-')
   ensureUniqueMessage(messageId)
+  const {
+    content,
+    duration = 3,
+    top = 24,
+    showIcon = true,
+    onClose,
+    className,
+    style
+  } = options
   const container = document.createElement('div')
   document.body.append(container)
   const messageInstance = React.createElement(
@@ -68,89 +71,17 @@ export function removeMessage(messageId: string) {
 }
 
 export function info(options: IOptions) {
-  const {
-    content,
-    duration = 3,
-    top = 24,
-    showIcon = true,
-    onClose,
-    className,
-    style
-  } = options
-  openMessage(
-    content,
-    'info',
-    duration,
-    top,
-    showIcon,
-    onClose,
-    className,
-    style
-  )
+  openMessage(options, 'info')
 }
 
 export function success(options: IOptions) {
-  const {
-    content,
-    duration = 3,
-    top = 24,
-    showIcon = true,
-    onClose,
-    className,
-    style
-  } = options
-  openMessage(
-    content,
-    'success',
-    duration,
-    top,
-    showIcon,
-    onClose,
-    className,
-    style
-  )
+  openMessage(options, 'success')
 }
 
 export function warning(options: IOptions) {
-  const {
-    content,
-    duration = 3,
-    top = 24,
-    showIcon = true,
-    onClose,
-    className,
-    style
-  } = options
-  openMessage(
-    content,
-    'warning',
-    duration,
-    top,
-    showIcon,
-    onClose,
-    className,
-    style
-  )
+  openMessage(options, 'warning')
 }
 
 export function error(options: IOptions) {
-  const {
-    content,
-    duration = 3,
-    top = 24,
-    showIcon = true,
-    onClose,
-    className,
-    style
-  } = options
-  openMessage(
-    content,
-    'error',
-    duration,
-    top,
-    showIcon,
-    onClose,
-    className,
-    style
-  )
+  openMessage(options, 'error')
 }

@@ -85,18 +85,17 @@ class Input extends React.Component<IInputProps, IInputState> {
     }
   }
 
-  public handleChange: React.ChangeEventHandler = e => {
+  public handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     const { onChange } = this.props
     if (onChange) {
       onChange(e)
     }
-    const target = e.target as HTMLInputElement
     this.setState({
-      derivedValue: target.value
+      derivedValue: e.target.value
     })
   }
 
-  public handleKeyDown: React.KeyboardEventHandler = e => {
+  public handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e => {
     const { onPressEnter, onKeyDown } = this.props
     if (onPressEnter && e.keyCode === 13) {
       onPressEnter(e)

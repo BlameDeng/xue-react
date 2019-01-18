@@ -54,17 +54,20 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     changeOnSelect: false
   }
 
-  public state = {
-    valueArr: [] as string[],
-    selectedOptions: [] as IOption[],
-    inputValueFromLabel: '',
-    menuStyle: {
-      top: ''
-    },
-    menuVisible: false
-  }
-
   private cascaderRef: HTMLDivElement
+
+  constructor(props: ICascaderProps) {
+    super(props)
+    this.state = {
+      valueArr: [],
+      selectedOptions: [],
+      inputValueFromLabel: '',
+      menuStyle: {
+        top: ''
+      },
+      menuVisible: false
+    }
+  }
 
   public componentDidMount() {
     const { bottom, top } = this.cascaderRef.getBoundingClientRect()
@@ -81,10 +84,10 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   }
 
   // 监听 document，点击别处关闭
-  public handleClickDocument = (e: MouseEvent) => {
-    const target = e.target as HTMLElement
+  public handleClickDocument: EventListener = e => {
+    const target = e.target
     const { menuVisible } = this.state
-    if (!this.cascaderRef.contains(target) && menuVisible) {
+    if (!this.cascaderRef.contains(target as Node) && menuVisible) {
       this.setState({
         menuVisible: false
       })

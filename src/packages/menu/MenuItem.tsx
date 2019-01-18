@@ -50,7 +50,7 @@ class MenuItem extends React.Component<IMenuItemProps> {
           active: uniqueKey === selectedKey
         })}
         style={style}
-        onClick={() => handleSelectedKey!(uniqueKey as string)}
+        onClick={() => handleSelectedKey!(uniqueKey!)}
       >
         {children}
         {mode === 'vertical' && theme === 'light' && (
