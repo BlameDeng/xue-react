@@ -1,21 +1,14 @@
 {
-    "name": "xue-re",
-    "version": "0.0.3",
-    "description": "> 一套小巧的 UI 组件库。",
-    "main": "lib/xue-re.js",
+    "name": "xue-react",
+    "version": "0.0.1",
+    "description": "> 一套小巧的 React 组件库。",
+    "main": "lib/xue-react.js",
     "author": "blame",
     "license": "MIT",
     "dependencies": {
         "prop-types": "^15.6.2",
         "react": "^16.7.0",
-        "react-dom": "^16.7.0",
-        "react-scripts-ts": "3.1.0"
-    },
-    "scripts": {
-        "start": "react-scripts-ts start",
-        "build": "react-scripts-ts build",
-        "test": "react-scripts-ts test --env=jsdom",
-        "eject": "react-scripts-ts eject"
+        "react-dom": "^16.7.0"
     },
     "devDependencies": {
         "@types/jest": "^23.3.10",
@@ -28,10 +21,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/BlameDeng/xue-re.git"
+        "url": "git+https://github.com/BlameDeng/xue-react.git"
     },
     "bugs": {
-        "url": "https://github.com/BlameDeng/xue-re/issues"
+        "url": "https://github.com/BlameDeng/xue-react/issues"
     },
-    "homepage": "https://github.com/BlameDeng/xue-re#readme"
+    "homepage": "https://github.com/BlameDeng/xue-react#readme"
 }

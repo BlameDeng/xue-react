@@ -8,13 +8,8 @@
 
 # production
 /build
-/lib
-
-# src
-src/utils
-src/examples
-src/style
-src/components
+/public
+/src
 
 # misc
 .DS_Store
