@@ -6,19 +6,20 @@
 
 > 本组件库仅供学习交流，请勿在生产环境中使用
 
-[官方文档](https://blamedeng.github.io/xue-react)   
-[Vue 实现](https://github.com/BlameDeng/xue-ui)
-
 ## 安装
 
-暂未发布，可克隆仓库后本地引入使用。
+```
+$ npm install xue-react
+$ yarn add xue-react
+```
 
 ## 使用
 
 ```javascript
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Button from 'components/Button'
+import { Button } from 'xue-react'
+import 'xue-react/lib/xue-react.css'
 
 ReactDOM.render(
   <div>
@@ -30,7 +31,7 @@ ReactDOM.render(
 
 ## 特别提醒
 
-使用 Xue-react 时，您需要使用 border-box 盒模型，否则会影响样式。代码示例：
+使用 Xue-react 时，需要注意的是，样式文件需要单独引入，并且需要使用 border-box 盒模型，否则会影响样式。代码示例：
 
 ```css
 *,
