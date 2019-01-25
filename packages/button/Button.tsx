@@ -14,13 +14,13 @@ interface IButtonProps {
   htmlType?: 'button' | 'submit' | 'reset'
   loading?: boolean
   onClick?: React.MouseEventHandler
-  style?: React.CSSProperties
-  className?: string
   disabled?: boolean
   onMouseEnter?: React.MouseEventHandler
   onMouseLeave?: React.MouseEventHandler
   onFocus?: React.FocusEventHandler
   onBlur?: React.FocusEventHandler
+  className?: string
+  style?: React.CSSProperties
 }
 
 const componentName = 'Button'
@@ -39,9 +39,9 @@ class Button extends React.Component<IButtonProps> {
     htmlType: PropTypes.oneOf(['button', 'submit', 'reset']),
     loading: PropTypes.bool,
     onClick: PropTypes.func,
-    style: PropTypes.object,
+    disabled: PropTypes.bool,
     className: PropTypes.string,
-    disabled: PropTypes.bool
+    style: PropTypes.object
   }
 
   public static defaultProps = {

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
@@ -16,6 +15,8 @@ interface IColProps {
   md?: IOptions
   lg?: IOptions
   xl?: IOptions
+  className?: string
+  style?: React.CSSProperties
 }
 
 const componentName = 'Col'
@@ -26,7 +27,9 @@ class Col extends React.Component<IColProps> {
   public static propTypes = {
     gutter: PropTypes.number,
     span: PropTypes.number,
-    offset: PropTypes.number
+    offset: PropTypes.number,
+    className: PropTypes.string,
+    style: PropTypes.object
   }
 
   public static defaultProps = {
@@ -34,16 +37,27 @@ class Col extends React.Component<IColProps> {
   }
 
   public getColClassName = (): string[] => {
-    const { span, offset = 0, children, ...options } = this.props
-    const className = [`col-span-${span}`, `col-offset-${offset}`]
+    const {
+      gutter,
+      span,
+      offset = 0,
+      children,
+      className,
+      style,
+      ...options
+    } = this.props
+    const classNameArr = [`col-span-${span}`, `col-offset-${offset}`]
     Object.keys(options).forEach(key => {
       if (options[key]) {
         const { span: optionSpan, offset: optionOffset = 0 } = options[key]
-        className.push(`${key}-col-span-${optionSpan}`)
-        className.push(`${key}-col-offset-${optionOffset}`)
+        classNameArr.push(`${key}-col-span-${optionSpan}`)
+        classNameArr.push(`${key}-col-offset-${optionOffset}`)
       }
     })
-    return className
+    if (className) {
+      classNameArr.push(className)
+    }
+    return classNameArr
   }
 
   public render() {
@@ -56,6 +70,8 @@ class Col extends React.Component<IColProps> {
       md,
       lg,
       xl,
+      className,
+      style,
       children,
       ...rest
     } = this.props
@@ -65,7 +81,8 @@ class Col extends React.Component<IColProps> {
         {...rest}
         style={{
           paddingLeft: `${gutter! / 2}px`,
-          paddingRight: `${gutter! / 2}px`
+          paddingRight: `${gutter! / 2}px`,
+          ...style
         }}
       >
         {children}

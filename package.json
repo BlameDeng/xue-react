@@ -1,10 +1,14 @@
 {
     "name": "xue-react",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "> 一套小巧的 React 组件库。",
     "main": "lib/xue-react.js",
     "author": "blame",
     "license": "MIT",
+    "scripts": {
+        "build": "react-scripts-ts build",
+        "test": "react-scripts-ts test --env=jsdom"
+    },
     "dependencies": {
         "prop-types": "^15.6.2",
         "react": "^16.7.0",

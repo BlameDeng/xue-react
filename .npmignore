@@ -4,6 +4,12 @@ node_modules
 /src
 /public
 
+images.d.ts
+tsconfig.json
+tsconfig.prod.json
+tsconfig.test.json
+tslint.json
+
 .gitignore
 
 yarn.lock

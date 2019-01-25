@@ -10,8 +10,6 @@ interface IInputProps {
   value?: string
   defaultValue?: string
   placeholder?: string
-  style?: React.CSSProperties
-  className?: string
   onChange?: React.ChangeEventHandler
   onKeyDown?: React.KeyboardEventHandler
   onPressEnter?: React.KeyboardEventHandler
@@ -24,6 +22,8 @@ interface IInputProps {
   disabled?: boolean
   error?: boolean
   readonly?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 interface IInputState {

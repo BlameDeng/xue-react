@@ -1,11 +1,12 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
-import './style'
 import { classes } from '../utils'
+import './style'
 
 interface IRowProps {
   gutter?: number
+  className?: string
+  style?: React.CSSProperties
 }
 
 interface IColProps {
@@ -20,7 +21,9 @@ class Row extends React.Component<IRowProps> {
   public static displayName = componentName
 
   public static propTypes = {
-    gutter: PropTypes.number
+    gutter: PropTypes.number,
+    className: PropTypes.string,
+    style: PropTypes.object
   }
 
   public static defaultProps = {
@@ -29,14 +32,15 @@ class Row extends React.Component<IRowProps> {
 
   public render() {
     const cn = componentName
-    const { gutter, children, ...rest } = this.props
+    const { gutter, className, style, children, ...rest } = this.props
     return (
       <div
-        className={classes(cn, '')}
+        className={classes(cn, '', [className])}
         {...rest}
         style={{
           marginLeft: `${-gutter! / 2}px`,
-          marginRight: `${-gutter! / 2}px`
+          marginRight: `${-gutter! / 2}px`,
+          ...style
         }}
       >
         {React.Children.map(children, child => {

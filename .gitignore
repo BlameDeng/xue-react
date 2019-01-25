@@ -8,6 +8,8 @@
 
 # production
 /build
+/src
+/public
 
 # misc
 .DS_Store
@@ -15,6 +17,12 @@
 .env.development.local
 .env.test.local
 .env.production.local
+
+images.d.ts
+tsconfig.json
+tsconfig.prod.json
+tsconfig.test.json
+tslint.json
 
 .npmignore
 npm-debug.log*
