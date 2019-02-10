@@ -40,6 +40,7 @@ class Affix extends React.Component<IAffixProps> {
   public setTop = () => {
     if (window.scrollY === 0) {
       this.top = this.affixRef.getBoundingClientRect().top
+      // 挂载时若窗口滚动不为 0，先滚动至 0
     } else {
       const { scrollX, scrollY } = window
       window.scrollTo(scrollX, 0)
@@ -50,7 +51,6 @@ class Affix extends React.Component<IAffixProps> {
 
   public handleScroll = () => {
     const { distance } = this.props
-
     if (window.scrollY > this.top - distance!) {
       const {
         top,
