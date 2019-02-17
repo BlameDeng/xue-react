@@ -1,7 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
-import TabPane from './TabPane'
 import './style'
 
 interface ITabsProps {
@@ -29,8 +28,6 @@ const componentName = 'Tabs'
 
 class Tabs extends React.Component<ITabsProps, ITabsState> {
   public static displayName = componentName
-
-  public static TabPane: typeof TabPane = TabPane
 
   public static propTypes = {
     activeKey: PropTypes.string,

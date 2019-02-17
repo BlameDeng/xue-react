@@ -1,7 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { isSimpleArrayEqual, classes } from '../utils'
-import Panel from './Panel'
 import './style'
 
 interface ICollapseProps {
@@ -34,8 +33,6 @@ const componentName = 'Collapse'
 
 class Collapse extends React.Component<ICollapseProps, ICollapseState> {
   public static displayName = componentName
-
-  public static Panel: typeof Panel = Panel
 
   public static propTypes = {
     activeKey: PropTypes.oneOfType([

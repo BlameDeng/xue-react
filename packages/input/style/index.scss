@@ -1,7 +1,7 @@
 @import '../../style/mixins.scss';
 .xue-input-wrapper {
     display: inline-flex;
-    >.xue-input {
+    .xue-input {
         font-size: 14px;
         padding-top: 4px;
         padding-bottom: 4px;
@@ -22,7 +22,7 @@
     }
     &.prefix {
         position: relative;
-        >.prefix-wrapper {
+        .prefix-wrapper {
             position: absolute;
             top: 50%;
             left: 4px;
@@ -32,14 +32,20 @@
             height: 22px;
             justify-content: center;
             align-items: center;
+            .prefix-string {
+                font-size: 14px;
+                line-height: 20px;
+                padding: 4px 10px;
+                color: rgba(0, 0, 0, 0.65);
+            }
         }
-        >.xue-input {
+        .xue-input {
             padding-left: 30px;
         }
     }
     &.suffix {
         position: relative;
-        >.suffix-wrapper {
+        .suffix-wrapper {
             position: absolute;
             top: 50%;
             right: 4px;
@@ -49,16 +55,22 @@
             height: 22px;
             justify-content: center;
             align-items: center;
+            .suffix-string {
+                font-size: 14px;
+                line-height: 20px;
+                padding: 4px 10px;
+                color: rgba(0, 0, 0, 0.65);
+            }
         }
-        >.xue-input {
+        .xue-input {
             padding-right: 30px;
         }
     }
     &.addon-before {
         justify-content: flex-start;
         align-items: center;
-        >.addon-before-wrapper {
-            >.before-string {
+        .addon-before-wrapper {
+            .before-string {
                 display: inline-flex;
                 height: 100%;
                 border: 1px solid rgba(0, 0, 0, 0.15);
@@ -72,7 +84,7 @@
                 color: rgba(0, 0, 0, 0.65);
             }
         }
-        >.xue-input {
+        .xue-input {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
@@ -80,8 +92,8 @@
     &.addon-after {
         justify-content: flex-start;
         align-items: center;
-        >.addon-after-wrapper {
-            >.after-string {
+        .addon-after-wrapper {
+            .after-string {
                 display: inline-flex;
                 height: 100%;
                 border: 1px solid rgba(0, 0, 0, 0.15);
@@ -96,13 +108,13 @@
                 transition: all .3s cubic-bezier(.645, .045, .355, 1);
             }
         }
-        >.xue-input {
+        .xue-input {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
     }
     &.disabled {
-        >.xue-input {
+        .xue-input {
             color: rgba(0, 0, 0, 0.25);
             border-color: #d9d9d9;
             background-color: #e6e6e6;
@@ -116,27 +128,27 @@
         }
     }
     &.error {
-        >.xue-input {
+        .xue-input {
             border-color: $error;
         }
     }
     &.search {
-        >.suffix-wrapper {
+        .suffix-wrapper {
             color: rgba(0, 0, 0, 0.25);
             transition: all .3s cubic-bezier(.645, .045, .355, 1);
         }
         &:hover {
-            >.suffix-wrapper {
+            .suffix-wrapper {
                 color: rgba(0, 0, 0, 0.65);
             }
         }
         &.enter-button {
-            >.xue-input {
+            .xue-input {
                 border-right: none;
             }
         }
-        >.addon-after-wrapper {
-            >.xue-search-enter-button {
+        .addon-after-wrapper {
+            .xue-search-enter-button {
                 height: 30px;
                 padding: 0 15px;
                 border-top-right-radius: 4px;

@@ -1,9 +1,8 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
-import Transition from '../transition/Transition'
 import Icon from '../icon/Icon'
-const Unfold = Transition.Unfold
+import Unfold from '../transition/Unfold'
 
 interface IPanelProps {
   header: string | React.ReactNode

@@ -114,7 +114,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     }
   }
 
-  // 处理点击最后一层，点击后需要关闭菜单，若 valueArr 改变，需更新输入框显示的值
+  // 监听点击最后一层，点击后需要关闭菜单，若 valueArr 改变，需更新输入框显示的值
   public handleClickLastLevel = (option: IOption, level: number) => {
     const { onChange } = this.props
     const valueArr = this.state.valueArr || []
@@ -142,7 +142,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     }
   }
 
-  // 处理点击中间层，若改变，只在 changeOnSelect 为真时更新输入框显示的值
+  // 监听点击中间层，若改变，只在 changeOnSelect 为真时更新输入框显示的值
   public handleClickMidLevel = (option: IOption, level: number) => {
     const { changeOnSelect, onSelect } = this.props
     const valueArr = this.state.valueArr || []

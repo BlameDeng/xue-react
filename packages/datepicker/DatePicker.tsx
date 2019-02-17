@@ -126,7 +126,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     this.datePickerRef = node
   }
 
-  // 处理点击 input 打开 calendar 面板
+  // 监听点击 input 打开 calendar 面板
   public handleClickInput = () => {
     this.setState({
       calendarVisible: true,
@@ -155,7 +155,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     }
   }
 
-  // 处理 date 面板点击
+  // 监听 date 面板点击
   public handleClickDate = (value: IDateValue) => {
     this.setState(
       {
@@ -167,7 +167,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     )
   }
 
-  // 处理点击 date 面板设置为今天
+  // 监听点击 date 面板设置为今天
   public handleClickToday = () => {
     this.setState(
       {
@@ -179,7 +179,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     )
   }
 
-  // 处理点击清除图标
+  // 监听点击清除图标
   public handleOnClear = () => {
     this.setState(
       {
@@ -190,7 +190,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     )
   }
 
-  // 处理 month 面板点击
+  // 监听 month 面板点击
   public handleClickMonth = (month: number) => {
     const { pickerValue } = this.state
     this.setState({
@@ -199,7 +199,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     })
   }
 
-  // 处理 year 面板点击
+  // 监听 year 面板点击
   public handleClickYear = (
     year: number,
     type: 'first' | 'middle' | 'last'
@@ -231,7 +231,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     }
   }
 
-  // 处理 decade 面板点击
+  // 监听 decade 面板点击
   public handleClickDecade = (
     decade: number,
     type: 'first' | 'middle' | 'last'
@@ -304,7 +304,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     }
   }
 
-  // 处理日期面板点击单箭头更改月份
+  // 监听日期面板点击单箭头更改月份
   public handleClickArrow = (position: string) => {
     const { pickerValue } = this.state
     // month-1
@@ -338,7 +338,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     }
   }
 
-  // 处理 month year decade 面板点击双箭头
+  // 监听 month year decade 面板点击双箭头
   public handleClickDouble = (position: string) => {
     const { mode, pickerValue } = this.state
     // left -
@@ -398,7 +398,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     }
   }
 
-  // 处理点击动作条中间文字
+  // 监听点击动作条中间文字
   public handleClickValue = () => {
     const { mode } = this.state
     switch (mode) {

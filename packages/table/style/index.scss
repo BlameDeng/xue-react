@@ -1,5 +1,5 @@
 @import '../../style/mixins.scss';
-@mixin selection-span {
+@mixin selection {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -15,11 +15,14 @@
     border-color: rgba(0, 0, 0, 0.15);
     background-color: #fff;
     cursor: pointer;
-    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    &:hover {
+        border-color: $brand;
+    }
     &::after {
         display: block;
         content: '';
-        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         border: 2px solid #fff;
         border-radius: 1px;
         border-top: 0;
@@ -55,109 +58,196 @@
         }
     }
 }
-.xue-table-wrapper {
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    .xue-table-body {
-        height: 100%;
+@mixin head-inner {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(245, 245, 245);
+    &.border {
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
     }
-    .xue-table-head, .xue-table-body {
-        width: 100%;
-        .xue-table {
-            width: 100%;
-            border-collapse: collapse;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            &-head {
-                width: 100%;
-                background-color: $bg;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-                >tr {
-                    border-top-left-radius: 4px;
-                    border-top-right-radius: 4px;
-                    >th {
-                        font-size: 14px;
-                        line-height: 22px;
-                        font-weight: 500;
-                        color: rgba(0, 0, 0, 0.85);
-                        text-align: start;
-                        padding: 16px;
+    .xue-table-head-cell {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        &-inner {
+            padding: 16px;
+            &.small {
+                padding: 8px;
+            }
+            &.sort {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .sort-icon {
+                    margin-left: 4px;
+                    display: inline-flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    .xue-table-ascend,
+                    .xue-table-descend {
+                        color: rgba(0, 0, 0, 0.45);
+                        cursor: pointer;
+                        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                        &.active {
+                            color: $brand;
+                        }
+                    }
+                }
+            }
+        }
+        &.check-box {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            .xue-table-head-cell-inner {
+                position: relative;
+                .xue-table-selection {
+                    @include selection;
+                }
+            }
+        }
+        &.border {
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+            &:first-child {
+                border-left: 1px solid rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+}
+.xue-table-wrapper {
+    position: relative;
+    .xue-table {
+        font-size: 14px;
+        line-height: 22px;
+        color: rgba(0, 0, 0, 0.65);
+        &.scroll-x {
+            overflow-x: scroll;
+        }
+        &-head {
+            color: rgba(0, 0, 0, 0.85);
+            &.scroll-y {
+                overflow-y: scroll;
+            }
+            &-inner {
+                @include head-inner;
+            }
+            .xue-table-left-fixed-head-mask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+                .xue-table-left-fixed-head {
+                    position: static;
+                }
+            }
+            .xue-table-left-fixed-head {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow-x: hidden;
+                @include head-inner;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+                &.scroll-y {
+                    overflow-y: scroll;
+                }
+            }
+            .xue-table-right-fixed-head {
+                position: absolute;
+                top: 0;
+                right: 0;
+                overflow-x: hidden;
+                @include head-inner;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.start, &.middle {
+                    box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+        &-body {
+            color: rgba(0, 0, 0, 0.65);
+            &.scroll-y {
+                overflow-y: scroll;
+            }
+            &-inner {
+                &-row {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: stretch;
+                    background-color: #fff;
+                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                    &.stripe {
+                        background-color: rgb(245, 245, 245);
+                    }
+                    &.hover {
+                        background-color: #e6f7ff;
+                    }
+                    &-cell {
                         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
                         &.check-box {
-                            width: 62px;
-                            text-align: center;
-                            vertical-align: middle;
-                            position: relative;
-                        }
-                        >.xue-thead-selection {
-                            @include selection-span;
-                        }
-                        .xue-thead-wrapper {
-                            &.sort {
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            .xue-table-body-inner-row-cell-inner {
                                 position: relative;
-                                .sorter-icon {
-                                    position: absolute;
-                                    top: 50%;
-                                    right: 4px;
-                                    transform: translateY(-50%);
-                                    display: flex;
-                                    flex-direction: column;
-                                    justify-content: center;
-                                    align-items: center;
-                                    .xue-thead-ascend, .xue-thead-descend {
-                                        color: rgba(0, 0, 0, 0.45);
-                                        cursor: pointer;
-                                        transition: all .3s cubic-bezier(.645, .045, .355, 1);
-                                        &.active {
-                                            color: $brand;
-                                        }
-                                    }
+                                .xue-table-selection {
+                                    @include selection;
                                 }
+                            }
+                        }
+                        &.border {
+                            border-right: 1px solid rgba(0, 0, 0, 0.15);
+                            &:first-child {
+                                border-left: 1px solid rgba(0, 0, 0, 0.15);
+                            }
+                        }
+                        &-inner {
+                            height: 100%;
+                            padding: 16px;
+                            &.small {
+                                padding: 8px;
                             }
                         }
                     }
                 }
             }
-            &-body {
-                width: 100%;
-                >tr {
-                    transition: all .3s cubic-bezier(.645, .045, .355, 1);
-                    &:hover {
-                        background-color: #e6f7ff;
-                    }
-                    >td {
-                        font-size: 14px;
-                        line-height: 22px;
-                        font-weight: 400;
-                        color: rgba(0, 0, 0, 0.65);
-                        text-align: start;
-                        padding: 16px;
-                        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-                        &.check-box {
-                            width: 62px;
-                            text-align: center;
-                            vertical-align: middle;
-                            position: relative;
-                        }
-                        >.xue-table-selection {
-                            @include selection-span;
-                        }
-                    }
-                    &:last-child {
-                        >td {
-                            border-bottom: none;
-                        }
-                    }
+            .xue-table-left-fixed-body-mask {
+                position: absolute;
+                left: 0;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
                 }
-                &.stripe {
-                    >tr {
-                        &:nth-child(2n) {
-                            background-color: rgba(0, 0, 0, 0.04);
-                            &:hover {
-                                background-color: #e6f7ff;
-                            }
-                        }
-                    }
+                .xue-table-left-fixed-body {
+                    position: static;
+                }
+            }
+            .xue-table-left-fixed-body {
+                position: absolute;
+                left: 0;
+                overflow-x: hidden;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+            }
+            .xue-table-right-fixed-body {
+                position: absolute;
+                right: 0;
+                overflow-x: hidden;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.start, &.middle {
+                    box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.25);
                 }
             }
         }

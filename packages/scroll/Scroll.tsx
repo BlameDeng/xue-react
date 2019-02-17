@@ -4,18 +4,18 @@ import { classes } from '../utils'
 import './style'
 
 interface IScrollProps {
-  scrollBarVisible?: boolean // 是否始终显示滚动条
+  yBarVisible?: boolean // 是否始终显示垂直滚动条
   className?: string
   style?: React.CSSProperties
-  trackClassName?: string
-  trackStyle?: React.CSSProperties
-  scrollBarClassName?: string
-  scrollBarStyle?: React.CSSProperties
+  yTrackClassName?: string
+  yTrackStyle?: React.CSSProperties
+  yBarClassName?: string
+  yBarStyle?: React.CSSProperties
 }
 
 interface IScrollState {
   translateY: number
-  visible: boolean // 是否显示滚动条
+  yVisible: boolean // 是否显示垂直滚动条
 }
 
 const componentName = 'Scroll'
@@ -24,29 +24,30 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
   public static displayName = componentName
 
   public static propTypes = {
-    scrollBarVisible: PropTypes.bool,
+    yBarVisible: PropTypes.bool,
+    xBarVisible: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object,
-    trackClassName: PropTypes.string,
-    trackStyle: PropTypes.object,
-    scrollBarClassName: PropTypes.string,
-    scrollBarStyle: PropTypes.object
+    yTrackClassName: PropTypes.string,
+    yTrackStyle: PropTypes.object,
+    yBarClassName: PropTypes.string,
+    yBarStyle: PropTypes.object
   }
 
   public static defaultProps = {
-    scrollBarVisible: false
+    yBarVisible: false
   }
 
   public state = {
     translateY: 0,
-    visible: true
+    yVisible: true
   }
 
   private wrapperRef: HTMLDivElement
   private containerRef: HTMLDivElement
-  private barRef: HTMLDivElement
+  private yBarRef: HTMLDivElement
   private wrapperHeight: number
-  private contrainerHeight: number
+  private containerHeight: number
   private barHeight: number
   private maxContainerScrollHeight: number
   private barStartTranslateY: number
@@ -55,13 +56,15 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
   private mouseDown: boolean
   private mouseIn: boolean
   private userSelect: string | null
-  private trackRef: HTMLDivElement
+  private yTrackRef: HTMLDivElement
 
   public componentDidMount() {
-    this.getEleHeight()
-    if (!this.props.scrollBarVisible) {
+    this.getElRect()
+    const { yBarVisible } = this.props
+    const { yVisible } = this.state
+    if (yBarVisible !== yVisible) {
       this.setState({
-        visible: false
+        yVisible: yBarVisible as boolean
       })
     }
   }
@@ -78,8 +81,8 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     document.removeEventListener('mouseup', this.handleMouseUp)
   }
 
-  // 获取各个元素最新的高度、最大滚动高度等
-  public getEleHeight = () => {
+  // 获取各个元素最新的宽高、最大滚动宽高等
+  public getElRect = () => {
     const {
       top: wrapperTop,
       bottom: wrapperBottom
@@ -91,11 +94,12 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     const {
       top: barTop,
       bottom: barBottom
-    } = this.barRef.getBoundingClientRect()
+    } = this.yBarRef.getBoundingClientRect()
+    // 高度
     this.wrapperHeight = wrapperBottom - wrapperTop
-    this.contrainerHeight = containerBottom - containerTop
+    this.containerHeight = containerBottom - containerTop
     this.barHeight = barBottom - barTop
-    this.maxContainerScrollHeight = this.contrainerHeight - this.wrapperHeight
+    this.maxContainerScrollHeight = this.containerHeight - this.wrapperHeight
     this.maxBarScrollHeight = this.wrapperHeight - this.barHeight
   }
 
@@ -107,16 +111,16 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     this.containerRef = node
   }
 
-  public saveBarRef = (node: HTMLDivElement) => {
-    this.barRef = node
+  public saveYBarRef = (node: HTMLDivElement) => {
+    this.yBarRef = node
   }
 
-  public saveTrackRef = (node: HTMLDivElement) => {
-    this.trackRef = node
+  public saveYTrackRef = (node: HTMLDivElement) => {
+    this.yTrackRef = node
   }
 
   public handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    this.getEleHeight()
+    this.getElRect()
     e.preventDefault()
     const { translateY } = this.state
     const { deltaY } = e
@@ -125,7 +129,7 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
       return
       // 到底了向下
     } else if (
-      Math.abs(translateY) + this.wrapperHeight >= this.contrainerHeight &&
+      Math.abs(translateY) + this.wrapperHeight >= this.containerHeight &&
       deltaY > 0
     ) {
       return
@@ -140,8 +144,8 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     const barTranslateY =
       translateY *
       ((this.wrapperHeight - this.barHeight) /
-        (this.contrainerHeight - this.wrapperHeight))
-    this.barRef.style.transform = `translateY(${-barTranslateY}px)`
+        (this.containerHeight - this.wrapperHeight))
+    this.yBarRef.style.transform = `translateY(${-barTranslateY}px)`
   }
 
   public getTranslateY = (deltaY: number): number => {
@@ -169,7 +173,7 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
 
   public handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     this.barStartTranslateY =
-      this.barRef.getBoundingClientRect().top -
+      this.yBarRef.getBoundingClientRect().top -
       this.wrapperRef.getBoundingClientRect().top
     this.startClientY = e.clientY
     document.addEventListener('mousemove', this.handleMouseMove)
@@ -181,7 +185,7 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
 
   // 点击后拖动距离 -barStartTranslateY -> maxBarScrollHeight-barStartTranslateY
   public handleMouseMove = (e: MouseEvent) => {
-    this.getEleHeight()
+    this.getElRect()
     const { clientY } = e
     const deltaY = clientY - this.startClientY
     if (deltaY <= -this.barStartTranslateY) {
@@ -206,38 +210,40 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     document.removeEventListener('mouseup', this.handleMouseUp)
     this.mouseDown = false
     this.containerRef.style.userSelect = this.userSelect
-    if (!this.mouseIn && this.state.visible && !this.props.scrollBarVisible) {
+    if (!this.mouseIn && this.state.yVisible && !this.props.yBarVisible) {
       this.setState({
-        visible: false
+        yVisible: false
       })
     }
   }
 
+  // 鼠标进入 scroll 判断是否需要显示滚动条
   public handleMouseEnter = () => {
     this.mouseIn = true
-    if (this.wrapperHeight < this.contrainerHeight && !this.state.visible) {
+    const { yVisible } = this.state
+    if (!yVisible) {
       this.setState({
-        visible: true
+        yVisible: this.wrapperHeight < this.containerHeight
       })
     }
   }
 
   public handleMouseLeave = () => {
     this.mouseIn = false
-    if (this.state.visible && !this.props.scrollBarVisible && !this.mouseDown) {
+    if (this.state.yVisible && !this.props.yBarVisible && !this.mouseDown) {
       this.setState({
-        visible: false
+        yVisible: false
       })
     }
   }
 
   // 点击 track 时滚动
   public handleClickTrack = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target !== this.trackRef) {
+    if (e.target !== this.yTrackRef) {
       return
     }
-    this.getEleHeight()
-    const distance = e.clientY - this.trackRef.getBoundingClientRect().top
+    this.getElRect()
+    const distance = e.clientY - this.yTrackRef.getBoundingClientRect().top
     if (distance < this.maxBarScrollHeight) {
       this.setState({
         translateY:
@@ -255,13 +261,13 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     const {
       className,
       style,
-      trackClassName,
-      trackStyle,
-      scrollBarClassName,
-      scrollBarStyle,
+      yTrackClassName,
+      yTrackStyle,
+      yBarClassName,
+      yBarStyle,
       children
     } = this.props
-    const { translateY, visible } = this.state
+    const { translateY, yVisible } = this.state
     return (
       <div
         className={classes(cn, 'wrapper', [className])}
@@ -278,19 +284,20 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
         >
           {children}
         </div>
+        {/* 垂直滚动条 */}
         <div
-          className={classes(cn, 'track', [trackClassName], {
-            visible
+          className={classes(cn, 'y-track', [yTrackClassName], {
+            'y-visible': yVisible
           })}
           onClick={this.handleClickTrack}
-          ref={this.saveTrackRef}
-          style={trackStyle}
+          ref={this.saveYTrackRef}
+          style={yTrackStyle}
         >
           <div
-            className={classes(cn, 'bar', [scrollBarClassName])}
-            ref={this.saveBarRef}
+            className={classes(cn, 'bar', [yBarClassName])}
+            ref={this.saveYBarRef}
             onMouseDown={this.handleMouseDown}
-            style={scrollBarStyle}
+            style={yBarStyle}
           />
         </div>
       </div>

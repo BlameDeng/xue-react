@@ -94,7 +94,7 @@ class Pager extends React.Component<IPagerProps, IPagerState> {
     }
   }
 
-  // 处理点击省略号
+  // 监听点击省略号
   public handleClickDot = (index: number) => {
     const { derivedCurrent } = this.state
     const { total } = this.props

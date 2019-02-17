@@ -2,8 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import Icon from '../icon/Icon'
-import Transition from '../transition/Transition'
-const Unfold = Transition.Unfold
+import Unfold from '../transition/Unfold'
 
 interface ISubMenuProps {
   uniqueKey?: string

@@ -138,7 +138,7 @@ class LightUp extends React.Component<ILightUpProps> {
 
   public renderChildren = () => {
     const { src, children } = this.props
-    const img = React.Children.only(children)
+    const img = React.Children.only(children) as React.ReactElement<any>
     const { src: imgSrc, alt } = img.props
     return (
       <>

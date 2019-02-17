@@ -1,7 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
-import Unfold from './Unfold'
 
 interface ITransitionProps {
   visible: boolean
@@ -14,8 +13,6 @@ interface ITransitionProps {
 
 class Transition extends React.Component<ITransitionProps> {
   public static displayName = 'Transition'
-
-  public static Unfold: typeof Unfold = Unfold
 
   public static propTypes = {
     visible: PropTypes.bool.isRequired,

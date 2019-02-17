@@ -1,8 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { isSimpleArrayEqual, classes } from '../utils'
-import SubMenu from './SubMenu'
-import MenuItem from './MenuItem'
 import './style'
 
 interface IMenuProps {
@@ -40,9 +38,6 @@ const componentName = 'Menu'
 
 class Menu extends React.Component<IMenuProps, IMenuState> {
   public static displayName = componentName
-
-  public static SubMenu: typeof SubMenu = SubMenu
-  public static MenuItem: typeof MenuItem = MenuItem
 
   public static propTypes = {
     selectedKey: PropTypes.string,
@@ -89,7 +84,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
     this.state = {
       derivedSelectedKey: ('defaultSelectedKey' in props
         ? defaultSelectedKey
-        : '') as string ,
+        : '') as string,
       derivedExpandKeys: ('defaultExpandKeys' in props
         ? defaultExpandKeys
         : []) as string[]
