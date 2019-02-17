@@ -302,7 +302,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
       <span {...this.getChildrenEventHandlers()}>{children}</span>
     ) : (
       React.cloneElement(
-        React.Children.only(children),
+        React.Children.only(children) as React.ReactElement<any>,
         this.getChildrenEventHandlers()
       )
     )

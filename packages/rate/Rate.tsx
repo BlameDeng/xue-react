@@ -74,7 +74,7 @@ class Rate extends React.Component<IRateProps, IRateState> {
     }
   }
 
-  // 处理点击星星
+  // 监听点击星星
   public handleClickStar = (index: number, position: string) => {
     const { allowClear, allowHalf, disabled } = this.props
     const { derivedValue } = this.state
@@ -110,7 +110,7 @@ class Rate extends React.Component<IRateProps, IRateState> {
     }
   }
 
-  // 处理鼠标移动
+  // 监听鼠标移动
   public handleHover = (index: number, position: string) => {
     const { allowHalf, disabled } = this.props
     const { hoverValue } = this.state
@@ -137,7 +137,7 @@ class Rate extends React.Component<IRateProps, IRateState> {
     }
   }
 
-  // 处理鼠标移出 star 容器
+  // 监听鼠标移出 star 容器
   public handleMouseLeave = () => {
     this.setState({ hoverValue: 0 })
     this.handleOnHoverChange(0)

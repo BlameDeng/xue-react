@@ -9,10 +9,21 @@ interface IRowProps {
   style?: React.CSSProperties
 }
 
+interface IOptions {
+  span: number
+  offset?: number
+}
+
 interface IColProps {
   gutter?: number
   span?: number
   offset?: number
+  sm?: IOptions
+  md?: IOptions
+  lg?: IOptions
+  xl?: IOptions
+  className?: string
+  style?: React.CSSProperties
 }
 
 const componentName = 'Row'

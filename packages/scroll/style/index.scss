@@ -1,0 +1,27 @@
+.xue-scroll-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    position: relative;
+    .xue-scroll-container {
+        transition: transform 50ms ease;
+    }
+    .xue-scroll-y-track {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.04);
+        display: none;
+        &.y-visible {
+            display: block;
+        }
+        .xue-scroll-bar {
+            width: 14px;
+            height: 80px;
+            max-height: 100%;
+            transition: transform 50ms ease;
+            background-color: rgb(193, 193, 193);
+        }
+    }
+}

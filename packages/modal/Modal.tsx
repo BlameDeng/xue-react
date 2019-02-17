@@ -134,7 +134,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
 
   // 获取滚动条宽度
   public getScrollBarWidth = (): number => {
-    return window.innerWidth - document.body.clientWidth
+    return window.innerWidth - document.body.clientWidth||document.documentElement.clientHeight
   }
 
   // 'imperative' 模式下关闭 modal

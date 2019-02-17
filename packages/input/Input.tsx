@@ -1,9 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
-import Icon from '../icon/Icon'
-import Textarea from './Textarea'
-import Search from './Search'
 import './style'
 
 interface IInputProps {
@@ -34,9 +31,6 @@ const componentName = 'Input'
 
 class Input extends React.Component<IInputProps, IInputState> {
   public static displayName = componentName
-
-  public static Textarea: typeof Textarea = Textarea
-  public static Search: typeof Search = Search
 
   public static propTypes = {
     value: PropTypes.string,
@@ -156,11 +150,7 @@ class Input extends React.Component<IInputProps, IInputState> {
         {prefix && (
           <span className="prefix-wrapper">
             {typeof prefix === 'string' ? (
-              <Icon
-                name={prefix}
-                style={{ fill: 'rgba(0,0,0,0.25)' }}
-                size={16}
-              />
+              <span className="prefix-string">{prefix}</span>
             ) : (
               prefix
             )}
@@ -183,11 +173,7 @@ class Input extends React.Component<IInputProps, IInputState> {
         {suffix && (
           <span className="suffix-wrapper">
             {typeof suffix === 'string' ? (
-              <Icon
-                name={suffix}
-                style={{ fill: 'rgba(0,0,0,0.25)' }}
-                size={16}
-              />
+              <span className="suffix-string">{suffix}</span>
             ) : (
               suffix
             )}

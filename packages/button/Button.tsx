@@ -2,7 +2,6 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { Wave, classes } from '../utils'
 import Icon from '../icon/Icon'
-import ButtonGroup from './ButtonGroup'
 import './style'
 
 interface IButtonProps {
@@ -27,8 +26,6 @@ const componentName = 'Button'
 
 class Button extends React.Component<IButtonProps> {
   public static displayName = componentName
-
-  public static Group: typeof ButtonGroup = ButtonGroup
 
   public static propTypes = {
     icon: PropTypes.string,
