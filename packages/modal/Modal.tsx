@@ -46,7 +46,17 @@ class Modal extends React.Component<IModalProps, IModalState> {
   public static displayName = componentName
 
   public static openModal = openModal
+
   public static removeModal = removeModal
+
+  public static defaultProps = {
+    mode: 'declarative',
+    maskClosable: false,
+    okText: '确 定',
+    okType: 'primary',
+    cancelText: '取 消',
+    cancelType: 'default'
+  }
 
   public static propTypes = {
     visible: PropTypes.bool.isRequired,
@@ -67,15 +77,6 @@ class Modal extends React.Component<IModalProps, IModalState> {
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    mode: 'declarative',
-    maskClosable: false,
-    okText: '确 定',
-    okType: 'primary',
-    cancelText: '取 消',
-    cancelType: 'default'
   }
 
   private timeout: any
@@ -134,7 +135,10 @@ class Modal extends React.Component<IModalProps, IModalState> {
 
   // 获取滚动条宽度
   public getScrollBarWidth = (): number => {
-    return window.innerWidth - document.body.clientWidth||document.documentElement.clientHeight
+    return (
+      window.innerWidth - document.body.clientWidth ||
+      document.documentElement.clientHeight
+    )
   }
 
   // 'imperative' 模式下关闭 modal

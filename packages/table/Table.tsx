@@ -5,6 +5,7 @@ import { classes, isSimpleArrayEqual } from '../utils'
 import Icon from '../icon/Icon'
 import Pager from '../pager/Pager'
 import './style'
+import Spin from '../spin/Spin'
 
 interface IData {
   key: string
@@ -42,6 +43,8 @@ interface ITableProps {
   size?: 'default' | 'small' // 表格大小
   rowHeight?: number // body 每一行的高度
   onSelectChange?: (selectedKeys: string[]) => any // 选中项改变的回调
+  loading?: boolean // 加载中状态
+  spinSize?: number // 加载图标大小
 }
 
 interface ITableState {
@@ -60,15 +63,31 @@ const componentName = 'Table'
 class Table extends React.Component<ITableProps, ITableState> {
   public static displayName = componentName
 
-  public static propTypes = {}
-
   public static defaultProps = {
     selectCol: false,
     stripe: false,
     border: false,
     pager: false,
     pageSize: 10,
-    size: 'default'
+    size: 'default',
+    loading: false,
+    spinSize: 30
+  }
+
+  public static propTypes = {
+    columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+    dataSource: PropTypes.arrayOf(PropTypes.object).isRequired,
+    selectCol: PropTypes.bool,
+    scroll: PropTypes.object,
+    stripe: PropTypes.bool,
+    border: PropTypes.bool,
+    pager: PropTypes.bool,
+    pageSize: PropTypes.number,
+    size: PropTypes.oneOf(['small', 'default']),
+    rowHeight: PropTypes.number,
+    onSelectChange: PropTypes.func,
+    loading: PropTypes.bool,
+    spinSize: PropTypes.number
   }
 
   public static getDerivedStateFromProps(
@@ -805,7 +824,9 @@ class Table extends React.Component<ITableProps, ITableState> {
       scroll,
       size,
       border,
-      selectCol
+      selectCol,
+      loading,
+      spinSize
     } = this.props
     const shouldRenderFixedCol = scroll && scroll.x
     const headStyle =
@@ -824,62 +845,72 @@ class Table extends React.Component<ITableProps, ITableState> {
         : {}
     )
     return (
-      <div className={classes(cn, 'wrapper')} ref={this.saveWrapperEl}>
-        <div
-          className={classes(cn, '', { 'scroll-x': scroll && scroll.x })}
-          role="table"
-          onScroll={this.handleTableScroll}
-          ref={this.saveTableEl}
-        >
-          {/* 表头 */}
+      <Spin spinning={loading} size={spinSize}>
+        <div className={classes(cn, 'wrapper')} ref={this.saveWrapperEl}>
           <div
-            className={classes(cn, 'head', { 'scroll-y': scroll && scroll.y })}
-            style={headStyle}
-            ref={this.saveHeadEl}
+            className={classes(cn, '', { 'scroll-x': scroll && scroll.x })}
+            role="table"
+            onScroll={this.handleTableScroll}
+            ref={this.saveTableEl}
           >
-            <div className={classes(cn, 'head-inner', { border })}>
-              {this.renderHead(renderDataSource, columns, selectCol as boolean)}
-            </div>
-            {/* 左侧固定表头 */}
-            {shouldRenderFixedCol &&
-              this.renderMaskedLeftFixedHead(renderDataSource)}
-            {/* 右侧固定表头 */}
-            {shouldRenderFixedCol &&
-              this.renderRightFixedHead(renderDataSource)}
-          </div>
-          {/* 表格主体 */}
-          <div
-            className={classes(cn, 'body', { 'scroll-y': scroll && scroll.y })}
-            style={bodyStyle}
-            ref={this.saveBodyEl}
-            onScroll={this.handleBodyScrollY}
-            onMouseLeave={this.handleMouseLeaveBody}
-          >
+            {/* 表头 */}
             <div
-              className={classes(cn, 'body-inner')}
-              onMouseEnter={() => this.handleMouseEnterEl('bodyInner')}
+              className={classes(cn, 'head', {
+                'scroll-y': scroll && scroll.y
+              })}
+              style={headStyle}
+              ref={this.saveHeadEl}
             >
-              {this.renderBody(renderDataSource)}
+              <div className={classes(cn, 'head-inner', { border })}>
+                {this.renderHead(
+                  renderDataSource,
+                  columns,
+                  selectCol as boolean
+                )}
+              </div>
+              {/* 左侧固定表头 */}
+              {shouldRenderFixedCol &&
+                this.renderMaskedLeftFixedHead(renderDataSource)}
+              {/* 右侧固定表头 */}
+              {shouldRenderFixedCol &&
+                this.renderRightFixedHead(renderDataSource)}
             </div>
-            {/* 左侧固定列 */}
-            {shouldRenderFixedCol &&
-              this.renderMaskedLeftFixedBody(renderDataSource)}
-            {/* 右侧固定列 */}
-            {shouldRenderFixedCol &&
-              this.renderRightFixedBody(renderDataSource)}
+            {/* 表格主体 */}
+            <div
+              className={classes(cn, 'body', {
+                'scroll-y': scroll && scroll.y
+              })}
+              style={bodyStyle}
+              ref={this.saveBodyEl}
+              onScroll={this.handleBodyScrollY}
+              onMouseLeave={this.handleMouseLeaveBody}
+            >
+              <div
+                className={classes(cn, 'body-inner')}
+                onMouseEnter={() => this.handleMouseEnterEl('bodyInner')}
+              >
+                {this.renderBody(renderDataSource)}
+              </div>
+              {/* 左侧固定列 */}
+              {shouldRenderFixedCol &&
+                this.renderMaskedLeftFixedBody(renderDataSource)}
+              {/* 右侧固定列 */}
+              {shouldRenderFixedCol &&
+                this.renderRightFixedBody(renderDataSource)}
+            </div>
+            {/* 分页器 */}
+            {pager && dataSource && dataSource.length && (
+              <div style={{ padding: '10px', textAlign: 'end' }}>
+                <Pager
+                  total={Math.ceil(dataSource.length / pageSize!)}
+                  onChange={this.handlePageChange}
+                  size={size}
+                />
+              </div>
+            )}
           </div>
-          {/* 分页器 */}
-          {pager && dataSource && dataSource.length && (
-            <div style={{ padding: '10px', textAlign: 'end' }}>
-              <Pager
-                total={Math.ceil(dataSource.length / pageSize!)}
-                onChange={this.handlePageChange}
-                size={size}
-              />
-            </div>
-          )}
         </div>
-      </div>
+      </Spin>
     )
   }
 }

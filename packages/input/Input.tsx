@@ -32,6 +32,12 @@ const componentName = 'Input'
 class Input extends React.Component<IInputProps, IInputState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    disabled: false,
+    error: false,
+    readonly: false
+  }
+
   public static propTypes = {
     value: PropTypes.string,
     defaultValue: PropTypes.string,
@@ -50,12 +56,6 @@ class Input extends React.Component<IInputProps, IInputState> {
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     readonly: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    disabled: false,
-    error: false,
-    readonly: false
   }
 
   public static getDerivedStateFromProps(

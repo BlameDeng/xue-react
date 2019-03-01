@@ -27,6 +27,12 @@ const componentName = 'Rate'
 class Rate extends React.Component<IRateProps, IRateState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    allowClear: false,
+    allowHalf: false,
+    disabled: false
+  }
+
   public static propTypes = {
     value: PropTypes.number,
     defaultValue: PropTypes.number,
@@ -38,12 +44,6 @@ class Rate extends React.Component<IRateProps, IRateState> {
     tips: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    allowClear: false,
-    allowHalf: false,
-    disabled: false
   }
 
   public static getDerivedStateFromProps(

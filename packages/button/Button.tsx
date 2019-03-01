@@ -27,6 +27,16 @@ const componentName = 'Button'
 class Button extends React.Component<IButtonProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    position: 'left',
+    size: 'medium',
+    type: 'default',
+    ghost: false,
+    htmlType: 'button',
+    loading: false,
+    disabled: false
+  }
+
   public static propTypes = {
     icon: PropTypes.string,
     position: PropTypes.oneOf(['left', 'right']),
@@ -39,16 +49,6 @@ class Button extends React.Component<IButtonProps> {
     disabled: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    position: 'left',
-    size: 'medium',
-    type: 'default',
-    ghost: false,
-    htmlType: 'button',
-    loading: false,
-    disabled: false
   }
 
   public renderIcon = () => {

@@ -1,0 +1,61 @@
+@import '../../style/mixins.scss';
+@keyframes xue-spin {
+    from {
+        transform: rotateZ(0);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+.xue-spin-wrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &.with-children {
+        display: block;
+        position: relative;
+    }
+    .xue-spin-mask {
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        pointer-events: none;
+        transition: background-color .3s cubic-bezier(.645, .045, .355, 1);
+        background-color: transparent;
+        display: none;
+        &.spinning {
+            pointer-events: all;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        &.active {
+            display: block;
+        }
+    }
+    .xue-spin-container {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        &.with-children {
+            position: absolute;
+            z-index: 100;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        &.with-tip {
+            flex-direction: column;
+        }
+        .xue-spin {
+            animation: xue-spin 1.2s linear infinite;
+        }
+        .xue-spin-tip {
+            font-size: 14px;
+            line-height: 22px;
+            color: $brand;
+            margin-top: 5px;
+        }
+    }
+}

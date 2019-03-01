@@ -36,6 +36,11 @@ const componentName = 'SubMenu'
 class SubMenu extends React.Component<ISubMenuProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    showArrow: true,
+    itemGroup: false
+  }
+
   public static propTypes = {
     uniqueKey: PropTypes.string,
     selectedKey: PropTypes.string,
@@ -49,11 +54,6 @@ class SubMenu extends React.Component<ISubMenuProps> {
     style: PropTypes.object,
     showArrow: PropTypes.bool,
     itemGroup: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    showArrow: true,
-    itemGroup: false
   }
 
   public state = {

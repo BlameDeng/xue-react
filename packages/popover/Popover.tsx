@@ -26,6 +26,13 @@ const componentName = 'Popover'
 class Popover extends React.Component<IPopoveProps, IPopoveState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    trigger: 'hover',
+    position: 'top',
+    defaultVisible: false,
+    popClosable: false
+  }
+
   public static propTypes = {
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
@@ -37,13 +44,6 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
     className: PropTypes.string,
     style: PropTypes.object,
     popClosable: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    trigger: 'hover',
-    position: 'top',
-    defaultVisible: false,
-    popClosable: false
   }
 
   public static getDerivedStateFromProps(

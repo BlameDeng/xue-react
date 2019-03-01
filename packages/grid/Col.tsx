@@ -24,16 +24,16 @@ const componentName = 'Col'
 class Col extends React.Component<IColProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    gutter: 0
+  }
+
   public static propTypes = {
     gutter: PropTypes.number,
     span: PropTypes.number,
     offset: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    gutter: 0
   }
 
   public getColClassName = (): string[] => {

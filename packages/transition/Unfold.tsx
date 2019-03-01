@@ -39,23 +39,20 @@ interface IprevSize {
   height: string | null
 }
 
+const componentName = 'Unfold'
+
 class Unfold extends React.Component<IUnfoldProps> {
-  public static displayName = 'Unfold'
+  public static displayName = componentName
+
+  public static defaultProps = {
+    vertical: false,
+    transitionTime: 0.3
+  }
 
   public static propTypes = {
     visible: PropTypes.bool.isRequired,
     vertical: PropTypes.bool,
     transitionTime: PropTypes.number
-  }
-
-  public static defaulProps = {
-    visible: true,
-    vertical: false,
-    transitionTime: 0.3
-  }
-
-  public static defaultProps = {
-    transitionTime: 0.3
   }
 
   private node: HTMLElement

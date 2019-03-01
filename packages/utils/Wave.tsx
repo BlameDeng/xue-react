@@ -8,15 +8,17 @@ interface IWaveProps {
   closeWave?: boolean
 }
 
-class Wave extends React.Component<IWaveProps> {
-  public static displayName = 'Wave'
+const componentName = 'Wave'
 
-  public static propTypes = {
-    closeWave: PropTypes.bool
-  }
+class Wave extends React.Component<IWaveProps> {
+  public static displayName = componentName
 
   public static defaultProps = {
     closeWave: false
+  }
+
+  public static propTypes = {
+    closeWave: PropTypes.bool
   }
 
   private node: HTMLElement
@@ -25,23 +27,13 @@ class Wave extends React.Component<IWaveProps> {
   private animatingClassName = 'xue-react-wave-animation-animating'
 
   public componentDidMount() {
-    const node = ReactDOM.findDOMNode(this) as HTMLElement
-    if (node.nodeType !== 1) {
-      return
-    }
-    this.node = node
-    this.bindAnimationEvent()
+    this.node = ReactDOM.findDOMNode(this) as HTMLElement
+    this.node.addEventListener('click', this.animationStart)
   }
 
   public componentWillUnmount() {
-    if (this.node) {
-      this.node.removeEventListener('click', this.animationStart)
-      this.node.removeEventListener('animationend', this.animationEnd)
-    }
-  }
-
-  public bindAnimationEvent() {
-    this.node.addEventListener('click', this.animationStart)
+    this.node.removeEventListener('click', this.animationStart)
+    this.node.removeEventListener('animationend', this.animationEnd)
   }
 
   public animationStart = () => {
@@ -60,11 +52,16 @@ class Wave extends React.Component<IWaveProps> {
   public animationEnd = () => {
     this.animating = false
     this.node.className = classes('', [this.originClassName])
+    this.node.removeEventListener('animationend', this.animationEnd)
   }
 
   public render() {
-    const { closeWave, children, ...rest } = this.props
-    return React.cloneElement(children as React.ReactElement<{}>, rest) || null
+    const { children } = this.props
+    return typeof children === 'string' ? (
+      <span className="xue-wave-string-wrapper">{children}</span>
+    ) : (
+      children
+    )
   }
 }
 

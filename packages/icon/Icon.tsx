@@ -33,14 +33,14 @@ const Icon: React.FunctionComponent<IIconProps> = props => {
 
 Icon.displayName = componentName
 
+Icon.defaultProps = {
+  size: 16
+}
+
 Icon.propTypes = {
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   className: PropTypes.string
-}
-
-Icon.defaultProps = {
-  size: 16
 }
 
 export default Icon

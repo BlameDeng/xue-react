@@ -39,6 +39,11 @@ const componentName = 'Menu'
 class Menu extends React.Component<IMenuProps, IMenuState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    mode: 'vertical',
+    theme: 'light'
+  }
+
   public static propTypes = {
     selectedKey: PropTypes.string,
     expandKeys: PropTypes.arrayOf(PropTypes.string),
@@ -50,11 +55,6 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
     onExpandChange: PropTypes.func,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    mode: 'vertical',
-    theme: 'light'
   }
 
   public static getDerivedStateFromProps(

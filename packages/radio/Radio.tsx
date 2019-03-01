@@ -1,7 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
-import Option from './Option'
 import './style'
 
 interface IRadioProps {
@@ -34,7 +33,10 @@ const componentName = 'Radio'
 class Radio extends React.Component<IRadioProps, IRadionState> {
   public static displayName = componentName
 
-  public static Option: typeof Option = Option
+  public static defaultProps = {
+    vertical: false,
+    radioStyle: 'radio'
+  }
 
   public static propTypes = {
     defaultValue: PropTypes.any,
@@ -43,11 +45,6 @@ class Radio extends React.Component<IRadioProps, IRadionState> {
     radioStyle: PropTypes.oneOf(['radio', 'button']),
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    vertical: false,
-    radioStyle: 'radio'
   }
 
   public static getDerivedStateFromProps(

@@ -42,6 +42,10 @@ const componentName = 'DatePicker'
 class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    zIndex: 80
+  }
+
   public static propTypes = {
     value: PropTypes.string,
     defaultValue: PropTypes.string,
@@ -53,10 +57,6 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
     zIndex: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    zIndex: 80
   }
 
   public static getDerivedStateFromProps(

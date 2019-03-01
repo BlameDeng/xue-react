@@ -1,7 +1,7 @@
 {
     "name": "xue-react",
-    "version": "0.0.4",
-    "description": "> 一套小巧的 React 组件库。",
+    "version": "0.0.5",
+    "description": "> 一套好用的 PC 端 React 组件库。",
     "main": "lib/xue-react.js",
     "author": "blame",
     "license": "MIT",

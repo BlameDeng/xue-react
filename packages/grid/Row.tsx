@@ -31,14 +31,14 @@ const componentName = 'Row'
 class Row extends React.Component<IRowProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    gutter: 0
+  }
+
   public static propTypes = {
     gutter: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    gutter: 0
   }
 
   public render() {

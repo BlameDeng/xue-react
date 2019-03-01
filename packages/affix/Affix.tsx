@@ -14,14 +14,14 @@ const componentName = 'Affix'
 class Affix extends React.Component<IAffixProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    distance: 0
+  }
+
   public static propTypes = {
     distance: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    distance: 0
   }
 
   private top: number = 0

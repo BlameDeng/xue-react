@@ -20,13 +20,13 @@ const componentName = 'LightUp'
 class LightUp extends React.Component<ILightUpProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    imgClosable: false
+  }
+
   public static propTypes = {
     src: PropTypes.string,
     imgClosable: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    imgClosable: false
   }
 
   public state = {

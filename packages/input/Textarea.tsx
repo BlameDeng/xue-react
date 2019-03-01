@@ -29,6 +29,11 @@ const componentName = 'Textarea'
 class Textarea extends React.Component<ITextareaProps, ITextareaState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    autosize: false,
+    placeholder: ''
+  }
+
   public static propTypes = {
     size: PropTypes.object,
     autosize: PropTypes.bool,
@@ -38,11 +43,6 @@ class Textarea extends React.Component<ITextareaProps, ITextareaState> {
     onChange: PropTypes.func,
     style: PropTypes.object,
     placeholder: PropTypes.string
-  }
-
-  public static defaultProps = {
-    autosize: false,
-    placeholder: ''
   }
 
   public static getDerivedStateFromProps(

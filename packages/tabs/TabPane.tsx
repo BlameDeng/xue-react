@@ -12,8 +12,12 @@ interface ITabPaneProps {
 
 const componentName = 'TabPane'
 
-class TabPane extends React.Component<ITabPaneProps, {}> {
+class TabPane extends React.Component<ITabPaneProps> {
   public static displayName = componentName
+
+  public static defaultProps = {
+    disabled: false
+  }
 
   public static propTypes = {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -22,10 +26,6 @@ class TabPane extends React.Component<ITabPaneProps, {}> {
     className: PropTypes.string,
     style: PropTypes.object,
     disabled: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    disabled: false
   }
 
   public render() {

@@ -22,6 +22,11 @@ const componentName = 'Slides'
 class Slides extends React.Component<ISlidesProps, ISlidesState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    duration: 0,
+    dots: true
+  }
+
   public static propTypes = {
     duration: PropTypes.number,
     dots: PropTypes.bool,
@@ -29,11 +34,6 @@ class Slides extends React.Component<ISlidesProps, ISlidesState> {
     style: PropTypes.object,
     beforeChange: PropTypes.func,
     afterChange: PropTypes.func
-  }
-
-  public static defaultProps = {
-    duration: 0,
-    dots: true
   }
 
   public state = {

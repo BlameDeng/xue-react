@@ -6,7 +6,6 @@ import isSimpleArrayEqual from './isSimpleArrayEqual'
 import uniqueId from './uniqueId'
 import getDateLists from './getDateLists'
 import parseDateString from './parseDateString'
-import Check from './Check'
 
 export {
   Wave,
@@ -16,6 +15,5 @@ export {
   isSimpleArrayEqual,
   uniqueId,
   getDateLists,
-  parseDateString,
-  Check
+  parseDateString
 }

@@ -34,6 +34,11 @@ const componentName = 'Collapse'
 class Collapse extends React.Component<ICollapseProps, ICollapseState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    accordion: false,
+    showArrow: true
+  }
+
   public static propTypes = {
     activeKey: PropTypes.oneOfType([
       PropTypes.string,
@@ -46,11 +51,6 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
     onChange: PropTypes.func,
     style: PropTypes.object,
     className: PropTypes.string
-  }
-
-  public static defaultProps = {
-    accordion: false,
-    showArrow: true
   }
 
   public static getDerivedStateFromProps(

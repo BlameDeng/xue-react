@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { Wave, classes } from '../utils'
+import { classes } from '../utils'
 import './style'
 
 interface ISwitchProps {
@@ -22,6 +22,12 @@ const componentName = 'Switch'
 class Switch extends React.Component<ISwitchProps, ISwitchState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    size: 'default',
+    defaultChecked: false,
+    disabled: false
+  }
+
   public static propTypes = {
     defaultChecked: PropTypes.bool,
     onChange: PropTypes.func,
@@ -29,11 +35,6 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
     disabled: PropTypes.bool,
     className: PropTypes.string,
     style: PropTypes.object
-  }
-
-  public static defaultProps = {
-    size: 'default',
-    defaultChecked: false
   }
 
   public static getDerivedStateFromProps(
@@ -64,6 +65,7 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
     this.setState({
       derivedChecked: !derivedChecked
     })
+
     if (onChange) {
       onChange(!derivedChecked, e)
     }
@@ -78,15 +80,13 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
       disabled
     })
     return (
-      <Wave closeWave={disabled}>
-        <span
-          className={switchClassName}
-          onClick={this.handleClick}
-          style={style}
-        >
-          <span className={classes(cn, 'core')} />
-        </span>
-      </Wave>
+      <span
+        className={switchClassName}
+        onClick={this.handleClick}
+        style={style}
+      >
+        <span className={classes(cn, 'core')} />
+      </span>
     )
   }
 }

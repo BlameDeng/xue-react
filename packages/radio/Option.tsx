@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { Wave, classes } from '../utils'
+import { classes } from '../utils'
 
 interface IOptionProps {
   value: any
@@ -18,6 +18,11 @@ const componentName = 'Option'
 class Option extends React.Component<IOptionProps> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    disabled: false,
+    vertical: false
+  }
+
   public static propTypes = {
     value: PropTypes.any.isRequired,
     checkedValue: PropTypes.any,
@@ -25,11 +30,6 @@ class Option extends React.Component<IOptionProps> {
     radioStyle: PropTypes.oneOf(['radio', 'button']),
     disabled: PropTypes.bool,
     vertical: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    disabled: false,
-    vertical: false
   }
 
   public handleClick: React.MouseEventHandler = e => {
@@ -57,9 +57,7 @@ class Option extends React.Component<IOptionProps> {
     })
     return radioStyle === 'radio' ? (
       <label className={optionClassName} onClick={this.handleClick}>
-        <Wave closeWave={value === checkedValue}>
-          <span className="label-dot" />
-        </Wave>
+        <span className="label-dot" />
         <div className="label-text">{children}</div>
       </label>
     ) : (

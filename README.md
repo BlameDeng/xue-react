@@ -1,6 +1,6 @@
 # Xue-react
 
-## 一套小巧的 React 组件库
+## 一套好用的 PC 端 React 组件库
 
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 

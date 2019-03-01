@@ -38,6 +38,10 @@ const componentName = 'Cascader'
 class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    changeOnSelect: false
+  }
+
   public static propTypes = {
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
     placeholder: PropTypes.string,
@@ -50,11 +54,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     changeOnSelect: PropTypes.bool
   }
 
-  public static defaultProps = {
-    changeOnSelect: false
-  }
-
-  private cascaderRef: HTMLDivElement
+  private cascaderEl: HTMLDivElement
 
   constructor(props: ICascaderProps) {
     super(props)
@@ -70,7 +70,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   }
 
   public componentDidMount() {
-    const { bottom, top } = this.cascaderRef.getBoundingClientRect()
+    const { bottom, top } = this.cascaderEl.getBoundingClientRect()
     this.setState({
       menuStyle: {
         top: `${bottom - top + 4}px`
@@ -87,15 +87,15 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   public handleClickDocument: EventListener = e => {
     const target = e.target
     const { menuVisible } = this.state
-    if (!this.cascaderRef.contains(target as Node) && menuVisible) {
+    if (!this.cascaderEl.contains(target as Node) && menuVisible) {
       this.setState({
         menuVisible: false
       })
     }
   }
 
-  public saveCascaderRef = (node: HTMLDivElement) => {
-    this.cascaderRef = node
+  public saveCascaderEl = (node: HTMLDivElement) => {
+    this.cascaderEl = node
   }
 
   public handleClickInput = () => {
@@ -242,7 +242,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
         className={classes(cn, '', {
           active: menuVisible
         })}
-        ref={this.saveCascaderRef}
+        ref={this.saveCascaderEl}
       >
         <span className={classes(cn, 'input-wrapper')}>
           {placeholder && !inputValueFromLabel && (

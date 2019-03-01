@@ -24,6 +24,11 @@ const componentName = 'Search'
 class Search extends React.Component<ISearchProps, ISearchState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    placeholder: '',
+    enterButton: false
+  }
+
   public static propTypes = {
     value: PropTypes.string,
     defaultValue: PropTypes.string,
@@ -36,11 +41,6 @@ class Search extends React.Component<ISearchProps, ISearchState> {
     onSearch: PropTypes.func,
     style: PropTypes.object,
     className: PropTypes.string
-  }
-
-  public static defaultProps = {
-    placeholder: '',
-    enterButton: false
   }
 
   public static getDerivedStateFromProps(

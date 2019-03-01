@@ -54,8 +54,6 @@ class Message extends React.Component<IMessageProps, IMessageState> {
     style: PropTypes.object
   }
 
-  public static defaultProps = {}
-
   public state = {
     visible: false
   }

@@ -26,6 +26,13 @@ const componentName = 'Pager'
 class Pager extends React.Component<IPagerProps, IPagerState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    simple: false,
+    size: 'default',
+    defaultCurrent: 1,
+    hideOnSinglePage: false
+  }
+
   public static propTypes = {
     current: PropTypes.number,
     total: PropTypes.number.isRequired,
@@ -36,13 +43,6 @@ class Pager extends React.Component<IPagerProps, IPagerState> {
     className: PropTypes.string,
     style: PropTypes.object,
     hideOnSinglePage: PropTypes.bool
-  }
-
-  public static defaultProps = {
-    simple: false,
-    size: 'default',
-    defaultCurrent: 1,
-    hideOnSinglePage: false
   }
 
   public static getDerivedStateFromProps(

@@ -11,8 +11,16 @@ interface ITransitionProps {
   transitionActive?: React.CSSProperties
 }
 
+const componentName = 'Transition'
+
 class Transition extends React.Component<ITransitionProps> {
-  public static displayName = 'Transition'
+  public static displayName = componentName
+
+  public static defaultProps = {
+    transitionActive: {
+      transition: '300ms all cubic-bezier(.645, .045, .355, 1)'
+    }
+  }
 
   public static propTypes = {
     visible: PropTypes.bool.isRequired,
@@ -21,12 +29,6 @@ class Transition extends React.Component<ITransitionProps> {
     beforeEnter: PropTypes.object,
     beforeLeave: PropTypes.object,
     transitionActive: PropTypes.object
-  }
-
-  public static defaultProps = {
-    transitionActive: {
-      transition: '300ms all cubic-bezier(.645, .045, .355, 1)'
-    }
   }
 
   private node: HTMLElement

@@ -23,6 +23,10 @@ const componentName = 'Scroll'
 class Scroll extends React.Component<IScrollProps, IScrollState> {
   public static displayName = componentName
 
+  public static defaultProps = {
+    yBarVisible: false
+  }
+
   public static propTypes = {
     yBarVisible: PropTypes.bool,
     xBarVisible: PropTypes.bool,
@@ -32,10 +36,6 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     yTrackStyle: PropTypes.object,
     yBarClassName: PropTypes.string,
     yBarStyle: PropTypes.object
-  }
-
-  public static defaultProps = {
-    yBarVisible: false
   }
 
   public state = {
