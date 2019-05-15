@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { isSimpleArrayEqual, classes } from '../utils'
+import { arrayIsEqual, classes } from '../utils'
 import './style'
 
-interface IMenuProps {
+export interface MenuProps {
   selectedKey?: string
   expandKeys?: string[]
   defaultSelectedKey?: string
@@ -16,12 +16,12 @@ interface IMenuProps {
   style?: React.CSSProperties
 }
 
-interface IMenuState {
+export interface MenuState {
   derivedSelectedKey: string
   derivedExpandKeys: string[]
 }
 
-interface IChildProps {
+export interface ChildProps {
   uniqueKey?: string
   selectedKey?: string
   expandKeys?: string[]
@@ -36,7 +36,7 @@ interface IChildProps {
 
 const componentName = 'Menu'
 
-class Menu extends React.Component<IMenuProps, IMenuState> {
+class Menu extends React.Component<MenuProps, MenuState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -58,8 +58,8 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IMenuProps,
-    prevState: IMenuState
+    nextProps: MenuProps,
+    prevState: MenuState
   ) {
     const { selectedKey, expandKeys } = nextProps
     const { derivedSelectedKey, derivedExpandKeys } = prevState
@@ -67,7 +67,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
       'selectedKey' in nextProps && selectedKey !== derivedSelectedKey
     const shouldChangeExpandKeys =
       'expandKeys' in nextProps &&
-      !isSimpleArrayEqual(expandKeys as string[], derivedExpandKeys)
+      !arrayIsEqual(expandKeys as string[], derivedExpandKeys)
     if (shouldChangeSelectedKey && shouldChangeExpandKeys) {
       return { derivedSelectedKey: selectedKey, derivedExpandKeys: expandKeys }
     } else if (shouldChangeSelectedKey && !shouldChangeExpandKeys) {
@@ -78,7 +78,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
     return null
   }
 
-  constructor(props: IMenuProps) {
+  constructor(props: MenuProps) {
     super(props)
     const { defaultSelectedKey, defaultExpandKeys } = props
     this.state = {
@@ -91,13 +91,13 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
     }
   }
 
-  public renderChildren = (): Array<React.ReactElement<IChildProps>> => {
+  public renderChildren = (): Array<React.ReactElement<ChildProps>> => {
     const { handleSelectedKey, handleExpandKeys } = this
     const { mode, theme, children } = this.props
     const { derivedSelectedKey, derivedExpandKeys } = this.state
     return React.Children.map(
       children,
-      (child: React.ReactElement<IChildProps>, index: number) => {
+      (child: React.ReactElement<ChildProps>, index: number) => {
         const uniqueKey = this.getUniqueKeyFromChild(child, index)
         return React.cloneElement(child, {
           uniqueKey,
@@ -113,7 +113,7 @@ class Menu extends React.Component<IMenuProps, IMenuState> {
   }
 
   public getUniqueKeyFromChild = (
-    child: React.ReactElement<IChildProps>,
+    child: React.ReactElement<ChildProps>,
     index: number
   ): string => {
     return (child.key as string) || `item-${index}`

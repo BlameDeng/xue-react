@@ -1,0 +1,255 @@
+@import '../../style/mixins.scss';
+@mixin selection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    margin-top: -1px;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    &:hover {
+        border-color: $brand;
+    }
+    &::after {
+        display: block;
+        content: '';
+        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        border: 2px solid #fff;
+        border-radius: 1px;
+        border-top: 0;
+        border-right: 0;
+        width: 8px;
+        height: 5px;
+        transform: rotateZ(-45deg) translateX(1px) scale(0);
+    }
+    &.checked {
+        border-color: $brand;
+        background-color: $brand;
+        &::after {
+            border: 2px solid #fff;
+            border-radius: 1px;
+            border-top: 0;
+            border-right: 0;
+            width: 8px;
+            height: 5px;
+            transform: rotateZ(-45deg) translateX(1px) scale(1.2);
+        }
+    }
+    &.determinate {
+        border-color: $brand;
+        background-color: $brand;
+        &::after {
+            border: 3px solid #fff;
+            border-radius: 1px;
+            border-top: 3;
+            border-right: 3;
+            width: 0px;
+            height: 0px;
+            transform: rotateZ(0) translateX(0) scale(1.2);
+        }
+    }
+}
+@mixin head-inner {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(245, 245, 245);
+    &.border {
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .xue-table-head-cell {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        &-inner {
+            padding: 16px;
+            &.small {
+                padding: 8px;
+            }
+            &.sort {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .sort-icon {
+                    margin-left: 4px;
+                    display: inline-flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    .xue-table-ascend,
+                    .xue-table-descend {
+                        color: rgba(0, 0, 0, 0.45);
+                        cursor: pointer;
+                        transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                        &.active {
+                            color: $brand;
+                        }
+                    }
+                }
+            }
+        }
+        &.check-box {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            .xue-table-head-cell-inner {
+                position: relative;
+                .xue-table-selection {
+                    @include selection;
+                }
+            }
+        }
+        &.border {
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+            &:first-child {
+                border-left: 1px solid rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+}
+.xue-table-wrapper {
+    position: relative;
+    .xue-table {
+        font-size: 14px;
+        line-height: 22px;
+        color: rgba(0, 0, 0, 0.65);
+        &.scroll-x {
+            overflow-x: scroll;
+        }
+        &-head {
+            color: rgba(0, 0, 0, 0.85);
+            &.scroll-y {
+                overflow-y: scroll;
+            }
+            &-inner {
+                @include head-inner;
+            }
+            .xue-table-left-fixed-head-mask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+                .xue-table-left-fixed-head {
+                    position: static;
+                }
+            }
+            .xue-table-left-fixed-head {
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow-x: hidden;
+                @include head-inner;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+                &.scroll-y {
+                    overflow-y: scroll;
+                }
+            }
+            .xue-table-right-fixed-head {
+                position: absolute;
+                top: 0;
+                right: 0;
+                overflow-x: hidden;
+                @include head-inner;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.start, &.middle {
+                    box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+        &-body {
+            color: rgba(0, 0, 0, 0.65);
+            &.scroll-y {
+                overflow-y: scroll;
+            }
+            &-inner {
+                &-row {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: stretch;
+                    background-color: #fff;
+                    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                    &.stripe {
+                        background-color: rgb(245, 245, 245);
+                    }
+                    &.hover {
+                        background-color: #e6f7ff;
+                    }
+                    &-cell {
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+                        &.check-box {
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            .xue-table-body-inner-row-cell-inner {
+                                position: relative;
+                                .xue-table-selection {
+                                    @include selection;
+                                }
+                            }
+                        }
+                        &.border {
+                            border-right: 1px solid rgba(0, 0, 0, 0.15);
+                            &:first-child {
+                                border-left: 1px solid rgba(0, 0, 0, 0.15);
+                            }
+                        }
+                        &-inner {
+                            height: 100%;
+                            padding: 16px;
+                            &.small {
+                                padding: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+            .xue-table-left-fixed-body-mask {
+                position: absolute;
+                left: 0;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+                .xue-table-left-fixed-body {
+                    position: static;
+                }
+            }
+            .xue-table-left-fixed-body {
+                position: absolute;
+                left: 0;
+                overflow-x: hidden;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.middle, &.end {
+                    box-shadow: 4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+            }
+            .xue-table-right-fixed-body {
+                position: absolute;
+                right: 0;
+                overflow-x: hidden;
+                transition: box-shadow 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0);
+                &.start, &.middle {
+                    box-shadow: -4px 0 8px -4px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
+    }
+}

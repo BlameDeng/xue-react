@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import './style'
 
-interface ISlidesProps {
+export interface SlidesProps {
   duration?: number
   dots?: boolean
   className?: string
@@ -12,14 +12,14 @@ interface ISlidesProps {
   afterChange?: (current: number, from: number) => any
 }
 
-interface ISlidesState {
+export interface SlidesState {
   hasTransitionClassName: boolean
   current: number
 }
 
 const componentName = 'Slides'
 
-class Slides extends React.Component<ISlidesProps, ISlidesState> {
+class Slides extends React.Component<SlidesProps, SlidesState> {
   public static displayName = componentName
 
   public static defaultProps = {

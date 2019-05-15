@@ -4,18 +4,17 @@ import { classes } from '../utils'
 import '../utils/svg.js'
 import './style'
 
-interface IIconProps {
+export interface IconProps extends React.SVGAttributes<SVGElement> {
   name: string
-  onClick?: React.MouseEventHandler
+  size?: number
   className?: string
   style?: React.CSSProperties
-  size?: number
 }
 
 const componentName = 'Icon'
 
-const Icon: React.FunctionComponent<IIconProps> = props => {
-  const { className, size, style, onClick, name } = props
+const Icon: React.FunctionComponent<IconProps> = props => {
+  const { className, size, style, name, children, ...rest } = props
   return (
     <svg
       className={classes(componentName, '', [className])}
@@ -24,7 +23,7 @@ const Icon: React.FunctionComponent<IIconProps> = props => {
         width: size + 'px',
         height: size + 'px'
       })}
-      onClick={onClick}
+      {...rest}
     >
       <use xlinkHref={`#icon-${name}`} />
     </svg>

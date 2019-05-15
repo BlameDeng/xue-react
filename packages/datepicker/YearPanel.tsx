@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
-interface IYearPanelProps {
+export interface YearPanelProps {
   startYear: number
   year?: number
   onClickYear?: (year: number, type: string) => any
@@ -10,7 +10,7 @@ interface IYearPanelProps {
 
 const componentName = 'YearPanel'
 
-class YearPanel extends React.Component<IYearPanelProps> {
+class YearPanel extends React.Component<YearPanelProps> {
   public static displayName = componentName
 
   public static propTypes = {

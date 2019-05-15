@@ -3,18 +3,18 @@ import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
-interface IWaterfallProps {
+export interface WaterfallProps {
   width?: number
 }
 
-interface IWaterfallState {
+export interface WaterfallState {
   colCount: number
   gutter: number
 }
 
 const componentName = 'Waterfall'
 
-class Waterfall extends React.Component<IWaterfallProps, IWaterfallState> {
+class Waterfall extends React.Component<WaterfallProps, WaterfallState> {
   public static displayName = componentName
 
   public static defaultProps = {

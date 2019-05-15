@@ -1,0 +1,84 @@
+@import "../../style/mixins.scss";
+.xue-checkbox {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10px;
+  &-selection {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    &:hover {
+      border-color: $brand;
+    }
+    &::after {
+      display: block;
+      content: "";
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      border: 2px solid #fff;
+      border-radius: 1px;
+      border-top: 0;
+      border-right: 0;
+      width: 8px;
+      height: 5px;
+      transform: rotateZ(-45deg) translateX(1px) scale(0);
+    }
+    &.checked {
+      border-color: $brand;
+      background-color: $brand;
+      &::after {
+        border: 2px solid #fff;
+        border-radius: 1px;
+        border-top: 0;
+        border-right: 0;
+        width: 8px;
+        height: 5px;
+        transform: rotateZ(-45deg) translateX(1px) scale(1.2);
+      }
+    }
+    &.disabled {
+      border-color: $disabled;
+      background-color: $disabled;
+    }
+    &.checked.disabled {
+      border-color: $disabled;
+      background-color: $disabled;
+      &::after {
+        border: 2px solid #fff;
+        border-radius: 1px;
+        border-top: 0;
+        border-right: 0;
+        width: 8px;
+        height: 5px;
+        transform: rotateZ(-45deg) translateX(1px) scale(1.2);
+      }
+    }
+    &.indeterminate {
+      border-color: $brand;
+      background-color: $brand;
+      &::after {
+        border: 3px solid #fff;
+        border-radius: 1px;
+        border-top: 3;
+        border-right: 3;
+        width: 0px;
+        height: 0px;
+        transform: rotateZ(0) translateX(0) scale(1.2);
+      }
+    }
+  }
+}
+
+.xue-checkboxgroup {
+  display: inline-flex;
+  justify-content: flex-start;
+}

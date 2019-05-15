@@ -5,7 +5,7 @@ import { classes } from '../utils'
 import Transition from '../transition/Transition'
 import './style'
 
-interface IPopoveProps {
+export interface PopoveProps {
   content: string | React.ReactNode
   trigger?: 'click' | 'hover' | 'focus'
   position?: 'top' | 'left' | 'right' | 'bottom'
@@ -17,13 +17,13 @@ interface IPopoveProps {
   style?: React.CSSProperties
 }
 
-interface IPopoveState {
+export interface PopoveState {
   derivedVisible: boolean
 }
 
 const componentName = 'Popover'
 
-class Popover extends React.Component<IPopoveProps, IPopoveState> {
+class Popover extends React.Component<PopoveProps, PopoveState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -47,8 +47,8 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IPopoveProps,
-    prevState: IPopoveState
+    nextProps: PopoveProps,
+    prevState: PopoveState
   ) {
     const { visible } = nextProps
     if ('visible' in nextProps) {
@@ -63,7 +63,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
   private delay: number = 200
   private timeout: any
 
-  constructor(props: IPopoveProps) {
+  constructor(props: PopoveProps) {
     super(props)
     this.state = {
       derivedVisible: props.defaultVisible as boolean
@@ -77,7 +77,7 @@ class Popover extends React.Component<IPopoveProps, IPopoveState> {
     }
   }
 
-  public componentDidUpdate(prevProps: IPopoveProps, prevState: IPopoveState) {
+  public componentDidUpdate(prevProps: PopoveProps, prevState: PopoveState) {
     const { derivedVisible: prevDerivedVisible } = prevState
     const { derivedVisible } = this.state
     const { trigger } = this.props

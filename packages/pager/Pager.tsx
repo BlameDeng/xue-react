@@ -4,7 +4,7 @@ import { calculatePagerPages, classes } from '../utils'
 import Icon from '../icon/Icon'
 import './style'
 
-interface IPagerProps {
+export interface PagerProps {
   current?: number
   total: number
   onChange?: (current: number) => any
@@ -16,14 +16,14 @@ interface IPagerProps {
   style?: React.CSSProperties
 }
 
-interface IPagerState {
+export interface PagerState {
   derivedCurrent: number
   derivedTotal: number
 }
 
 const componentName = 'Pager'
 
-class Pager extends React.Component<IPagerProps, IPagerState> {
+class Pager extends React.Component<PagerProps, PagerState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -46,8 +46,8 @@ class Pager extends React.Component<IPagerProps, IPagerState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IPagerProps,
-    prevState: IPagerState
+    nextProps: PagerProps,
+    prevState: PagerState
   ) {
     const { current, total } = nextProps
     const { derivedCurrent, derivedTotal } = prevState
@@ -64,7 +64,7 @@ class Pager extends React.Component<IPagerProps, IPagerState> {
     return null
   }
 
-  constructor(props: IPagerProps) {
+  constructor(props: PagerProps) {
     super(props)
     this.state = {
       derivedCurrent: props.defaultCurrent || 1,

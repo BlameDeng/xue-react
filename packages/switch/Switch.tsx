@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import './style'
 
-interface ISwitchProps {
+export interface SwitchProps {
   checked?: boolean
   defaultChecked?: boolean
   size?: 'small' | 'default'
@@ -13,13 +13,13 @@ interface ISwitchProps {
   style?: React.CSSProperties
 }
 
-interface ISwitchState {
+export interface SwitchState {
   derivedChecked: boolean
 }
 
 const componentName = 'Switch'
 
-class Switch extends React.Component<ISwitchProps, ISwitchState> {
+class Switch extends React.Component<SwitchProps, SwitchState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -38,8 +38,8 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: ISwitchProps,
-    prevState: ISwitchState
+    nextProps: SwitchProps,
+    prevState: SwitchState
   ) {
     const { checked } = nextProps
     const { derivedChecked } = prevState
@@ -49,7 +49,7 @@ class Switch extends React.Component<ISwitchProps, ISwitchState> {
     return null
   }
 
-  constructor(props: ISwitchProps) {
+  constructor(props: SwitchProps) {
     super(props)
     this.state = {
       derivedChecked: props.defaultChecked || false

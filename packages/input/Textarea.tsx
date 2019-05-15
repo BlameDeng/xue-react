@@ -3,13 +3,13 @@ import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 import { calculateNodeHeight, classes } from '../utils'
 
-interface ISize {
+export interface Size {
   rows: number | string
   cols: number | string
 }
 
-interface ITextareaProps {
-  size?: ISize
+export interface TextareaProps {
+  size?: Size
   autosize?: boolean
   value?: string
   defaultValue?: string
@@ -20,13 +20,13 @@ interface ITextareaProps {
   placeholder?: string
 }
 
-interface ITextareaState {
+export interface TextareaState {
   derivedValue: string
 }
 
 const componentName = 'Textarea'
 
-class Textarea extends React.Component<ITextareaProps, ITextareaState> {
+class Textarea extends React.Component<TextareaProps, TextareaState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -46,8 +46,8 @@ class Textarea extends React.Component<ITextareaProps, ITextareaState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: ITextareaProps,
-    prevState: ITextareaState
+    nextProps: TextareaProps,
+    prevState: TextareaState
   ) {
     const { value } = nextProps
     const { derivedValue } = prevState
@@ -60,7 +60,7 @@ class Textarea extends React.Component<ITextareaProps, ITextareaState> {
   private textareaRef: HTMLTextAreaElement
   private originHeight: number
 
-  constructor(props: ITextareaProps) {
+  constructor(props: TextareaProps) {
     super(props)
     this.state = {
       derivedValue: props.defaultValue || ''

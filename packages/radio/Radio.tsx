@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import './style'
 
-interface IRadioProps {
+export interface RadioProps {
   value?: any
   defaultValue?: any
   onChange?: (checkedValue: any, e: React.MouseEvent) => any
@@ -13,11 +13,11 @@ interface IRadioProps {
   style?: React.CSSProperties
 }
 
-interface IRadionState {
+export interface RadionState {
   checkedValue: any
 }
 
-interface IOptionProps {
+export interface OptionProps {
   value: any
   checkedValue?: any
   onClick?: (checkedValue: any, e: React.MouseEvent) => any
@@ -30,7 +30,7 @@ interface IOptionProps {
 
 const componentName = 'Radio'
 
-class Radio extends React.Component<IRadioProps, IRadionState> {
+class Radio extends React.Component<RadioProps, RadionState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -48,8 +48,8 @@ class Radio extends React.Component<IRadioProps, IRadionState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IRadioProps,
-    prevState: IRadionState
+    nextProps: RadioProps,
+    prevState: RadionState
   ) {
     const { value } = nextProps
     const { checkedValue } = prevState
@@ -59,7 +59,7 @@ class Radio extends React.Component<IRadioProps, IRadionState> {
     return null
   }
 
-  constructor(props: IRadioProps) {
+  constructor(props: RadioProps) {
     super(props)
     this.state = {
       checkedValue: props.defaultValue
@@ -78,7 +78,7 @@ class Radio extends React.Component<IRadioProps, IRadionState> {
     const { checkedValue } = this.state
     return React.Children.map(
       children,
-      (child: React.ReactElement<IOptionProps>) => {
+      (child: React.ReactElement<OptionProps>) => {
         return React.cloneElement(child, {
           onClick: this.handleClick,
           checkedValue,

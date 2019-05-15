@@ -2,14 +2,14 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
-interface IMonthPanelProps {
+export interface MonthPanelProps {
   month?: number
   onClickMonth?: (month: number) => any
 }
 
 const componentName = 'MonthPanel'
 
-class MonthPanel extends React.Component<IMonthPanelProps> {
+class MonthPanel extends React.Component<MonthPanelProps> {
   public static displayName = componentName
 
   public static propTypes = {

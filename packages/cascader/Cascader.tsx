@@ -6,28 +6,28 @@ import Icon from '../icon/Icon'
 import Unfold from '../transition/Unfold'
 import './style'
 
-interface IOption {
+export interface Option {
   value: string
   label: string
-  children?: IOption[]
+  children?: Option[]
   disabled?: boolean
 }
 
-interface ICascaderProps {
-  options: IOption[]
+export interface CascaderProps {
+  options: Option[]
   placeholder?: string
   changeOnSelect?: boolean
   itemClassName?: string
   itemStyle?: React.CSSProperties
-  onChange?: (valueArr: string[], selectedOptions: IOption[]) => any
-  onSelect?: (valueArr: string[], selectedOptions: IOption[]) => any
+  onChange?: (valueArr: string[], selectedOptions: Option[]) => any
+  onSelect?: (valueArr: string[], selectedOptions: Option[]) => any
   className?: string
   style?: React.CSSProperties
 }
 
-interface ICascaderState {
+export interface CascaderState {
   valueArr: string[]
-  selectedOptions: IOption[]
+  selectedOptions: Option[]
   inputValueFromLabel: string
   menuVisible: boolean
   menuStyle: React.CSSProperties
@@ -35,7 +35,7 @@ interface ICascaderState {
 
 const componentName = 'Cascader'
 
-class Cascader extends React.Component<ICascaderProps, ICascaderState> {
+class Cascader extends React.Component<CascaderProps, CascaderState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -56,7 +56,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
 
   private cascaderEl: HTMLDivElement
 
-  constructor(props: ICascaderProps) {
+  constructor(props: CascaderProps) {
     super(props)
     this.state = {
       valueArr: [],
@@ -104,7 +104,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     })
   }
 
-  public handleChangeValue = (option: IOption, level: number) => {
+  public handleChangeValue = (option: Option, level: number) => {
     // 最后一级
     if (!option.children) {
       this.handleClickLastLevel(option, level)
@@ -115,7 +115,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   }
 
   // 监听点击最后一层，点击后需要关闭菜单，若 valueArr 改变，需更新输入框显示的值
-  public handleClickLastLevel = (option: IOption, level: number) => {
+  public handleClickLastLevel = (option: Option, level: number) => {
     const { onChange } = this.props
     const valueArr = this.state.valueArr || []
     const selectedOptions = this.state.selectedOptions || []
@@ -143,7 +143,7 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
   }
 
   // 监听点击中间层，若改变，只在 changeOnSelect 为真时更新输入框显示的值
-  public handleClickMidLevel = (option: IOption, level: number) => {
+  public handleClickMidLevel = (option: Option, level: number) => {
     const { changeOnSelect, onSelect } = this.props
     const valueArr = this.state.valueArr || []
     const selectedOptions = this.state.selectedOptions || []
@@ -202,11 +202,11 @@ class Cascader extends React.Component<ICascaderProps, ICascaderState> {
     }
   }
 
-  public getLabelString = (selectedOptions: IOption[]): string => {
+  public getLabelString = (selectedOptions: Option[]): string => {
     const prev: string[] = []
     return (
       selectedOptions
-        .reduce((base, current: IOption) => {
+        .reduce((base, current: Option) => {
           base.push(current.label)
           return base
         }, prev)

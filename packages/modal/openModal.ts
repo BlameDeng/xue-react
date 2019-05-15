@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { uniqueId } from '../utils'
 import Modal from './Modal'
 
-interface IModalOptions {
+export interface ModalOptions {
   title: string | React.ReactNode
   content: string | React.ReactNode
   okText?: string
@@ -28,7 +28,7 @@ function ensureUniqueModal(modalId: string) {
   }
 }
 
-export function openModal(options: IModalOptions) {
+export function openModal(options: ModalOptions) {
   const modalId = uniqueId('$xue-modal$-')
   ensureUniqueModal(modalId)
   return new Promise((resolve, reject) => {

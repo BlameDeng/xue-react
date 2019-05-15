@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types'
-import { isSimpleArrayEqual, classes } from '../utils'
+import { arrayIsEqual, classes } from '../utils'
 import './style'
 
-interface ICollapseProps {
+export interface CollapseProps {
   activeKey?: string[]
   defaultActiveKey?: string[]
   accordion?: boolean
@@ -13,11 +13,11 @@ interface ICollapseProps {
   style?: React.CSSProperties
 }
 
-interface ICollapseState {
+export interface CollapseState {
   derivedActiveKey: string[]
 }
 
-interface IPanelProps {
+export interface PanelProps {
   header: string | React.ReactNode
   uniqueKey?: string
   disabled?: boolean
@@ -31,7 +31,7 @@ interface IPanelProps {
 
 const componentName = 'Collapse'
 
-class Collapse extends React.Component<ICollapseProps, ICollapseState> {
+class Collapse extends React.Component<CollapseProps, CollapseState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -54,8 +54,8 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: ICollapseProps,
-    prevState: ICollapseState
+    nextProps: CollapseProps,
+    prevState: CollapseState
   ) {
     const { activeKey } = nextProps
     const { derivedActiveKey } = prevState
@@ -65,7 +65,7 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
       activeKey instanceof Array &&
       derivedActiveKey instanceof Array
     ) {
-      const isEqual = isSimpleArrayEqual(activeKey, derivedActiveKey)
+      const isEqual = arrayIsEqual(activeKey, derivedActiveKey)
       if (isEqual) {
         return null
       } else {
@@ -75,7 +75,7 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
     return { derivedActiveKey: activeKey }
   }
 
-  constructor(props: ICollapseProps) {
+  constructor(props: CollapseProps) {
     super(props)
     this.state = {
       derivedActiveKey: props.defaultActiveKey || []
@@ -123,7 +123,7 @@ class Collapse extends React.Component<ICollapseProps, ICollapseState> {
     const { derivedActiveKey } = this.state
     return React.Children.map(
       children,
-      (child: React.ReactElement<IPanelProps>) => {
+      (child: React.ReactElement<PanelProps>) => {
         if (!child) {
           return null
         }

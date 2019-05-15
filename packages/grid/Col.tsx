@@ -2,19 +2,19 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
-interface IOptions {
+export interface Option {
   span: number
   offset?: number
 }
 
-interface IColProps {
+export interface IColProps {
   gutter?: number
   span?: number
   offset?: number
-  sm?: IOptions
-  md?: IOptions
-  lg?: IOptions
-  xl?: IOptions
+  sm?: Option
+  md?: Option
+  lg?: Option
+  xl?: Option
   className?: string
   style?: React.CSSProperties
 }

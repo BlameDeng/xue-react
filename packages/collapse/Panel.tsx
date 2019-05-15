@@ -4,7 +4,7 @@ import { classes } from '../utils'
 import Icon from '../icon/Icon'
 import Unfold from '../transition/Unfold'
 
-interface IPanelProps {
+export interface PanelProps {
   header: string | React.ReactNode
   uniqueKey?: string
   disabled?: boolean
@@ -17,7 +17,7 @@ interface IPanelProps {
 
 const componentName = 'Panel'
 
-class Panel extends React.Component<IPanelProps> {
+class Panel extends React.Component<PanelProps> {
   public static displayName = componentName
 
   public static propTypes = {

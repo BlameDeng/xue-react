@@ -4,7 +4,7 @@ import { classes } from '../utils'
 import Star from './Star'
 import './style'
 
-interface IRateProps {
+export interface RateProps {
   value?: number
   defaultValue?: number
   onChange?: (value: number) => any
@@ -17,14 +17,14 @@ interface IRateProps {
   style?: React.CSSProperties
 }
 
-interface IRateState {
+export interface RateState {
   derivedValue: number
   hoverValue: number
 }
 
 const componentName = 'Rate'
 
-class Rate extends React.Component<IRateProps, IRateState> {
+class Rate extends React.Component<RateProps, RateState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -47,8 +47,8 @@ class Rate extends React.Component<IRateProps, IRateState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IRateProps,
-    prevState: IRateState
+    nextProps: RateProps,
+    prevState: RateState
   ) {
     const { value } = nextProps
     const { derivedValue } = prevState
@@ -58,7 +58,7 @@ class Rate extends React.Component<IRateProps, IRateState> {
     return null
   }
 
-  constructor(props: IRateProps) {
+  constructor(props: RateProps) {
     super(props)
     this.state = {
       derivedValue: props.defaultValue || 0,

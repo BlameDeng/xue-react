@@ -4,7 +4,7 @@ import { classes } from '../utils'
 import Icon from '../icon/Icon'
 import Unfold from '../transition/Unfold'
 
-interface ISubMenuProps {
+export interface SubMenuProps {
   uniqueKey?: string
   selectedKey?: string
   expandKeys?: string[]
@@ -19,7 +19,7 @@ interface ISubMenuProps {
   itemGroup?: boolean
 }
 
-interface IChildProps {
+export interface ChildProps {
   uniqueKey?: string
   selectedKey?: string
   expandKeys?: string[]
@@ -33,7 +33,7 @@ interface IChildProps {
 
 const componentName = 'SubMenu'
 
-class SubMenu extends React.Component<ISubMenuProps> {
+class SubMenu extends React.Component<SubMenuProps> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -62,7 +62,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
 
   private childrenKeys: string[] = []
 
-  public renderChildren = (): Array<React.ReactElement<IChildProps>> => {
+  public renderChildren = (): Array<React.ReactElement<ChildProps>> => {
     const {
       selectedKey,
       expandKeys,
@@ -74,7 +74,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
     } = this.props
     return React.Children.map(
       children,
-      (child: React.ReactElement<IChildProps>, index: number) => {
+      (child: React.ReactElement<ChildProps>, index: number) => {
         const uniqueKey = this.getUniqueKeyFromChild(child, index)
         this.childrenKeys.push(uniqueKey)
         return React.cloneElement(child, {
@@ -91,7 +91,7 @@ class SubMenu extends React.Component<ISubMenuProps> {
   }
 
   public getUniqueKeyFromChild = (
-    child: React.ReactElement<IChildProps>,
+    child: React.ReactElement<ChildProps>,
     index: number
   ): string => {
     return (child.key as string) || `item-${index}`

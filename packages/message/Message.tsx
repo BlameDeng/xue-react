@@ -6,7 +6,7 @@ import Transition from '../transition/Transition'
 import Icon from '../icon/Icon'
 import './style'
 
-interface IMessageProps {
+export interface MessageProps {
   content: string | React.ReactNode
   mode: 'info' | 'success' | 'warning' | 'error'
   top: number
@@ -18,11 +18,11 @@ interface IMessageProps {
   style?: React.CSSProperties
 }
 
-interface IMessageState {
+export interface MessageState {
   visible: boolean
 }
 
-interface IOptions {
+export interface Options {
   content: string | React.ReactNode
   duration?: number
   top?: number
@@ -34,13 +34,13 @@ interface IOptions {
 
 const componentName = 'Message'
 
-class Message extends React.Component<IMessageProps, IMessageState> {
+class Message extends React.Component<MessageProps, MessageState> {
   public static displayName = componentName
 
-  public static info: (options: IOptions) => any = info
-  public static success: (options: IOptions) => any = success
-  public static warning: (options: IOptions) => any = warning
-  public static error: (options: IOptions) => any = error
+  public static info: (options: Options) => any = info
+  public static success: (options: Options) => any = success
+  public static warning: (options: Options) => any = warning
+  public static error: (options: Options) => any = error
   public static removeMessage: (messageId: string) => any = removeMessage
 
   public static propTypes = {

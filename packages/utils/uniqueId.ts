@@ -1,11 +1,11 @@
-const xueUiqueIdMap = {}
+const xueUniqueIdMap = {};
 
-function uniqueId(prefix = '$xue$') {
-  if (!xueUiqueIdMap[prefix]) {
-    xueUiqueIdMap[prefix] = 0
+function uniqueId(prefix = "$xue$") {
+  if (!xueUniqueIdMap[prefix]) {
+    xueUniqueIdMap[prefix] = 0;
   }
-  xueUiqueIdMap[prefix]++
-  return prefix + `${xueUiqueIdMap[prefix]}`
+  xueUniqueIdMap[prefix]++;
+  return prefix + `${xueUniqueIdMap[prefix]}`;
 }
 
-export default uniqueId
+export default uniqueId;

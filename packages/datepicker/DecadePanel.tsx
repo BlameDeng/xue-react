@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
-interface IDecadePanelProps {
+export interface DecadePanelProps {
   startDecade: number
   decade?: number
   onClickDecade?: (decade: number, type: string) => any
@@ -10,7 +10,7 @@ interface IDecadePanelProps {
 
 const componentName = 'DecadePanel'
 
-class DecadePanel extends React.Component<IDecadePanelProps> {
+class DecadePanel extends React.Component<DecadePanelProps> {
   public static displayName = componentName
 
   public static propTypes = {

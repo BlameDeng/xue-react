@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import Icon from '../icon/Icon'
 
-interface IStarProps {
+export interface StarProps {
   count: number
   index: number
   handleHover?: (index: number, position: 'left' | 'right') => any
@@ -12,7 +12,7 @@ interface IStarProps {
 
 const componentName = 'Star'
 
-class Star extends React.Component<IStarProps> {
+class Star extends React.Component<StarProps> {
   public static displayName = componentName
 
   public static propTypes = {

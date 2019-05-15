@@ -7,12 +7,12 @@ import Transition from '../transition/Transition'
 import Button from '../button/Button'
 import './style'
 
-interface IPromiseHandler {
+export interface PromiseHandler {
   resolve: () => any
   reject: () => any
 }
 
-interface IModalProps {
+export interface ModalProps {
   // common
   visible: boolean
   title?: string | React.ReactNode
@@ -31,18 +31,18 @@ interface IModalProps {
   cancelText?: string
   cancelType?: 'default' | 'dashed' | 'primary' | 'danger'
   maskClosable?: boolean
-  promiseHandler?: IPromiseHandler
+  promiseHandler?: PromiseHandler
   modalId?: string
   content?: string | React.ReactNode
 }
 
-interface IModalState {
+interface ModalState {
   modalVisible: boolean
 }
 
 const componentName = 'Modal'
 
-class Modal extends React.Component<IModalProps, IModalState> {
+class Modal extends React.Component<ModalProps, ModalState> {
   public static displayName = componentName
 
   public static openModal = openModal
@@ -83,7 +83,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
   private bodyOverflow: string | null
   private bodyPaddingRight: string | null
 
-  constructor(props: IModalProps) {
+  constructor(props: ModalProps) {
     super(props)
     this.state = {
       modalVisible: props.mode === 'declarative'
@@ -103,7 +103,7 @@ class Modal extends React.Component<IModalProps, IModalState> {
     }
   }
 
-  public componentDidUpdate(prevProps: IModalProps, prevState: IModalState) {
+  public componentDidUpdate(prevProps: ModalProps, prevState: ModalState) {
     const { mode, visible } = this.props
     const { modalVisible } = this.state
     // 声明式调用

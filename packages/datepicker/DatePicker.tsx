@@ -9,28 +9,28 @@ import YearPanel from './YearPanel'
 import DecadePanel from './DecadePanel'
 import './style'
 
-interface IDatePickerProps {
+export interface DatePickerProps {
   value?: string
   defaultValue?: string
   defaultPickerValue?: string
   placeholder?: string
   footer?: string | React.ReactNode
-  onChange?: (value: string, valueObject: IDateValue | null) => any
+  onChange?: (value: string, valueObject: DateValue | null) => any
   onOpenChange?: (visible: boolean) => any
   zIndex?: number
   className?: string
   style?: React.CSSProperties
 }
 
-interface IDateValue {
+export interface DateValue {
   year: number
   month: number
   date: number
 }
 
-interface IDatePickerState {
-  derivedValue: IDateValue | null
-  pickerValue: IDateValue
+export interface DatePickerState {
+  derivedValue: DateValue | null
+  pickerValue: DateValue
   calendarVisible: boolean
   mode: 'date' | 'month' | 'year' | 'decade'
   startYear: number
@@ -39,7 +39,7 @@ interface IDatePickerState {
 
 const componentName = 'DatePicker'
 
-class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
+class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -60,8 +60,8 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IDatePickerProps,
-    prevState: IDatePickerState
+    nextProps: DatePickerProps,
+    prevState: DatePickerState
   ) {
     if (nextProps.value && !isNaN(Date.parse(nextProps.value))) {
       return {
@@ -74,7 +74,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
 
   private datePickerRef: HTMLDivElement
 
-  constructor(props: IDatePickerProps) {
+  constructor(props: DatePickerProps) {
     super(props)
     const { defaultValue, defaultPickerValue } = props
     // 是否可被解析
@@ -98,8 +98,8 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
   }
 
   public componentDidUpdate(
-    prevProps: IDatePickerProps,
-    prevState: IDatePickerState
+    prevProps: DatePickerProps,
+    prevState: DatePickerState
   ) {
     const { onOpenChange } = this.props
     const { calendarVisible } = this.state
@@ -156,7 +156,7 @@ class DatePicker extends React.Component<IDatePickerProps, IDatePickerState> {
   }
 
   // 监听 date 面板点击
-  public handleClickDate = (value: IDateValue) => {
+  public handleClickDate = (value: DateValue) => {
     this.setState(
       {
         derivedValue: value,

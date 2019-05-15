@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 
-interface IOptionProps {
+export interface OptionProps {
   value: any
   checkedValue?: any
   onClick?: (checkedValue: any, e: React.MouseEvent) => any
@@ -15,7 +15,7 @@ interface IOptionProps {
 
 const componentName = 'Option'
 
-class Option extends React.Component<IOptionProps> {
+class Option extends React.Component<OptionProps> {
   public static displayName = componentName
 
   public static defaultProps = {

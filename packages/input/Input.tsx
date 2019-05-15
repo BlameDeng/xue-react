@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import './style'
 
-interface IInputProps {
+export interface InputProps {
   value?: string
   defaultValue?: string
   placeholder?: string
@@ -23,13 +23,13 @@ interface IInputProps {
   style?: React.CSSProperties
 }
 
-interface IInputState {
+export interface InputState {
   derivedValue: string
 }
 
 const componentName = 'Input'
 
-class Input extends React.Component<IInputProps, IInputState> {
+class Input extends React.Component<InputProps, InputState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -59,8 +59,8 @@ class Input extends React.Component<IInputProps, IInputState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: IInputProps,
-    prevState: IInputState
+    nextProps: InputProps,
+    prevState: InputState
   ) {
     const { value } = nextProps
     const { derivedValue } = prevState
@@ -72,7 +72,7 @@ class Input extends React.Component<IInputProps, IInputState> {
 
   private inputRef: HTMLInputElement
 
-  constructor(props: IInputProps) {
+  constructor(props: InputProps) {
     super(props)
     this.state = {
       derivedValue: props.defaultValue || ''

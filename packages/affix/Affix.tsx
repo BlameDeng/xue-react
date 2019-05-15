@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import './style'
 
-interface IAffixProps {
+export interface AffixProps {
   distance?: number
   className?: string
   style?: React.CSSProperties
@@ -11,7 +11,7 @@ interface IAffixProps {
 
 const componentName = 'Affix'
 
-class Affix extends React.Component<IAffixProps> {
+class Affix extends React.Component<AffixProps> {
   public static displayName = componentName
 
   public static defaultProps = {

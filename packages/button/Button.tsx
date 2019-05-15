@@ -4,7 +4,7 @@ import { Wave, classes } from '../utils'
 import Icon from '../icon/Icon'
 import './style'
 
-interface IButtonProps {
+export interface ButtonProps {
   icon?: string
   position?: 'left' | 'right'
   size?: 'small' | 'medium' | 'large'
@@ -24,7 +24,7 @@ interface IButtonProps {
 
 const componentName = 'Button'
 
-class Button extends React.Component<IButtonProps> {
+class Button extends React.Component<ButtonProps> {
   public static displayName = componentName
 
   public static defaultProps = {

@@ -5,19 +5,19 @@ import { classes } from '../utils'
 import Transition from '../transition/Transition'
 import './style'
 
-interface ISize {
+export interface Size {
   width: number
   height: number
 }
 
-interface ILightUpProps {
+export interface LightUpProps {
   src?: any
   imgClosable?: boolean
 }
 
 const componentName = 'LightUp'
 
-class LightUp extends React.Component<ILightUpProps> {
+class LightUp extends React.Component<LightUpProps> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -36,7 +36,7 @@ class LightUp extends React.Component<ILightUpProps> {
   }
 
   private img: HTMLImageElement
-  private size: ISize
+  private size: Size
   private maskRef: HTMLDivElement
   private wrapperRef: HTMLDivElement
 

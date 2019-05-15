@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import './style'
 
-interface IScrollProps {
+export interface ScrollProps {
   yBarVisible?: boolean // 是否始终显示垂直滚动条
   className?: string
   style?: React.CSSProperties
@@ -11,16 +11,17 @@ interface IScrollProps {
   yTrackStyle?: React.CSSProperties
   yBarClassName?: string
   yBarStyle?: React.CSSProperties
+  onScroll?: (translateY: number) => any
 }
 
-interface IScrollState {
+export interface ScrollState {
   translateY: number
   yVisible: boolean // 是否显示垂直滚动条
 }
 
 const componentName = 'Scroll'
 
-class Scroll extends React.Component<IScrollProps, IScrollState> {
+class Scroll extends React.Component<ScrollProps, ScrollState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -69,10 +70,14 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
     }
   }
 
-  public componentDidUpdate(prevProps: IScrollProps, prevState: IScrollState) {
+  public componentDidUpdate(prevProps: ScrollProps, prevState: ScrollState) {
+    const { onScroll } = this.props
     const { translateY } = this.state
     if (prevState.translateY !== translateY) {
       this.updateBar(translateY)
+      if (onScroll) {
+        onScroll(translateY)
+      }
     }
   }
 
@@ -243,7 +248,10 @@ class Scroll extends React.Component<IScrollProps, IScrollState> {
       return
     }
     this.getElRect()
-    const distance = e.clientY - this.yTrackRef.getBoundingClientRect().top
+    const distance =
+      e.clientY -
+      this.yTrackRef.getBoundingClientRect().top -
+      this.barHeight / 2
     if (distance < this.maxBarScrollHeight) {
       this.setState({
         translateY:

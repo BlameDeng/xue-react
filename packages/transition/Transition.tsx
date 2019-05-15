@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 
-interface ITransitionProps {
+export interface TransitionProps {
   visible: boolean
   beforeEnter?: React.CSSProperties
   afterEnter?: React.CSSProperties
@@ -13,7 +13,7 @@ interface ITransitionProps {
 
 const componentName = 'Transition'
 
-class Transition extends React.Component<ITransitionProps> {
+class Transition extends React.Component<TransitionProps> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -44,7 +44,7 @@ class Transition extends React.Component<ITransitionProps> {
     this.addTransitionListener()
   }
 
-  public componentDidUpdate(prevProps: ITransitionProps, prevState: {}) {
+  public componentDidUpdate(prevProps: TransitionProps, prevState: {}) {
     if (!this.monitored) {
       this.addTransitionListener()
     }

@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { uniqueId } from '../utils'
 import Message from './Message'
 
-interface IOptions {
+export interface Options {
   content: string | React.ReactNode
   duration?: number
   top?: number
@@ -26,7 +26,7 @@ function ensureUniqueMessage(messageId: string) {
 }
 
 function openMessage(
-  options: IOptions,
+  options: Options,
   mode: 'info' | 'success' | 'warning' | 'error'
 ) {
   const messageId = uniqueId('$xue-message$-')
@@ -70,18 +70,18 @@ export function removeMessage(messageId: string) {
   delete messageContainerMap[messageId]
 }
 
-export function info(options: IOptions) {
+export function info(options: Options) {
   openMessage(options, 'info')
 }
 
-export function success(options: IOptions) {
+export function success(options: Options) {
   openMessage(options, 'success')
 }
 
-export function warning(options: IOptions) {
+export function warning(options: Options) {
   openMessage(options, 'warning')
 }
 
-export function error(options: IOptions) {
+export function error(options: Options) {
   openMessage(options, 'error')
 }

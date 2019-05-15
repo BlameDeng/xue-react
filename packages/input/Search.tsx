@@ -4,7 +4,7 @@ import { classes } from '../utils'
 import Icon from '../icon/Icon'
 import Input from './Input'
 
-interface ISearchProps {
+export interface SearchProps {
   value?: string
   defaultValue?: string
   placeholder?: string
@@ -15,13 +15,13 @@ interface ISearchProps {
   style?: React.CSSProperties
 }
 
-interface ISearchState {
+export interface SearchState {
   derivedValue: string
 }
 
 const componentName = 'Search'
 
-class Search extends React.Component<ISearchProps, ISearchState> {
+class Search extends React.Component<SearchProps, SearchState> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -44,8 +44,8 @@ class Search extends React.Component<ISearchProps, ISearchState> {
   }
 
   public static getDerivedStateFromProps(
-    nextProps: ISearchProps,
-    prevState: ISearchState
+    nextProps: SearchProps,
+    prevState: SearchState
   ) {
     const { value } = nextProps
     const { derivedValue } = prevState
@@ -57,7 +57,7 @@ class Search extends React.Component<ISearchProps, ISearchState> {
 
   private inputInstance: any
 
-  constructor(props: ISearchProps) {
+  constructor(props: SearchProps) {
     super(props)
     this.state = {
       derivedValue: props.defaultValue || ''

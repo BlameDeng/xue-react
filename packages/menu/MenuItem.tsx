@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import Transition from '../transition/Transition'
 
-interface IMenuItemProps {
+export interface MenuItemProps {
   uniqueKey?: string
   selectedKey?: string
   expandKeys?: string[]
@@ -17,7 +17,7 @@ interface IMenuItemProps {
 
 const componentName = 'MenuItem'
 
-class MenuItem extends React.Component<IMenuItemProps> {
+class MenuItem extends React.Component<MenuItemProps> {
   public static displayName = componentName
 
   public static propTypes = {

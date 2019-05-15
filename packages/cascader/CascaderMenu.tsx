@@ -3,31 +3,31 @@ import * as PropTypes from 'prop-types'
 import { classes } from '../utils'
 import Icon from '../icon/Icon'
 
-interface IOption {
+export interface Option {
   value: string
   label: string
-  children?: IOption[]
+  children?: Option[]
   disabled?: boolean
 }
 
-interface ICascaderMenuProps {
-  options: IOption[]
+export interface CascaderMenuProps {
+  options: Option[]
   level: number
-  handleChangeValue: (option: IOption, level: number) => any
+  handleChangeValue: (option: Option, level: number) => any
   valueArr: string[]
   itemClassName?: string
   itemStyle?: React.CSSProperties
 }
 
-interface ICascaderMenuState {
-  currentOption: IOption | null
+export interface CascaderMenuState {
+  currentOption: Option | null
 }
 
 const componentName = 'CascaderMenu'
 
 class CascaderMenu extends React.Component<
-  ICascaderMenuProps,
-  ICascaderMenuState
+  CascaderMenuProps,
+  CascaderMenuState
 > {
   public static displayName = componentName
 
@@ -41,8 +41,8 @@ class CascaderMenu extends React.Component<
   }
 
   public static getDerivedStateFromProps(
-    nextProps: ICascaderMenuProps,
-    prevState: ICascaderMenuState
+    nextProps: CascaderMenuProps,
+    prevState: CascaderMenuState
   ) {
     // 未选中任何一项
     if (!nextProps.valueArr) {
@@ -59,14 +59,14 @@ class CascaderMenu extends React.Component<
     return null
   }
 
-  constructor(props: ICascaderMenuProps) {
+  constructor(props: CascaderMenuProps) {
     super(props)
     this.state = {
       currentOption: null
     }
   }
 
-  public handleClickItem = (option: IOption) => {
+  public handleClickItem = (option: Option) => {
     if (option.disabled) {
       return
     }

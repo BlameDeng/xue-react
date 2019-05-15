@@ -5,7 +5,7 @@ import Icon from '../icon/Icon'
 import Transition from '../transition/Transition'
 import './style'
 
-interface ISpinProps {
+export interface SpinProps {
   spinning?: boolean
   size?: number
   tip?: string
@@ -15,7 +15,7 @@ interface ISpinProps {
 
 const componentName = 'Spin'
 
-class Spin extends React.Component<ISpinProps> {
+class Spin extends React.Component<SpinProps> {
   public static displayName = componentName
 
   public static defaultProps = {

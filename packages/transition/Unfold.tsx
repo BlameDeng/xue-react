@@ -2,23 +2,23 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as PropTypes from 'prop-types'
 
-interface IUnfoldProps {
+export interface UnfoldProps {
   visible: boolean
   vertical?: boolean
   transitionTime?: number
 }
 
-interface ITransitionEffect {
+export interface TransitionEffect {
   vertical: string
   horizontal: string
 }
 
-interface ILeaveTo {
+export interface LeaveTo {
   vertical: React.CSSProperties
   horizontal: React.CSSProperties
 }
 
-interface IPrevCssProp {
+export interface PrevCssProp {
   paddingLeft: string | null
   paddingRight: string | null
   paddingTop: string | null
@@ -34,14 +34,14 @@ interface IPrevCssProp {
   overflow: string | null
 }
 
-interface IprevSize {
+export interface PrevSize {
   width: string | null
   height: string | null
 }
 
 const componentName = 'Unfold'
 
-class Unfold extends React.Component<IUnfoldProps> {
+class Unfold extends React.Component<UnfoldProps> {
   public static displayName = componentName
 
   public static defaultProps = {
@@ -59,11 +59,11 @@ class Unfold extends React.Component<IUnfoldProps> {
   private monitored: boolean = false
   private nodeDisplay: any
   private rendered: boolean
-  private transitionEffect: ITransitionEffect = {
+  private transitionEffect: TransitionEffect = {
     vertical: '',
     horizontal: ''
   }
-  private leaveTo: ILeaveTo = {
+  private leaveTo: LeaveTo = {
     vertical: {
       paddingTop: '0',
       paddingBottom: '0',
@@ -79,7 +79,7 @@ class Unfold extends React.Component<IUnfoldProps> {
       width: '0'
     }
   }
-  private prevCssProp: IPrevCssProp = {
+  private prevCssProp: PrevCssProp = {
     paddingLeft: '',
     paddingRight: '',
     paddingTop: '',
@@ -94,7 +94,7 @@ class Unfold extends React.Component<IUnfoldProps> {
     overflowY: '',
     overflow: ''
   }
-  private prevSize: IprevSize = {
+  private prevSize: PrevSize = {
     width: null,
     height: null
   }
@@ -117,7 +117,7 @@ class Unfold extends React.Component<IUnfoldProps> {
     this.addTransitionListener()
   }
 
-  public componentDidUpdate(prevProps: IUnfoldProps, prevState: {}) {
+  public componentDidUpdate(prevProps: UnfoldProps, prevState: {}) {
     if (!this.monitored) {
       this.addTransitionListener()
     }

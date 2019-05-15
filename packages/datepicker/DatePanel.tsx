@@ -2,17 +2,17 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import { getDateLists, classes } from '../utils'
 
-interface IDateValue {
+export interface DateValue {
   year: number
   month: number
   date: number
 }
 
-interface IDatePanelProps {
+export interface IDatePanelProps {
   year: number
   month: number
-  value?: IDateValue | null
-  onClickDate?: (value: IDateValue) => any
+  value?: DateValue | null
+  onClickDate?: (value: DateValue) => any
 }
 
 const componentName = 'DatePanel'
